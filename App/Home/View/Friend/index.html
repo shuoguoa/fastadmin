@@ -1,0 +1,426 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <title>扑克部落</title>        
+        <link rel="stylesheet" href="__PUBLIC__/home/css/bootstrap.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/home/css/my.css">
+        <link rel="stylesheet" href="__PUBLIC__/home/css/showBo.css">
+        <script src="__PUBLIC__/home/js/showBo.js"></script>
+        <script src="__PUBLIC__/home/js/jquery-1.11.3.min.js"></script>
+        <style>
+        /********************修改placeholder的固定颜色****************************/
+            #hh:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color: #b69f60; 
+                opacity:0.6
+            }
+            #hh::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color: #b69f60;
+                opacity:0.6
+            }
+            #hh:-ms-input-placeholder,
+                textarea:-ms-input-placeholder {
+                color: #b69f60;
+                opacity:0.6
+            }
+            #hh::-webkit-input-placeholder,
+                textarea::-webkit-input-placeholder {
+                color:#b69f60;
+                opacity:0.6
+            }
+            #open4:focus{
+                outline: 0;
+            }
+            input[type="radio"] {
+              display: none;
+            }
+            #diamond0 .a1 {
+              padding-right: 20px;
+              cursor: pointer;
+              background: url(__PUBLIC__/home/images/others.png) no-repeat right top;
+            }
+            #diamond0 #checked {
+              padding-right: 20px;
+              cursor: pointer;
+              background: url(__PUBLIC__/home/images/others.png) no-repeat right bottom !important;
+
+            }
+
+        </style>
+
+    </head> 
+    <script type="text/javascript">
+        
+    </script>
+    <body style="background-color:#ECEDF2;">
+    
+        <section id="mama" >
+            <div class="container2">
+                <div id="two1" >
+                    <volist name="goods" id="good">
+                    
+                    <div class="line1">
+                        <div class="container">
+                            <div class="row" >
+                                <div class=" col-md-6 col-sm-6 col-xs-12">
+                                    <div id="diamond0">
+                                        <img src="__PUBLIC__/home/images/my4.png" class="img-responsive">
+                                        <span class="dia" >{$good['name']}</span>
+                                        <input class="radio1" name="good_id" type="radio" id="{$good['id']}" value="{$good['id']}" onclick="price({$good['price']})"/>
+                                        <div class="a1" name="{$good['id']}">&yen;{$good['price']}</div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kong"></div>
+                    </volist>
+                </div>
+             </div>   
+        </section>
+        <section id="two2" style="display:none;">
+            
+                <div class="container">
+                    <div class="row"  onclick="sel_baijin(this)" id="baijin">
+                        <div class=" col-md-6 col-sm-12 col-xs-12 aa">
+                            <div ><img src="__PUBLIC__/home/images/white.png" class="img-responsive same">
+                            <a class="btn btn-warning all" href="#">&yen;{$vips[0][price]}</a></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="line1">
+            </div>
+            <div class="kong"></div>
+            <div class="line1" style="margin-top:5px;">
+                <div class="container">
+                    <div class="row" onclick="sel_heika(this)" id="heika">
+                        <div class=" col-md-6 col-sm-12 col-xs-12 aa">
+                            <div ><img src="__PUBLIC__/home/images/black.png" class="img-responsive same">
+                            <a class="btn btn-warning all" href="#">&yen;{$vips[1][price]}</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kong"></div>
+        </section>
+        <div class="container zui">
+            <div class="row">
+                <div class=" col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <div id="check">
+                            <table id="login_table" align="center">
+                                <tr class="login2">
+                                    <td class="login2_u1" >
+                                         
+                                          <span class="select-style"><select name="ccode" > <volist name="stateCode" id="v"><option value="{$v}" align="right" style="height:0.8rem !important">+{$v}</option></volist></select></span>
+                                        <span style="font-size:2rem;color:#AACBD4;line-height:2rem">|</span>
+                                    </td>
+                                    <td class="login_u2">
+                                        <input name="username" type="text" placeholder="  请输入手机号" style="line-height: 3.2rem !important;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group hml" id="change">
+                         <img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="open5" onclick="sel_ios(this)">
+                         <img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="open5" onclick="sel_android(this)">
+                         <input type="hidden" name="os" value="">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="price" value="" id="price">
+                         <a href="#"><input class="btn btn-success up yanzheng" type="button" value="验证并充值" id="open4"/></a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    
+    <include file="Public/footer" />
+
+    </body>
+    <script src="__PUBLIC__/home/js/jquery-1.11.3.min.js"></script>
+    <script src="__PUBLIC__/home/js/layer/layer.js"></script>
+    <script>
+    function sel_baijin(obj){
+        $(obj).attr("style","border:1px solid #b69f60;");
+        $(obj).parent().parent().parent().find('#heika').removeAttr("style");
+        $("input[name='good_id']").val({$vips[0]['id']});
+    }
+    function sel_heika(obj){
+        $(obj).attr("style","border:1px solid #b69f60;");
+        $(obj).parent().parent().parent().find('#baijin').removeAttr("style");
+        $("input[name='good_id']").val({$vips[1]['id']});
+    }
+
+    function sel_zhuan(obj){
+        $(obj).attr("src","__PUBLIC__/home/images/after1.png");
+        $(obj).parent().parent().parent().find('#tab2 img').attr("src","__PUBLIC__/home/images/buy2.png");
+        $('#two2').hide();$('#mama').show();
+        $(".re1").attr("style","background-color:black;border:2px solid #957c14");
+        $(".re2").attr("style","background-color:#282828; border:2px solid #383838;");
+        $(".re3").attr("style","background-color:#282828; border:2px solid #383838;");
+        $("#total").html(price1*n);
+        $('.chosed').removeClass('chosed');
+        $(".re1").addClass('chosed');
+        $("input[name='good_id']").val({$goods[0]['id']});
+
+    }
+    function sel_hui(obj){
+        $(obj).attr("src","__PUBLIC__/home/images/after2.png")
+        $(obj).parent().parent().parent().find('#tab1 img').attr("src","__PUBLIC__/home/images/buy1.png");
+        $('#mama').hide();$('#two2').show();
+        $('#baijin').attr("style","border:1px solid #b69f60;");
+        $('#heika').removeAttr("style");
+        $("input[name='good_id']").val({$vips[0]['id']});
+    }
+    
+    //初始化金额
+    $('#total').text({$goods[0]['price']});
+    //
+    var oDiv = document.getElementById('three');
+        oDiv.style.position = 'fixed';
+        oDiv.style.bottom = '0px';
+    var n=1;
+    var span1=$(".r1 span")[0];
+    var price1=parseFloat(span1.innerHTML.slice(1));
+    var span2=$(".r2 span")[0];
+    var price2=parseFloat(span2.innerHTML.slice(1));
+    var span3=$(".r3 span")[0];
+    var price3=parseFloat(span3.innerHTML.slice(1));
+    
+    var arr=[price1,price2,price3];
+
+    $("#ab").click(function(){
+        var span=document.getElementById("number");
+        n=parseInt(span.innerHTML);
+        n++;
+        span.innerHTML=n;
+        //return n;
+        if($('.chosed')[0]){
+            var index=$('.chosed').index();
+            console.log(index);
+            $("#total").html( arr[index]*n);   
+        }
+        
+    });
+    $("#aa").click(function(){
+        var span=document.getElementById("number");
+        n=parseInt(span.innerHTML);
+            if(n==1){
+                n-=0;
+            }else{
+                n--;
+            }
+        span.innerHTML=n;
+        //return n;
+        if($('.chosed')[0]){
+            var index=$('.chosed').index();
+            console.log(index);
+            $("#total").html( arr[index]*n);   
+        }
+    });
+    //console.log(n);
+    $("#d10").click(function(){
+        $(".re1").attr("style","background-color:black;border:2px solid #957c14");
+        $(".re2").attr("style","background-color:#282828; border:2px solid #383838;");
+        $(".re3").attr("style","background-color:#282828; border:2px solid #383838;");
+        $("#total").html(price1*n);
+        $('.chosed').removeClass('chosed');
+        $(this).addClass('chosed');
+        var good_id = $(this).attr('value');
+        $("input[name='good_id']").val(good_id);
+    });
+    $("#d100").click(function(){
+        $(".re2").attr("style","background-color:black;border:2px solid #957c14");
+        $(".re1").attr("style","background-color:#282828; border:2px solid #383838;");
+        $(".re3").attr("style","background-color:#282828; border:2px solid #383838;");
+        $("#total").html(price2*n);
+        $('.chosed').removeClass('chosed');
+        $(this).addClass('chosed');
+        var good_id = $(this).attr('value');
+        $("input[name='good_id']").val(good_id);
+    });
+    $("#d1000").click(function(){
+        $(".re3").attr("style","background-color:black;border:2px solid #957c14");
+        $(".re1").attr("style","background-color:#282828; border:2px solid #383838;");
+        $(".re2").attr("style","background-color:#282828; border:2px solid #383838;");
+        $("#total").html(price3*n);
+        $('.chosed').removeClass('chosed');
+        $(this).addClass('chosed');
+        var good_id = $(this).attr('value');
+        $("input[name='good_id']").val(good_id);
+    });
+    
+        
+
+
+    function sel_ios(obj){
+        $(obj).attr("src","__PUBLIC__/home/images/others7.png")
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/others9.png");
+        $("input[name='os']").attr('value', '0'); 
+    }
+    function sel_android(obj){
+        $(obj).attr("src","__PUBLIC__/home/images/others8.png")
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/others6.png");
+        $("input[name='os']").attr('value', '1'); 
+    }
+
+    </script>
+    <script>
+        $(function() {
+          $('.a1').click(function(){
+            var radioId = $(this).attr('name');
+            price($(this).text());
+            $('.a1').removeAttr('id') && $(this).attr('id', 'checked');
+            $('input[type="radio"]').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
+            
+          });
+        });
+        
+    
+        function price(param){
+            $('#price').val(param);
+        }
+        $('#open4').click(function() {
+            price = $("input[name='price']").val();
+            username = $("input[name='username']").val();
+            os = $("input[name='os']").val();
+            if(username.length == 0){
+        //alert('请输入需要充值的账号');
+                Showbo.Msg.alert('请输入需要充值的账号');
+                return false;
+            }
+            if(os.length == 0){
+                alert('请选择操作系统');
+                return false;
+            }
+            var loading_layer = layer.load(1, {
+              shade: [0.2,'#fff'] //0.1透明度的白色背景
+            });
+            $.ajax({
+                url: '{:U('Friend/getFriendInfo')}',
+                type: 'POST',
+                dataType: 'json',
+                data: {username: username, os: os},
+            })
+            .success(function(req) {
+                layer.close(loading_layer);
+                if(req.status == 1){
+                    var uid = req.data.id;
+                    var username = req.data.username;
+                    var nickname = req.data.nickname;
+                    var os = req.data.os;
+                    var uuid = req.data.uuid;
+           
+                    verify(uid, username, nickname, os, uuid, price);
+                }else{
+                    //alert('查不到此用户');
+                    Showbo.Msg.alert('查不到此用户');
+                }
+            })
+            .fail(function() {
+                layer.close(loading_layer);
+                alert('验证失败，请重试！');
+            })
+        });
+
+        function verify(uid, username, nickname, os, uuid, price) { 
+            if (uid != ''){ 
+                var str= '<table style="text-align:center;width:100%"><tr style="line-height:3rem;" ><td style="width:30%;line-height:3rem;font-size:16px;" align="right">昵 称 : </td>'+
+                    '<td style="width:60%;line-height:3rem;left:2rem;float:left; font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+nickname+'</td></tr>'+
+                    '<tr style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right">账 号 : </td>'+
+                    '<td style="width:60%;line-height:3rem;left:2rem;float:left;font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+uuid+'</td></tr>'+
+                    '<tr style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right">金 额 : </td>'+
+                    '<td style="width:60%;line-height:3rem;font-size:16px;margin-left:2rem" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+price+'</td></tr>'+
+                    '<tr align="center" style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right"></td>'+
+                    '<td style="width:60%;line-height:3rem;left:2rem;float:left;font-size:16px;">确定充值？</td></tr></table>';
+
+                Showbo.Msg.confirm(str);
+                $(".btn2").click(function(){
+                    var flag = $(this).val();// alert(flag);alert(999);return false;
+                    if (flag == '确认') {
+                        recharge(uid, username, nickname, os, uuid, price);
+                    } else {
+                        window.location.href='{:U('Friend/index?flag=2')}';
+                    }
+                }
+
+                );
+            } else {
+                alert('该账号不存在');
+                return false;
+            }
+        }
+
+        function recharge(uid, username, nickname, os, uuid, price) {
+            good_id = $("input[name='good_id']").val();
+            if(good_id.length == 0){
+                alert('请选择商品！');
+                return false;
+            }
+    
+            var loading_layer = layer.load(1, {
+              shade: [0.2,'#fff'] //0.1透明度的白色背景
+            });
+
+            if (good_id < 3001) {
+                $.ajax({
+                    url: '{:U('Pay/friendOrder')}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {uid: uid, username: username, os: os, good_id: good_id},
+                })
+                .success(function(req) {
+                    layer.close(loading_layer);
+                    if(req.status == 0){
+                        alert(req.data);
+                        return false;
+                    }else{
+                        onBridgeReady(req.data);
+                        console.log("success");
+                    }
+                })
+                .fail(function() {
+                    layer.close(loading_layer);
+                    console.log("error");
+                })
+            } else {
+                $.ajax({
+                    url: '{:U('Pay/friendVipOrder')}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {uid: uid, username: username, os: os, good_id: good_id},
+                })
+                .success(function(req) {
+                    layer.close(loading_layer);
+                    if(req.status == 0){
+                        alert(req.data);
+                        return false;
+                    }else{
+                        onBridgeReady(req.data);
+                        console.log("success");
+                    }
+                })
+                .fail(function() {
+                    layer.close(loading_layer);
+                    console.log("error");
+                })
+            }
+        }
+            
+        //});
+
+        function onBridgeReady(data){
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', data,
+                function(res){     
+                   if(res.err_msg == "get_brand_wcpay_request：ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+               }
+            ); 
+        }
+    </script>
+</html>

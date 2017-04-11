@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vips>
+  <g3001>
+    <id>3001</id>
+    <name>白金月卡</name>
+    <discount>1</discount>
+    <original_price>26</original_price>
+  </g3001>
+  <g3002>
+    <id>3002</id>
+    <name>黑金年卡</name>
+    <discount>1</discount>
+    <original_price>280</original_price>
+  </g3002>
+</vips>

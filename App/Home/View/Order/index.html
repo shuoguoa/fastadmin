@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <title>扑克部落</title>        
+        <link rel="stylesheet" href="__PUBLIC__/home/css/bootstrap.min.css">
+        <link rel="stylesheet" href="__PUBLIC__/home/css/my.css">
+        <style>
+        </style>
+    </head>
+    <body style="background-color:#ECEDF2;">
+    <!--头部分-->
+    <volist name="month" id="vo">
+        <div class="order1">{$vo.month}</div>
+        <section id="tou">
+            <volist name="vo.k" id="v"> 
+                <div class="container2">
+                    <div class="row">
+                        
+                        <div class="col-1"><span class="tou5_1">{$v['w']}<br/>{$v['rq']}</span></div>
+                        <div class="col-2">
+                            <img src="{$userInfo['avatar']}" class="img-responsive" id="own7_1">
+                            <img  class="img-responsive" id="own11">
+                        </div>
+                        <div class="col-3">
+                           <span class="tou5_1"> {$v['nickname']}<br/>
+                            账号:{$v['username']}</span>
+                        </div>
+                       
+                        <div class=" col-5">
+                                <div style="float: left"><img src="__PUBLIC__/home/images/my4.png" class="img-responsive"></div>
+                                <span class="tou5">{$v['diamond']}</span>
+                        </div>
+                        <div class=" col-6">
+                            <span class="tou5">&yen;{$v['money'] }</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="kong"></div>
+            </volist>
+                <div class="kong"></div>
+        </section>
+     </volist>
+<!--
+                <if condition="$order['number'] eq 1">
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-md-6 col-sm-4 col-xs-4">
+                            <div>
+                            <if condition="$order['type'] eq 0">
+                                <img src="__PUBLIC__/home/images/my4.png" class="img-responsive" id="tou1"><span class="tou2">{$order['diamond']}钻石<br><i class="tou3">&yen;{$order['money']}</i></span>
+                            <elseif condition="$order['product_id'] eq 3001" />
+                                <img src="__PUBLIC__/home/images/white.png" class="img-responsive" id="tou1"><span class="tou2">白金月卡<br><i class="tou3">&yen;{$order['money']}</i></span>
+                            <else />
+                                <img src="__PUBLIC__/home/images/black.png" class="img-responsive" id="tou1"><span class="tou2">黑金年卡<br><i class="tou3">&yen;{$order['money']}</i></span>
+                            </if>
+                            </div>
+                        </div>
+                        <div class=" col-md-6 col-sm-4 col-xs-4">
+                                <span class="tou4">{$order['username']}</span>
+                        </div>
+                        <div class=" col-md-6 col-sm-4 col-xs-4">
+                            <span class="tou5">{$order['time'] | date="Y-m-d H:i", ###}</span>
+                        </div>
+                    </div>
+                </div>
+                <else />
+                    <div class="container">
+                    <div class="row">
+                        <div class=" col-md-6 col-sm-4 col-xs-4" style="padding-right:0px;">
+                            <div>
+                                <img src="__PUBLIC__/home/images/my4.png" class="img-responsive" id="tou1"><span class="tou2">{$order['diamond']}钻石<b class="zx">{$order['number']}笔</b><i class="tou3" style="margin-left:32%;">&yen;{$order['money']}<b class="zx">*{$order['number']}</b></i></span>
+                            </div>
+                        </div>
+                        <div class=" col-md-6 col-sm-4 col-xs-4">
+                                <span class="tou4">{$order['username']}</span>
+                        </div>
+                        <div class=" col-md-6 col-sm-4 col-xs-4">
+                            <span class="tou5">{$order['time'] | date="Y-m-d H:i", ###}</span>
+                        </div>
+                    </div>
+                </div>
+                </if>
+                <div class="kong"></div>
+                </volist>
+        </section>-->
+    
+    <include file="Public/footer" />
+<!--底部（导航）部分
+    <section id="three" style="background-color:#000000; width:100%;">
+        <div class="outer">
+            <div class="header-logo">
+                <span id="a0"style="left:66.6%"></span>
+                <a class=""  href="{:U('Index/index')}" id="a1">商品首页</a><a class="" href="{:U('Friend/index')}" id="a2">为好友充值</a><a  class="a1234" id="a3" href="{:U('Order/index')}">我的订单</a>
+            </div>
+        </div>
+    </section>-->
+    </body>
+    <script src="__PUBLIC__/home/js/jquery-1.11.3.min.js"></script> 
+    <script>
+    var oDiv = document.getElementById('three');
+        oDiv.style.position = 'fixed';
+        oDiv.style.bottom = '0px';
+
+/*
+        document.querySelector('.header-logo').addEventListener('click',function(e){
+            e=window.e||e;
+            var target=e.target||e.srcElement;
+            if(target.tagName=="A"){
+                var index=$('.header-logo a').index(target); 
+                console.log(index); alert($(this).eq(i).attr('href');
+                $('.a1234').removeClass();
+                $('.header-logo a').eq(index).addClass('a1234');
+                $('#a0')[0].style.left=index*33.3+"%";
+            }
+        })
+  */    
+        
+    </script>
+</html>

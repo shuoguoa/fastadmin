@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>{$current['title']}-{$Think.CONFIG.title}</title>
+
+		<meta name="keywords" content="{$Think.CONFIG.keywords}" />
+		<meta name="description" content="{$Think.CONFIG.description}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<include file="Public/head" />
+   </head>
+
+	<body class="no-skin">
+		<include file="Public/header" />
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<include file="Public/sidebar" />
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<include file="Public/breadcrumbs" />
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						<include file="Public/set" />
+
+						<!-- /section:settings.box -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+									<form class="form-horizontal" id="form" role="form" method="post" action="{:U('push')}">
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 通知标题 </label>
+										<div class="col-sm-9">
+											<input type="text" name="title" id="title" placeholder="请输入通知标题" class="col-xs-10 col-sm-5" maxlength="20">
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">最多20个字</span>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 通知内容 </label>
+										<div class="col-sm-9">
+											<textarea name="content" id="content" placeholder="请输入通知内容" class="col-xs-10 col-sm-5" rows="3" maxlength="300"></textarea>
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">最多300个字</span>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> OS </label>
+										<div class="col-sm-9">
+											<div class="radio">
+												<label>
+													<input name="ANDROID" value="1" type="checkbox" class="ace" checked="checked">
+													<span class="lbl"> Android</span>
+												</label>
+												<label>
+													<input name="IOS" value="1" type="checkbox" class="ace" checked="checked"> 
+													<span class="lbl"> iOS</span>
+												</label>
+											</div>
+										</div>
+									</div>
+									
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 有效时长 </label>
+										<div class="col-sm-9">
+											<input type="text" name="offlineTime" id="offlineTime" value="2" class="col-xs-10 col-sm-1" maxlength="2">
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">该时间段内cid在线过的用户均可收到通知。(0-72 小时内的正整数)</span>
+											</span>
+										</div>
+									</div>
+
+									<!-- <div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 后续动作 </label>
+										<div class="col-sm-9">
+											<div class="radio">
+												<label>
+													<input name="successor" value="2" type="radio" class="ace" checked="checked">
+													<span class="lbl"> 启动应用</span>
+												</label>
+												<label>
+													<input name="successor" value="1" type="radio" class="ace">
+													<span class="lbl"> 打开链接</span>
+													<input type="text" name="url" size="40">
+												</label>
+											</div>
+										</div>
+									</div> -->
+									
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> URL </label>
+										<div class="col-sm-9">
+											<input type="text" name="url" id="url" placeholder="请输入URL" class="col-xs-10 col-sm-5">
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle"></span>
+											</span>
+										</div>
+									</div>
+
+									<!-- <div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 图片 </label>
+										<div class="col-sm-9">
+											<input type="text" name="image" id="image" placeholder="请输入图片网址" class="col-xs-10 col-sm-5">
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle"></span>
+											</span>
+										</div>
+									</div> -->
+
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-4"> 图片 </label>
+										<div class="col-sm-9">
+											<div class="col-xs-10 col-sm-5">{:UpImage("image",400,200,$member['head'])}</div>
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">仅支持jpg、gif、png、bmp、jpeg，且小于1MB。</span>
+											</span>
+										</div>	
+									</div>
+
+									<div class="col-md-offset-2 col-md-9">
+										<button class="btn btn-info submit" type="button">
+											<i class="icon-ok bigger-110"></i>
+											提交
+										</button>
+									</div>
+									<input type="hidden" name="region" value="{$region}">
+									<input type="hidden" name="flag" value="{$flag}">
+								</form>
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+			<include file="Public/footer" />
+			
+		</div><!-- /.main-container -->
+
+		<include file="Public/footerjs" />
+		
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+		$(".submit").click(function(){
+			$("#form").submit();
+		})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<diamonds>
+    <g2001>
+        <id>2001</id>
+        <name>100钻石</name>
+        <diamond>100</diamond>
+        <discount>1</discount>
+        <original_price>10</original_price>
+    </g2001>
+    <g2002>
+        <id>2002</id>
+        <name>1000钻石</name>
+        <diamond>1000</diamond>
+        <discount>0.95</discount>
+        <original_price>100</original_price>
+    </g2002>
+    <g2003>
+        <id>2003</id>
+        <name>10000钻石</name>
+        <diamond>10000</diamond>
+        <discount>0.9</discount>
+        <original_price>1000</original_price>
+    </g2003>
+</diamonds>

@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="IE=edge" http-equiv="X-UA-Compatible">
+		  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		<title>扑克部落</title>		
+		<link rel="stylesheet" href="__PUBLIC__/home/css/bootstrap.min.css">
+		<link rel="stylesheet" href="__PUBLIC__/home/css/my.css">
+		<link rel="stylesheet" href="__PUBLIC__/home/css/showBo.css">
+        <script src="__PUBLIC__/home/js/showBo.js"></script>
+	</head>
+	<body style="background-color:#ECEDF2;">
+   <!-- <body>-->
+	<eq name="userInfo['id']" value="0">
+	<!--头部分-->
+		<section id="one">
+			<div class="container" >
+				<div class="row">
+					<div class=" col-md-6 col-sm-6 col-xs-12">
+						
+						<div class="money1"><a href="{:U('Bind/index')}"><img src="__PUBLIC__/home/images/my3.png" class="img-responsive" id="start3"><span>绑定充值账号</span></a>
+                        <!---->  </div>
+						
+					</div>
+				</div>
+			</div>		
+			<div class="money2"></div>
+		</section>
+	</eq>
+ 	<neq name="userInfo['id']" value="0">
+	<!--头部分-->
+		<section id="one">
+	<!--影藏部分-->			
+				<div class="container2" id="own3" style="display:none;">
+					<div class="mm">
+						<ul class="mm1 list-unstyled">
+							<li class="mm2"></li>
+							<volist name="allUserInfo" id="info">
+							<a href="{:U('Index/switchUser',array('uid'=>$info['id']))}">
+							<li class="mm3">
+								<img src="{$info['avatar']}" class="img-responsive add" id="own5">
+								<span id="own6">{$info['nickname']}<br>
+									<i class="extra">账号:{$info['username']}</i>
+								</span>
+								<if condition="$userInfo['id'] eq $info['id']">
+									<img src="__PUBLIC__/home/images/cur.png" class="img-responsive" id="own10">
+									<!--<span id="own10">当前绑定</span>-->
+								</if>
+								<if condition="$info['os'] eq 0">
+									<img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="own8">
+								<else />
+									<img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="own8">
+								</if>
+							</li>
+							</a>
+							<li class="mm2"></li>
+							</volist>
+							<li class="mm3">
+								<a href="{:U('Bind/index')}"><img src="__PUBLIC__/home/images/1_1.png" class="img-responsive add"></a>
+							</li>
+							<li class="mm4"></li>
+						</ul>
+					</div>
+				</div>		
+			</div>
+			<div class="yonghu">
+				<!--<img  class="img-responsive">-->
+				<img src="{$userInfo['avatar']}" class="img-responsive" id="own7">
+				<img  class="img-responsive" id="own11">
+				<span id="own12">{$userInfo['nickname']}<br>
+									<i class="extra">账号:{$userInfo['username']}
+				<if condition="$userInfo['os'] eq 0">
+					<img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="own1">
+				<else />
+					<img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="own1">
+				</if>
+				</i>
+				<img src="__PUBLIC__/home/images/more.png" class="img-responsive" id="own2">
+			</div>
+			<!--<div class="money2" style="margin-top:0px;"></div>-->
+			<div class="money2" ></div>
+		</section>
+	</neq>
+		<div id="substance">
+			<div id="two1" style="z-index: 1;">
+				<volist name="goods" id="good">
+				<div class="kong"></div>
+				<div class="line1">
+					<div class="container">
+						<div class="row">
+							<div class=" col-md-6 col-sm-6 col-xs-12">
+								<div ><img src="__PUBLIC__/home/images/my4.png" class="img-responsive"><span>{$good['name']}</span>
+								<a class="btn btn-warning" onclick="order({$good['id']})">&yen;{$good['price']}</a></div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				</volist>
+			</div>
+			<div id="two2" style="display: none;">
+				
+				<div class="kong"></div>
+				<div class="line1">
+					<div class="container">
+						<div class="row">
+							<div class=" col-md-6 col-sm-12 col-xs-12 aa">
+								<div ><img src="__PUBLIC__/home/images/white.png" class="img-responsive same">
+								<a class="btn btn-warning all " onclick="vipOrder(3001)">&yen;{$vips[3001][price]}</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="line1" style="margin-top:5px;">
+					<div class="container">
+						<div class="row">
+							<div class=" col-md-6 col-sm-12 col-xs-12 aa">
+								<div ><img src="__PUBLIC__/home/images/black.png" class="img-responsive same">
+								<a class="btn btn-warning all " onclick="vipOrder(3002)">&yen;{$vips[3002][price]}</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="kong"></div>
+			</div>
+		</div>
+	<!--底部（导航）部分-->
+	<include file="Public/footer" />
+
+	</body>
+	<script src="__PUBLIC__/home/js/jquery-1.11.3.min.js"></script>
+	<script src="__PUBLIC__/home/js/bootstrap.js"></script>
+	<script src="__PUBLIC__/home/js/layer/layer.js"></script>
+	<script>
+	function sel_baijin(obj){
+		$(obj).attr("style","border:1px solid #b69f60;");
+		$(obj).parent().parent().parent().find('#heika').removeAttr("style");
+	}
+	function sel_heika(obj){
+		$(obj).attr("style","border:1px solid #b69f60;");
+		$(obj).parent().parent().parent().find('#baijin').removeAttr("style");
+	}
+
+	function sel_zhuan(obj){
+		$(obj).attr("src","__PUBLIC__/home/images/after1.png");
+		$(obj).parent().parent().parent().find('#tab2 img').attr("src","__PUBLIC__/home/images/buy2.png");
+		$('#two2').hide();$('#two1').show();
+	}
+	function sel_hui(obj){
+		$(obj).attr("src","__PUBLIC__/home/images/after2.png")
+		$(obj).parent().parent().parent().find('#tab1 img').attr("src","__PUBLIC__/home/images/buy1.png");
+		$('#two1').hide();$('#two2').show();
+	}
+	
+	var oDiv = document.getElementById('three');
+		oDiv.style.position = 'fixed';
+		oDiv.style.bottom = '0px';
+
+		
+		document.querySelector('.header-logo').addEventListener('click',function(e){
+			e=window.e||e;
+			var target=e.target||e.srcElement;
+			if(target.tagName=="A"){
+				var index=$('.header-logo a').index(target);
+				console.log(index);
+				$('.a1234').removeClass();
+				$('.header-logo a').eq(index).addClass('a1234');
+				$('#a0')[0].style.left=index*33.3+"%";
+			}	
+		})
+
+	/*	var urlstr = location.href;  
+		var urlstatus=false;  
+
+		$(".header-logo a").each(function () {
+		    if ((urlstr + '/').indexOf($(this).attr('href')) > -1&&$(this).attr('href')!='') {  
+		      $(this).addClass('a1234'); urlstatus = true;  
+		    } else {  
+		      $(this).removeClass('a1234');  
+		    }  
+		});  
+		if (urlstatus == false) {$(".header-logo a").eq(0).addClass('a1234'); }  */
+
+		$("#own2").click(function(e){
+		    $("#own3").toggle(); //意思是显示隐藏的切换
+		})
+		
+	</script>
+	<script>
+		function order(id) {
+			var id = id;
+			var uid = {$userInfo['id']};
+			if(uid == 0){
+				//alert('请先绑定账号');
+				Showbo.Msg.alert('请先绑定账号');
+				return false;
+			}
+			var loading_layer = layer.load(1, {
+			  shade: [0.2,'#fff'] //0.1透明度的白色背景
+			});
+			$.ajax({
+				url: '{:U('Pay/order')}',
+				type: 'POST',
+				dataType: 'json',
+				data: {id: id, uid: uid},
+			})
+			.success(function(req) {
+				layer.close(loading_layer);
+				if(req.status == 0){
+					alert(req.data);
+				}else{
+					onBridgeReady(req.data);
+					console.log("成功调起支付");
+				}
+			})
+			.fail(function() {
+				layer.close(loading_layer);
+				alert('请求失败，请重试！');
+			})
+		}
+
+		function vipOrder(id) {
+			var id = id;
+			var uid = {$userInfo['id']};
+			if(uid == 0){
+				Showbo.Msg.alert('请先绑定账号');
+				return false;
+			}
+			var loading_layer = layer.load(1, {
+			  shade: [0.2,'#fff'] //0.1透明度的白色背景
+			});
+			$.ajax({
+				url: '{:U('Pay/vipOrder')}',
+				type: 'POST',
+				dataType: 'json',
+				data: {id: id, uid: uid},
+			})
+			.success(function(req) {
+				layer.close(loading_layer);
+				if(req.status == 0){
+					alert(req.data);
+				}else{
+					onBridgeReady(req.data);
+					console.log("成功调起支付");
+				}
+			})
+			.fail(function() {
+				layer.close(loading_layer);
+				alert('请求失败，请重试！');
+			})
+		}
+
+		function onBridgeReady(data){
+			WeixinJSBridge.invoke(
+				'getBrandWCPayRequest', data,
+				function(res){     
+		           if(res.err_msg == "get_brand_wcpay_request：ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+		       }
+		    ); 
+		}
+	</script>
+</html>

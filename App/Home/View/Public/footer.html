@@ -1,0 +1,95 @@
+
+
+<section id="three" style="background-color:#3E809A; width:100%;">
+    <div class="outer">
+        <div class="header-logo" background="__PUBLIC__/home/images/menu_bg">
+            <img  class="menu" src="__PUBLIC__/home/images/menu_2.png" class="img-responsive" id="open5_nav" onclick="nav_a1(this)">
+            <img src="__PUBLIC__/home/images/menu_line.png" class="img-responsive" id="open5_line" >
+            <img class="menu" src="__PUBLIC__/home/images/menu_4.png" class="img-responsive" id="open5_nav" onclick="nav_a2(this)">
+            <img src="__PUBLIC__/home/images/menu_line.png" class="img-responsive" id="open5_line" >
+            <img class="menu" src="__PUBLIC__/home/images/menu_6.png" class="img-responsive" id="open5_nav" onclick="nav_a3(this)">
+
+           <!-- <span id="a0"></span>
+            <a class="a1234"  href="{:U('Index/index?flag=0')}" id="a1">商品首页</a><a class="" href="{:U('Friend/index?flag=1')}" id="a2" >为好友充值</a><a class="" href="{:U('Order/index?flag=2')}" id="a3" >我的订单</a>-->
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<script src="__PUBLIC__/home/js/jquery-1.11.3.min.js"></script>	
+<script>
+//亮 1,3,5 灰 2,4,6/**/
+    $(function(){ 
+        $(".header-logo .menu").each(function(i, obj){
+            if ( ''!= {$check} && i+1 == {$check}) {
+                switch(i){
+                    case 0 :
+                    $(".header-logo .menu").eq(i).attr("src","__PUBLIC__/home/images/menu_1.png");
+                    break;
+                    case 1 :
+                    $(".header-logo .menu").eq(i).attr("src","__PUBLIC__/home/images/menu_3.png");
+                    break;
+                    case 2 :
+                    $(".header-logo .menu").eq(i).attr("src","__PUBLIC__/home/images/menu_5.png");
+                    break;
+                }
+            }
+        });
+    })
+
+    function nav_a1(obj){
+        $(obj).attr("src","__PUBLIC__/home/images/menu_1.png")
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/menu_4.png");
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/menu_6.png");
+        window.location.href='{:U('Index/index?flag=1')}';
+        //$("input[name='os']").attr('value', '0'); 
+    }
+    function nav_a2(obj){
+        $(obj).attr("src","__PUBLIC__/home/images/menu_3.png")
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/menu_2.png");
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/menu_6.png");
+        window.location.href='{:U('Friend/index?flag=2')}';
+    }
+
+    function nav_a3(obj){
+        $(obj).attr("src","__PUBLIC__/home/images/menu_5.png")
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/menu_2.png");
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/menu_6.png");
+        window.location.href='{:U('Order/index?flag=3')}'; 
+    }
+
+
+  /*
+  $(function(){
+         $(".header-logo a").each(function(i, obj){
+
+            if($(".header-logo a").eq(i).attr('class') == 'a1234'){
+                var  flag = $(".header-logo a").eq(i).attr('id');
+                if (i != {$check} && {$check} != 0 && {$check} != '') {
+                   
+                        $(".header-logo a").eq(i).removeClass('a1234'); 
+                        $(".header-logo a").eq({$check}).addClass("a1234"); 
+                    
+                } 
+            }
+        });
+  });*/
+
+  document.querySelector('.header-logo').addEventListener('click',function(e){
+            e=window.e||e;
+            var target=e.target||e.srcElement;
+            if(target.tagName=="A"){
+                var index=$('.header-logo a').index(target);
+                console.log(index);
+                $('.a1234').removeClass();
+                $('.header-logo a').eq(index).addClass('a1234');
+                $('#a0')[0].style.left=index*33.3+"%";
+            }
+            
+        })
+   
+</script>
