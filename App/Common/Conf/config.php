@@ -20,6 +20,7 @@ return array(
     'DB_LEVEL' => '9',         //压缩级别   1:普通   4:一般   9:最高
     //扩展配置文件
     'LOAD_EXT_CONFIG' => 'db2',
+    //'URL_MODEL'=>1,
 
     //数据库配置2
     'DB_CONFIG2' => array(

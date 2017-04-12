@@ -11,7 +11,7 @@ class PayController extends ComController {
         $xml = file_get_contents('php://input');
         $log = ROOT_PATH.'/Public/log/wxpay.log';
         error_log($xml . PHP_EOL, 3, $log);
-        $result = $wechatpay->getCallback($xml);
+        $result = $wechatpay->getCallback($xml); var_dump($result);exit;
         if($result){
             if($result['return_code'] != 'SUCCESS' || $result['appid'] != C('WechatPay.appid') || $result['mch_id'] != C('WechatPay.mch_id')){
                 error_log('商户信息出错' . PHP_EOL, 3, $log);
@@ -267,7 +267,7 @@ class PayController extends ComController {
             $orderData['username'] = $user['username'];
             if( $wxOrderModel->add($orderData) ){
                 $wechatpay = new WechatPay(C('WechatPay'));
-                $prepayId = $wechatpay->getPrepayId($goodInfo['name'], $orderData['order_id'], $orderData['money'], $openid);
+                $prepayId = $wechatpay->getPrepayId($goodInfo['name'], $orderData['order_id'], $orderData['money']*100, $openid); 
                 $data  = $wechatpay->getPackage($prepayId);
                 exit(json_encode(array('status'=>1, 'data'=>$data)));
             }
