@@ -19,6 +19,7 @@ class ComController extends Controller {
             $data = $this->httpGet($get_token_url);
             $data = json_decode($data, true); 
             session('openid',$data['openid']);
+
         } 
     
         //过滤首页和绑定页
@@ -156,6 +157,14 @@ class ComController extends Controller {
                     'vip' => 0,
                     'desc' => '含钻石6888颗',
                     'price' => 618
+                ],
+                2006 => ['id' => 2006,
+                    'ios_id'=> $bid.'.rmb999',
+                    'name' => '999',
+                    'diamond' => 11188,
+                    'vip' => 0,
+                    'desc' => '含钻石6888颗',
+                    'price' => 999
                 ],
             ];
         }else{
