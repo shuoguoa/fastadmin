@@ -4,6 +4,7 @@ use Think\Controller;
 class ComController extends Controller {
 
     public function _initialize(){
+        /*
         $appid = C('WechatPay.appid');
         $secret = C('WechatPay.secret');
 
@@ -32,7 +33,7 @@ class ComController extends Controller {
             if(!$data){
                 $this->redirect('Bind/index');
             }
-        }
+        }*/
     }
 
     private function httpGet($url) {
