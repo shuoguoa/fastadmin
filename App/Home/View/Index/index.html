@@ -90,7 +90,7 @@
 					<div class="container">
 						<div class="row">
 							<div class=" col-md-6 col-sm-6 col-xs-12">
-								<div ><img src="__PUBLIC__/home/images/my4.png" class="img-responsive"><span>{$good['name']}</span>
+								<div ><img src="__PUBLIC__/home/images/my4.png" class="img-responsive"><span>{$good['diamond']}</span>
 								<a class="btn btn-warning" onclick="order({$good['id']})">&yen;{$good['price']}</a></div>
 							</div>
 							
@@ -169,18 +169,6 @@
 				$('#a0')[0].style.left=index*33.3+"%";
 			}	
 		})
-
-	/*	var urlstr = location.href;  
-		var urlstatus=false;  
-
-		$(".header-logo a").each(function () {
-		    if ((urlstr + '/').indexOf($(this).attr('href')) > -1&&$(this).attr('href')!='') {  
-		      $(this).addClass('a1234'); urlstatus = true;  
-		    } else {  
-		      $(this).removeClass('a1234');  
-		    }  
-		});  
-		if (urlstatus == false) {$(".header-logo a").eq(0).addClass('a1234'); }  */
 
 		$("#own2").click(function(e){
 		    $("#own3").toggle(); //意思是显示隐藏的切换

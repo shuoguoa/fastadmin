@@ -73,16 +73,16 @@
 							<div id="check">
 							<table id="login_table" align="center">
 								<tr class="login">
-									<td class="login_u1" >
-										手机号 <span class="select-style"><select name="ccode" > <volist name="stateCode" id="v"><option value="{$v}" align="right" style="height:0.8rem !important">+{$v}</option></volist></select></span>
-										<!----><span class="line0">|</span>
-									</td>
+									<td class="login_u1" >手机号&nbsp;&nbsp;<span class="select-style"><select name="ccode" > <volist name="stateCode" id="v"><option value="{$v}" align="right" style="height:0.8rem !important">+{$v}</option></volist></select></span>
+									<span style="font-size:2rem;color:#AACBD4;line-height:2rem">|</span>
+                                    </td>
+                                    <!--<td style="width:1%;height: 2rem"></td>-->
 									<td class="login_u2">
 										<input name="username" type="text" placeholder="" style="line-height: 2.5rem !important;" id="username">
 									</td>
 								</tr>
-								<tr class="login">
-									<td class="login_u1">
+								<tr class="login" >
+									<td class="login_u1" >
 										密 码
 									</td>
 									<td class="login_u2">
@@ -91,14 +91,35 @@
 								</tr>
 							</table>
                              </div>
-							<div class="form-group" id="change">
+							
+							<div class="form-group hml" id="change">
+		                        <table id="login_table" align="center">
+		                                <tr class="login2">
+		                                    <td class="login2_u1" align="center">
+		                                         <img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="open5" onclick="sel_ios(this)"> 
+		                                    </td>
+
+		                                    <td class="login_u2" align="center">
+		                                        <img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="open5" onclick="sel_android(this)">
+		                                    </td>
+		                                    <input type="hidden" name="os" value="">
+		                                </tr>
+		                               
+		                            </table>
+		                    </div>
+							<!--<div class="form-group" id="change">
 								 <img src="__PUBLIC__/home/images/my6.png" class="img-responsive" id="open5" onclick="sel_ios(this)">
 								 <img src="__PUBLIC__/home/images/my8.png" class="img-responsive" id="open5" onclick="sel_android(this)">
 								 <input type="hidden" name="os" value="">
-							</div>
-							<div class="form-group">
-								 <input class="btn btn-success" type="submit" value="绑定账号" id="open4"/>
-							</div>
+							</div></div>-->
+							<table id="login_table2" align="center">
+								<tr class="form-group" id="change">
+                                	<td align="center" colspan="2">
+                                		<input class="btn btn-success" type="submit" value="绑定账号" id="open4"/>
+                                	</td>
+                                </tr>
+                            </table>
+							
 						</div>
 						</form>
 					</div>

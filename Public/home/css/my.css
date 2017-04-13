@@ -114,15 +114,15 @@
 }
 #two1 img{
 	display:inline-block;
-	margin-left:1.2rem;
-	width:5rem;
+	
+	width:4rem;
 }
 #two1 span{
 	color:#555;
-	margin-left:1.2rem;
+	vertical-align: middle;
 	font-size:1.5rem;
 	font-family:inherit;
-	top:1.8rem;
+	padding-left: 1%;
 }
 #two1 a{
 	background-color:#37BECD;
@@ -135,11 +135,12 @@
 }
 .a1{
 	color:#37BECD;
-	position:absolute;
-	top:1.5rem;
+
+
 	right:1rem;
 	width:7rem;
 	font-size: 15px;
+	vertical-align: middle;
 }
 #radio1{
 	position:absolute;
@@ -198,16 +199,23 @@ label.checked {
 	display: block;
 }
 #login_table{
-	width:95% ;
+	width:100% ;
 	position: relative;
 	margin:0 auto;
+}
+
+#login_table2{
+	width:100% ;
+	position: relative;
+	margin:0 auto;
+	margin-top: 8%;
 }
 #check .login{
 	margin:0 auto;
 	border-bottom: 2px solid #303741;
 	display: -webkit-box;
 	float: center;
-	width: 95%;
+	width: 84%;
 	font-family:inherit
 }
 #check .login2{
@@ -223,7 +231,7 @@ label.checked {
 	font-family:'NSimSun';
 	padding:0 auto;
 	line-height: 3rem;
-	width:30%;
+	width:15%;
 	padding-left: 1rem;
 	font-family:inherit;
 	
@@ -234,9 +242,9 @@ label.checked {
 	font-family:'NSimSun';
 	padding:0 auto;
 	line-height: 4rem;
-	width:35%;
+	width:40%;
 	font-family:inherit;
-	font-size: 5%;
+	font-size: 16px;
 }
 
 
@@ -498,10 +506,11 @@ label.checked {
 }
 #open4{
 		height:50px;
-		width:90%;
-		margin-left:1.6rem;
+		width:84%;
 		background-color:#39BDCC;
 		border-radius:6px;
+		letter-spacing:3px;
+		font-size: 20px !important;
 	}
 	.mone{
 	background-color:#000000;
@@ -597,6 +606,7 @@ label.checked {
 	text-align:center;
 	color:#C7C7C7;
 	line-height:2.3rem;
+
 }
 .wo2{
 	color:#B69F60;
@@ -604,7 +614,7 @@ label.checked {
 	margin-left:12%;
 }
 .hml{
-	margin-top:2%;
+	margin-top:5%;
 	margin-bottom:2%;
 }
 
@@ -1000,8 +1010,7 @@ label.checked {
 		margin:12% auto;
 	}
 	#open5{
-		width:13%;
-		margin-left:8.8rem;
+		width:28%;
 		display:inline-block;
 	}
 	#upwd2{

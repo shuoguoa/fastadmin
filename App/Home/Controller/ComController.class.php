@@ -178,14 +178,14 @@ class ComController extends Controller {
                     'desc' => '含钻石1颗',
                     'price' => 0.01
                 ],
-                2001 => ['id' => 2001,
+                /*2001 => ['id' => 2001,
                     'ios_id'=> 'com.htgames.nutspoker.rmb6',
                     'name' => '6',
                     'diamond' => 60,
                     'vip' => 0,
                     'desc' => '含钻石60颗',
                     'price' => 6
-                ],
+                ],*/
                 2002 => ['id' => 2002,
                     'ios_id'=> 'com.htgames.nutspoker.rmb30',
                     'name' => '30',
@@ -217,6 +217,14 @@ class ComController extends Controller {
                     'vip' => 0,
                     'desc' => '含钻石6888颗',
                     'price' => 618
+                ],
+                2006 => ['id' => 2006,
+                    'ios_id'=> $bid.'.rmb999',
+                    'name' => '999',
+                    'diamond' => 11188,
+                    'vip' => 0,
+                    'desc' => '含钻石6888颗',
+                    'price' => 999
                 ],
             ];
         }

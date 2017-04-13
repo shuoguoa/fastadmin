@@ -36,13 +36,13 @@
             input[type="radio"] {
               display: none;
             }
-            #diamond0 .a1 {
-              padding-right: 20px;
+            #login_table .a1 {
+              padding-right: 30px;
               cursor: pointer;
               background: url(__PUBLIC__/home/images/others.png) no-repeat right top;
             }
-            #diamond0 #checked {
-              padding-right: 20px;
+            #login_table #checked {
+              padding-right: 30px;
               cursor: pointer;
               background: url(__PUBLIC__/home/images/others.png) no-repeat right bottom !important;
 
@@ -65,12 +65,27 @@
                         <div class="container">
                             <div class="row" >
                                 <div class=" col-md-6 col-sm-6 col-xs-12">
+                                   
+                                    <table id="login_table" align="center">
+                                        <tr class="login2">
+                                            <td class="login2_u1" >
+                                                <img src="__PUBLIC__/home/images/my4.png" class="img-responsive">
+                                                <span class="dia" >{$good['diamond']}</span>   
+                                            </td>
+                                            <td class="login_u2" align="right">
+                                                <input class="radio1" name="good_id" type="radio" id="{$good['id']}" value="{$good['id']}" onclick="price({$good['price']})"/>
+                                                <div class="a1" name="{$good['id']}">&yen;{$good['price']}</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!--
                                     <div id="diamond0">
                                         <img src="__PUBLIC__/home/images/my4.png" class="img-responsive">
-                                        <span class="dia" >{$good['name']}</span>
+                                        <span class="dia" >{$good['diamond']}</span>
                                         <input class="radio1" name="good_id" type="radio" id="{$good['id']}" value="{$good['id']}" onclick="price({$good['price']})"/>
                                         <div class="a1" name="{$good['id']}">&yen;{$good['price']}</div>
-                                    </div>
+                                    </div>-->
+
                                 </div>
                                 
                             </div>
@@ -117,24 +132,47 @@
                                     <td class="login2_u1" >
                                          
                                           <span class="select-style"><select name="ccode" > <volist name="stateCode" id="v"><option value="{$v}" align="right" style="height:0.8rem !important">+{$v}</option></volist></select></span>
-                                        <span style="font-size:2rem;color:#AACBD4;line-height:2rem">|</span>
+                                        
                                     </td>
+                                    <td style="width:1%;height: 2rem"><span style="font-size:2rem;color:#AACBD4;line-height:2rem">|</span></td>
                                     <td class="login_u2">
-                                        <input name="username" type="text" placeholder="  请输入手机号" style="line-height: 3.2rem !important;">
+                                        <input name="username" id="username" type="text" placeholder="  请输入手机号" style="line-height: 3.2rem !important;" value="">
+
+                                    </td>
+                                    <td>
+                                        <img src="__PUBLIC__/home/images/clear.png" class="img-responsive clear-button" id="open5" >
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
+
+                    <div class="form-group hml" id="change">
+                        <table id="login_table" align="center">
+                                <tr class="login2">
+                                    <td class="login2_u1" align="center">
+                                         <img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="open5" onclick="sel_ios(this)"> 
+                                    </td>
+
+                                    <td class="login_u2" align="center">
+                                        <img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="open5" onclick="sel_android(this)">
+                                    </td>
+                                    <input type="hidden" name="os" value="">
+                                </tr>
+                            </table>
+                    </div>
+
+                    <!--
                     <div class="form-group hml" id="change">
                          <img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="open5" onclick="sel_ios(this)">
                          <img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="open5" onclick="sel_android(this)">
                          <input type="hidden" name="os" value="">
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <input type="hidden" name="price" value="" id="price">
                          <a href="#"><input class="btn btn-success up yanzheng" type="button" value="验证并充值" id="open4"/></a>
                     </div>
+
                 </div> 
             </div>
         </div>
@@ -271,6 +309,11 @@
 
     </script>
     <script>
+        //点击清空手机号文本框
+        $('.clear-button').click(function(){
+            $('#username').val('');
+        });
+
         $(function() {
           $('.a1').click(function(){
             var radioId = $(this).attr('name');
