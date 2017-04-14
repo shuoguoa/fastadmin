@@ -5,12 +5,8 @@ use Think\Model;
 class WxBindModel extends Model{
 
     public function getCurrentUser($openid){
-     /*
-        $model = M('user');
-        $model->where(array('openid'=>$openid, 'status'=>1))->find();echo 888; echo $model->_sql();exit;
-        // $this->where(array('openid'=>$openid, 'status'=>1))->find();echo 888; echo $this->_sql();exit;*/
-       return $this->where(array('openid'=>$openid, 'status'=>1))->find();
-        //echo 9999;exit;
+       return $this->where(array('openid'=>$openid, 'status'=>1))->order('id desc')->find();
+       // return $this->where(array('uid'=>$uid, 'status'=>1))->find();
     }
 
     public function getAllUserInfo($openid){

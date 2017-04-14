@@ -5,12 +5,28 @@ use Think\Controller;
 class OrderController extends ComController {
 
     public function index(){
-        $openid = session('openid');
-        $wxOrderModel = D('WxOrder');
-        $sql = 'select b.avatar as avatar,b.nickname as nickname, a.* from wx_order a left join user b on b.id= a.uid where a.openid="'.$openid.
-        '" and status = 1 order by a.id desc  limit 20 ';
+        //$openid = session('openid'); 
+        $uid = session('uid'); 
+        $wxOrderModel = D('WxOrder'); 
+        $bgn = strtotime(date('Y-m', strtotime('-1 month')));
+        $end = strtotime(date('Y-m-d H:i:s', time()));
+
+        $pageSize = 3;
+        $firstRow = $_GET['p'] == null ? '0' : ($_GET['p']-1)*$pageSize;
+
+        $field = 'b.avatar as avatar,b.nickname as nickname, a.time, a.date, a.diamond, a.money, a.username';
+        $sql = 'select '.$field.' from wx_order a left join user b on b.id= a.uid where a.uid="'.$uid.
+        '" and status = 1 and time between '.$bgn.' and '.$end.' order by a.id desc  limit '.$firstRow.' ,'. $pageSize;
         $orders = $wxOrderModel->query($sql);
-    	
+   
+        $sql2 = 'select count(*) as num from wx_order  where uid="'.$uid.
+        '" and status = 1 and time between '.$bgn.' and '.$end;
+
+        $count = $wxOrderModel->query($sql2); 
+        $page = new \Think\Page($count[0]['num'], $pageSize);
+        $page = $page->show();
+        $this->assign('page', $page);
+
        	$res = array();
         foreach ($orders as $key => $value) {
         	$k = date('Y年m月', $value['time']);
@@ -19,22 +35,14 @@ class OrderController extends ComController {
         	$w= date('w', $value['time']); 
         	$orders[$key]['w'] = $weekarray[$w];
         	$orders[$key]['d'] = $k;
+            $orders[$key]['rq'] = date('m-d', $value['time']);
  
         	$res[$i]['d'] = $k;
         	$month[$k]['month'] = $k;
-
-        	if ($res[$i]['d'] == $k) {
-        		$month[$k]['k'][$i]['nickname'] = $value['nickname'];
-	        	$month[$k]['k'][$i]['username'] = $value['username'];
-	        	$month[$k]['k'][$i]['avatar'] = $value['avatar'];
-	        	$month[$k]['k'][$i]['w'] = $weekarray[$w];
-	        	$month[$k]['k'][$i]['d'] = $k;
-	        	$month[$k]['k'][$i]['rq'] = date('m-d', $value['time']);
-	        	$month[$k]['k'][$i]['diamond'] += $value['diamond'];
-	        	$month[$k]['k'][$i]['money'] += $value['money'];
-        	}
         }  
+
         $this->assign('month',$month);
+        $this->assign('orders', $orders);
         $this->assign('check', I('get.flag'));
         $this->display();
     }

@@ -8,7 +8,7 @@ class PayController extends ComController {
     public function callback(){
         
         $wechatpay = new WechatPay(C('WechatPay'));
-        $xml = file_get_contents('php://input');
+        $xml = file_get_contents('php://input'); var_dump($xml);exit;
         $log = ROOT_PATH.'/Public/log/wxpay.log';
         error_log($xml . PHP_EOL, 3, $log);
         $result = $wechatpay->getCallback($xml); //var_dump($result);exit;
@@ -110,83 +110,6 @@ class PayController extends ComController {
         
     }
 
-    /**
-     * 处理vip购买请求
-     */
-    protected function buyVip(&$model, $orderInfo)
-    {
-        try {
-            $log = '/data/nginx/logs/wxpay/wxpay.log';
-            $wechatpay = new WechatPay(C('WechatPay'));
-            $userModel = D('User');
-            $userInfo = $userModel->where(array('id'=>$orderInfo['uid']))->find();
-            if (time() > $userInfo['expire_date']) { //如果会员已过期，过期时间设为0，等级为0
-                $level = 0;
-                $expire_date = 0;
-            }else{
-                $level = $userInfo['level'];
-                $expire_date = $userInfo['expire_date'];
-            }
-            if ($orderInfo['product_id'] == 3001) {
-                if ($level > 0) {
-                    $expire_date = $expire_date + (31 * 24 * 60 * 60);
-                    $user_data['expire_date'] = $expire_date;
-                    if ($expire_date > time() && $level == 2) {
-                        $user_data['level'] = 2;
-                    } else {
-                        if ($expire_date > (time() + (365 * 24 * 60 * 60))) {
-                            $user_data['level'] = 2;
-                        } else {
-                            $user_data['level'] = 1;
-                        }
-                    }
-                } else {
-                    $user_data['expire_date'] = time() + 31 * 24 * 60 * 60;
-                    $user_data['level'] = 1;
-                }
-            }
-            if ($orderInfo['product_id'] == 3002) {
-                if ($level > 0) {
-                    $user_data['expire_date'] = $expire_date + (365 * 24 * 60 * 60);
-                } else {
-                    $user_data['expire_date'] = time() + (365 * 24 * 60 * 60);
-                }
-                $user_data['level'] = 2;
-            }
-            $userModel->startTrans();
-            if ($userModel->where(array('id'=>$orderInfo['uid']))->save($user_data) === false) {
-                error_log('修改用户表会员失败' . PHP_EOL, 3, $log);
-                $model->rollback();
-                $userModel->rollback();
-                exit($wechatpay->responseMsg('FAIL'));
-            }
-            
-            //云信
-            $send_data = 'accid=' . $orderInfo['uid'] . '&ex=' . json_encode(['area_id' => $user_info['area_id'], 'level' => $user_data['level'], 'expire_date' => $user_data['expire_date']]);
-            $api_action = 'nimserver/user/updateUinfo.action';
-            $res = fn_send2netease($api_action, $send_data);
-            if ($res['code'] == 200) {
-                $model->commit();
-                $userModel->commit();
-                //更新redis
-                $redis = new \Redis();
-                $redis->connect(C('REDIS_HOST'), C('REDIS_PORT'));
-                $redis->auth(C('REDIS_AUTH'));
-                $redisKey = 'user:' . $orderInfo['uid'];
-                $redis->hset($redisKey, 'level', $user_data['level']);
-                $redis->hset($redisKey, 'expire_date', $user_data['expire_date']);
-                exit($wechatpay->responseMsg('SUCCESS'));
-            } else {
-                error_log('云信失败'. json_encode($res) . PHP_EOL, 3, $log);
-                $model->rollback();
-                $userModel->rollback();
-                exit($wechatpay->responseMsg('FAIL'));
-            }
-        } catch (Exception $e) {
-            throw new Exception("buyvip fail error message: ".$e->getMessage);
-        }
-    }
-
     public function order(){
         $goodId = I('id', 0 ,'intval');//商品id
         $openid = session('openid');
@@ -277,23 +200,6 @@ class PayController extends ComController {
     }
 
     protected function getGoodsInfo($path, $username = null, $product_id = null){
-        /*$file = C($path);
-        $xml = simplexml_load_file($file);
-        $xml = json_decode(json_encode($xml), true);
-        $data = array();
-        if($username){
-            $wxDiscountModel = D('WxDiscount');
-            $discount = $wxDiscountModel->where(array('username'=>$username))->getField('discount');
-        }
-        foreach ($xml as $key => $value) {
-            if($username && $discount && $path != "VIP_PATH"){
-                $value['price'] = round($discount * $value['original_price'], 2);
-            }else{
-                $value['price'] = round($value['discount'] * $value['original_price'], 2);
-            }
-            $data[$value['id']] = $value;
-            unset($value);
-        }*/
         return $product_id ? $this->pay($product_id) : $this->pay();
     }
 

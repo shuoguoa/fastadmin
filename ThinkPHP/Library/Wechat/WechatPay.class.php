@@ -173,7 +173,7 @@ class WechatPay {
      *          transaction_id  微信支付订单号
      */
     public function getCallback($xml) {
-        // $xml = file_get_contents('php://input');
+        //$xml = file_get_contents('php://input');
         $data = $this->xml2array($xml);
         if ($this->verifyCallback($data)) {
             return $data;

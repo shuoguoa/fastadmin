@@ -4,7 +4,7 @@ use Think\Controller;
 class ComController extends Controller {
 
     public function _initialize(){
-        /*
+        /**/
         $appid = C('WechatPay.appid');
         $secret = C('WechatPay.secret');
 
@@ -25,7 +25,19 @@ class ComController extends Controller {
     
         //过滤首页和绑定页
         $page = CONTROLLER_NAME.'/'.ACTION_NAME;
-        if($page != 'Index/index' && $page != 'Bind/index' && $page != 'Bind/bind'){
+        if($page == 'Pay/order' || $page == 'Order/index'){
+            //判断是否已经绑定
+            $wxBindModel = D('WxBind');
+            $openid = session('openid');
+            $data = $wxBindModel->where(array('openid'=>$openid))->select();
+            if(!$data){
+                $this->redirect('Bind/index');
+            }
+        }
+
+
+        /*
+        if($page != 'Index/index' && $page != 'Bind/index' && $page != 'Bind/bind'&& $page != 'Friend/index'&& $page != 'Friend/getFriendInfo'){
             //判断是否已经绑定
             $wxBindModel = D('WxBind');
             $openid = session('openid');

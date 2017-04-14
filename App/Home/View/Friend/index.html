@@ -74,7 +74,7 @@
                                             </td>
                                             <td class="login_u2" align="right">
                                                 <input class="radio1" name="good_id" type="radio" id="{$good['id']}" value="{$good['id']}" onclick="price({$good['price']})"/>
-                                                <div class="a1" name="{$good['id']}">&yen;{$good['price']}</div>
+                                                <div class="a1" name="{$good['id']}" value="{$good['price']}">&yen;{$good['price']}</div>
                                             </td>
                                         </tr>
                                     </table>
@@ -96,32 +96,7 @@
                 </div>
              </div>   
         </section>
-        <section id="two2" style="display:none;">
-            
-                <div class="container">
-                    <div class="row"  onclick="sel_baijin(this)" id="baijin">
-                        <div class=" col-md-6 col-sm-12 col-xs-12 aa">
-                            <div ><img src="__PUBLIC__/home/images/white.png" class="img-responsive same">
-                            <a class="btn btn-warning all" href="#">&yen;{$vips[0][price]}</a></div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="line1">
-            </div>
-            <div class="kong"></div>
-            <div class="line1" style="margin-top:5px;">
-                <div class="container">
-                    <div class="row" onclick="sel_heika(this)" id="heika">
-                        <div class=" col-md-6 col-sm-12 col-xs-12 aa">
-                            <div ><img src="__PUBLIC__/home/images/black.png" class="img-responsive same">
-                            <a class="btn btn-warning all" href="#">&yen;{$vips[1][price]}</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="kong"></div>
-        </section>
+   
         <div class="container zui">
             <div class="row">
                 <div class=" col-md-6 col-sm-12 col-xs-12">
@@ -140,7 +115,7 @@
 
                                     </td>
                                     <td>
-                                        <img src="__PUBLIC__/home/images/clear.png" class="img-responsive clear-button" id="open5" >
+                                        <img src="__PUBLIC__/home/images/clear.png" class="img-responsive clear-button" id="clear" >
                                     </td>
                                 </tr>
                             </table>
@@ -157,21 +132,19 @@
                                     <td class="login_u2" align="center">
                                         <img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="open5" onclick="sel_android(this)">
                                     </td>
-                                    <input type="hidden" name="os" value="">
+                                    <input type="hidden" name="os" value="" id="os">
                                 </tr>
                             </table>
                     </div>
 
-                    <!--
-                    <div class="form-group hml" id="change">
-                         <img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="open5" onclick="sel_ios(this)">
-                         <img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="open5" onclick="sel_android(this)">
-                         <input type="hidden" name="os" value="">
-                    </div>-->
-                    <div class="form-group">
-                        <input type="hidden" name="price" value="" id="price">
-                         <a href="#"><input class="btn btn-success up yanzheng" type="button" value="验证并充值" id="open4"/></a>
-                    </div>
+                    <table id="login_table2" align="center">
+                        <tr class="form-group" id="change">
+                            <td align="center" colspan="2">
+                                <input type="hidden" name="price" value="" id="price">
+                                <a href="#"><input class="btn btn-success up yanzheng" type="button" value="验证并充值" id="open4"/></a>
+                            </td>
+                        </tr>
+                    </table>
 
                 </div> 
             </div>
@@ -182,158 +155,44 @@
     </body>
     <script src="__PUBLIC__/home/js/jquery-1.11.3.min.js"></script>
     <script src="__PUBLIC__/home/js/layer/layer.js"></script>
-    <script>
-    function sel_baijin(obj){
-        $(obj).attr("style","border:1px solid #b69f60;");
-        $(obj).parent().parent().parent().find('#heika').removeAttr("style");
-        $("input[name='good_id']").val({$vips[0]['id']});
-    }
-    function sel_heika(obj){
-        $(obj).attr("style","border:1px solid #b69f60;");
-        $(obj).parent().parent().parent().find('#baijin').removeAttr("style");
-        $("input[name='good_id']").val({$vips[1]['id']});
-    }
 
-    function sel_zhuan(obj){
-        $(obj).attr("src","__PUBLIC__/home/images/after1.png");
-        $(obj).parent().parent().parent().find('#tab2 img').attr("src","__PUBLIC__/home/images/buy2.png");
-        $('#two2').hide();$('#mama').show();
-        $(".re1").attr("style","background-color:black;border:2px solid #957c14");
-        $(".re2").attr("style","background-color:#282828; border:2px solid #383838;");
-        $(".re3").attr("style","background-color:#282828; border:2px solid #383838;");
-        $("#total").html(price1*n);
-        $('.chosed').removeClass('chosed');
-        $(".re1").addClass('chosed');
-        $("input[name='good_id']").val({$goods[0]['id']});
-
-    }
-    function sel_hui(obj){
-        $(obj).attr("src","__PUBLIC__/home/images/after2.png")
-        $(obj).parent().parent().parent().find('#tab1 img').attr("src","__PUBLIC__/home/images/buy1.png");
-        $('#mama').hide();$('#two2').show();
-        $('#baijin').attr("style","border:1px solid #b69f60;");
-        $('#heika').removeAttr("style");
-        $("input[name='good_id']").val({$vips[0]['id']});
-    }
-    
-    //初始化金额
-    $('#total').text({$goods[0]['price']});
-    //
-    var oDiv = document.getElementById('three');
-        oDiv.style.position = 'fixed';
-        oDiv.style.bottom = '0px';
-    var n=1;
-    var span1=$(".r1 span")[0];
-    var price1=parseFloat(span1.innerHTML.slice(1));
-    var span2=$(".r2 span")[0];
-    var price2=parseFloat(span2.innerHTML.slice(1));
-    var span3=$(".r3 span")[0];
-    var price3=parseFloat(span3.innerHTML.slice(1));
-    
-    var arr=[price1,price2,price3];
-
-    $("#ab").click(function(){
-        var span=document.getElementById("number");
-        n=parseInt(span.innerHTML);
-        n++;
-        span.innerHTML=n;
-        //return n;
-        if($('.chosed')[0]){
-            var index=$('.chosed').index();
-            console.log(index);
-            $("#total").html( arr[index]*n);   
+     <script>
+        function sel_ios(obj){
+            $(obj).attr("src","__PUBLIC__/home/images/others7.png")
+            $(obj).siblings().attr("src","__PUBLIC__/home/images/others9.png");
+            $("input[name='os']").attr('value', '0'); 
         }
-        
-    });
-    $("#aa").click(function(){
-        var span=document.getElementById("number");
-        n=parseInt(span.innerHTML);
-            if(n==1){
-                n-=0;
-            }else{
-                n--;
-            }
-        span.innerHTML=n;
-        //return n;
-        if($('.chosed')[0]){
-            var index=$('.chosed').index();
-            console.log(index);
-            $("#total").html( arr[index]*n);   
+        function sel_android(obj){
+            $(obj).attr("src","__PUBLIC__/home/images/others8.png")
+            $(obj).siblings().attr("src","__PUBLIC__/home/images/others6.png");
+            $("input[name='os']").attr('value', '1'); 
         }
-    });
-    //console.log(n);
-    $("#d10").click(function(){
-        $(".re1").attr("style","background-color:black;border:2px solid #957c14");
-        $(".re2").attr("style","background-color:#282828; border:2px solid #383838;");
-        $(".re3").attr("style","background-color:#282828; border:2px solid #383838;");
-        $("#total").html(price1*n);
-        $('.chosed').removeClass('chosed');
-        $(this).addClass('chosed');
-        var good_id = $(this).attr('value');
-        $("input[name='good_id']").val(good_id);
-    });
-    $("#d100").click(function(){
-        $(".re2").attr("style","background-color:black;border:2px solid #957c14");
-        $(".re1").attr("style","background-color:#282828; border:2px solid #383838;");
-        $(".re3").attr("style","background-color:#282828; border:2px solid #383838;");
-        $("#total").html(price2*n);
-        $('.chosed').removeClass('chosed');
-        $(this).addClass('chosed');
-        var good_id = $(this).attr('value');
-        $("input[name='good_id']").val(good_id);
-    });
-    $("#d1000").click(function(){
-        $(".re3").attr("style","background-color:black;border:2px solid #957c14");
-        $(".re1").attr("style","background-color:#282828; border:2px solid #383838;");
-        $(".re2").attr("style","background-color:#282828; border:2px solid #383838;");
-        $("#total").html(price3*n);
-        $('.chosed').removeClass('chosed');
-        $(this).addClass('chosed');
-        var good_id = $(this).attr('value');
-        $("input[name='good_id']").val(good_id);
-    });
-    
-        
-
-
-    function sel_ios(obj){
-        $(obj).attr("src","__PUBLIC__/home/images/others7.png")
-        $(obj).siblings().attr("src","__PUBLIC__/home/images/others9.png");
-        $("input[name='os']").attr('value', '0'); 
-    }
-    function sel_android(obj){
-        $(obj).attr("src","__PUBLIC__/home/images/others8.png")
-        $(obj).siblings().attr("src","__PUBLIC__/home/images/others6.png");
-        $("input[name='os']").attr('value', '1'); 
-    }
-
-    </script>
-    <script>
         //点击清空手机号文本框
         $('.clear-button').click(function(){
             $('#username').val('');
         });
 
         $(function() {
-          $('.a1').click(function(){
-            var radioId = $(this).attr('name');
-            price($(this).text());
+            $('.a1').eq(0).attr('id', 'checked');
+        });
+
+        $('.a1').click(function(){
+            var radioId = $(this).attr('name'); 
             $('.a1').removeAttr('id') && $(this).attr('id', 'checked');
             $('input[type="radio"]').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
             
-          });
         });
         
-    
-        function price(param){
-            $('#price').val(param);
-        }
         $('#open4').click(function() {
-            price = $("input[name='price']").val();
+            $(".a1").each(function(i, obj){
+                if ($(this).attr('id') == 'checked') {
+                    price = $(this).attr('value');
+                }
+            });
+
             username = $("input[name='username']").val();
             os = $("input[name='os']").val();
             if(username.length == 0){
-        //alert('请输入需要充值的账号');
                 Showbo.Msg.alert('请输入需要充值的账号');
                 return false;
             }
@@ -384,12 +243,10 @@
 
                 Showbo.Msg.confirm(str);
                 $(".btn2").click(function(){
-                    var flag = $(this).val();// alert(flag);alert(999);return false;
+                    var flag = $(this).val();
                     if (flag == '确认') {
                         recharge(uid, username, nickname, os, uuid, price);
-                    } else {
-                        window.location.href='{:U('Friend/index?flag=2')}';
-                    }
+                    } 
                 }
 
                 );
@@ -466,4 +323,67 @@
             ); 
         }
     </script>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        
+    //初始化金额
+    $('#total').text({$goods[0]['price']});
+    //
+    var oDiv = document.getElementById('three');
+        oDiv.style.position = 'fixed';
+        oDiv.style.bottom = '0px';
+    var n=1;
+    var span1=$(".r1 span")[0];
+    var price1=parseFloat(span1.innerHTML.slice(1));
+    var span2=$(".r2 span")[0];
+    var price2=parseFloat(span2.innerHTML.slice(1));
+    var span3=$(".r3 span")[0];
+    var price3=parseFloat(span3.innerHTML.slice(1));
+    
+    var arr=[price1,price2,price3];
+
+    $("#ab").click(function(){
+        var span=document.getElementById("number");
+        n=parseInt(span.innerHTML);
+        n++;
+        span.innerHTML=n;
+        //return n;
+        if($('.chosed')[0]){
+            var index=$('.chosed').index();
+            console.log(index);
+            $("#total").html( arr[index]*n);   
+        }
+        
+    });
+    $("#aa").click(function(){
+        var span=document.getElementById("number");
+        n=parseInt(span.innerHTML);
+            if(n==1){
+                n-=0;
+            }else{
+                n--;
+            }
+        span.innerHTML=n;
+        //return n;
+        if($('.chosed')[0]){
+            var index=$('.chosed').index();
+            console.log(index);
+            $("#total").html( arr[index]*n);   
+        }
+    });
+  
+    
+
+    </script>
+
 </html>

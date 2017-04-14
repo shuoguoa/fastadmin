@@ -38,23 +38,33 @@
 							<li class="mm2"></li>
 							<volist name="allUserInfo" id="info">
 							<a href="{:U('Index/switchUser',array('uid'=>$info['id']))}">
-							<li class="mm3">
-								<img src="{$info['avatar']}" class="img-responsive add" id="own5">
-								<span id="own6">{$info['nickname']}<br>
-									<i class="extra">账号:{$info['username']}</i>
-								</span>
-								<if condition="$userInfo['id'] eq $info['id']">
-									<img src="__PUBLIC__/home/images/cur.png" class="img-responsive" id="own10">
-									<!--<span id="own10">当前绑定</span>-->
-								</if>
-								<if condition="$info['os'] eq 0">
-									<img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="own8">
-								<else />
-									<img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="own8">
-								</if>
-							</li>
-							</a>
-							<li class="mm2"></li>
+								<li class="mm3">
+									<table id="login_table" align="center" >
+		                                <tr class="login2">
+		                                    <td class="login2_u1" >
+		                                        <img src="{$info['avatar']}" class="img-responsive add" id="own5">
+												<span id="own6">{$info['nickname']}<br>
+													<i class="extra">账号:{$info['username']}</i>
+												</span>  
+		                                    </td>
+		                                    <td class="login_u2" align="right">
+		                                        <if condition="$info['os'] eq 0">
+													<img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="own8">
+												<else />
+													<img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="own8">
+												</if>
+		                                    </td>
+		                                    <td class="login_u2" align="right">
+		                                        <if condition="$userInfo['id'] eq $info['id']">
+													<img src="__PUBLIC__/home/images/cur.png" class="img-responsive" id="own10">
+												</if>
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </li>
+		                    </a>
+		                    <li class="mm2"></li>
+	
 							</volist>
 							<li class="mm3">
 								<a href="{:U('Bind/index')}"><img src="__PUBLIC__/home/images/1_1.png" class="img-responsive add"></a>
@@ -66,7 +76,33 @@
 			</div>
 			<div class="yonghu">
 				<!--<img  class="img-responsive">-->
-				<img src="{$userInfo['avatar']}" class="img-responsive" id="own7">
+
+				<table id="login_table" align="center" >
+                    <tr class="login2">
+                        <td class="login2_u1" >
+                            <img src="{$info['avatar']}" class="img-responsive add" id="own7">
+							<img  class="img-responsive" id="own11">
+							<span id="own12">{$userInfo['nickname']}<br>
+							<i class="extra">账号:{$userInfo['username']}
+                        </td>
+                        <td class="login_u2" align="right">
+                            <if condition="$userInfo['os'] eq 0">
+								<img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="own1">
+							<else />
+								<img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="own1">
+							</if>
+                        </td>
+                        <td class="login_u2" align="right">
+                            <img src="__PUBLIC__/home/images/more.png" class="img-responsive" id="own2">
+                        </td>
+                    </tr>
+                </table>
+
+
+
+
+
+				<!--<img src="{$userInfo['avatar']}" class="img-responsive" id="own7">
 				<img  class="img-responsive" id="own11">
 				<span id="own12">{$userInfo['nickname']}<br>
 									<i class="extra">账号:{$userInfo['username']}
@@ -78,7 +114,7 @@
 				</i>
 				<img src="__PUBLIC__/home/images/more.png" class="img-responsive" id="own2">
 			</div>
-			<!--<div class="money2" style="margin-top:0px;"></div>-->
+			<div class="money2" style="margin-top:0px;"></div>-->
 			<div class="money2" ></div>
 		</section>
 	</neq>
@@ -89,7 +125,7 @@
 				<div class="line1">
 					<div class="container">
 						<div class="row">
-							<div class=" col-md-6 col-sm-6 col-xs-12">
+							<div class=" col-md-6 col-sm-6 col-xs-12 aa">
 								<div ><img src="__PUBLIC__/home/images/my4.png" class="img-responsive"><span>{$good['diamond']}</span>
 								<a class="btn btn-warning" onclick="order({$good['id']})">&yen;{$good['price']}</a></div>
 							</div>
