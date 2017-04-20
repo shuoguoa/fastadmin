@@ -5,6 +5,7 @@ class ComController extends Controller {
 
     public function _initialize(){
         /**/
+        $param = I('test');
         $appid = C('WechatPay.appid');
         $secret = C('WechatPay.secret');
 
@@ -15,9 +16,17 @@ class ComController extends Controller {
             if(!$code){
                 $this->getCode();
             }
-            $get_token_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$secret.'&code='.$code.'&grant_type=authorization_code';
-          
-            $data = $this->httpGet($get_token_url);
+
+            $get_token_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$secret.'&$test='.$param.'&code='.$code.'&grant_type=authorization_code';
+            $get_token_url0 = 'http://liufuqin.test.htgames.cn/qwadmin/index.php?m=Home&c=Bind&a=index';
+             $param = I('test');
+            if ($param) {
+                $data = $this->httpGet($get_token_url0);
+            } else {
+                $data = $this->httpGet($get_token_url);
+            }
+            
+            //$data = $this->httpGet($get_token_url);
             $data = json_decode($data, true); 
             session('openid',$data['openid']);
 
@@ -35,17 +44,6 @@ class ComController extends Controller {
             }
         }
 
-
-        /*
-        if($page != 'Index/index' && $page != 'Bind/index' && $page != 'Bind/bind'&& $page != 'Friend/index'&& $page != 'Friend/getFriendInfo'){
-            //判断是否已经绑定
-            $wxBindModel = D('WxBind');
-            $openid = session('openid');
-            $data = $wxBindModel->where(array('openid'=>$openid))->select();
-            if(!$data){
-                $this->redirect('Bind/index');
-            }
-        }*/
     }
 
     private function httpGet($url) {
@@ -62,17 +60,20 @@ class ComController extends Controller {
         return $res;
     }
 
+    public function getDefaultAvatar(){
+        return 'qwadmin/Public/home/images/head.png';
+    }
+
     private function getCode(){
         $appid = C('WechatPay.appid');
         $secret = C('WechatPay.secret');
 
         $code = I('get.id',0);
-        //$url = C('WEB_DOMAIN');
         $url = "http://liufuqin.test.htgames.cn";
 
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.urlencode($url).'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-        header("Location:".$url);
-        die();
+        //header("Location:".$url);
+        //die();
     }
 
                                 
@@ -182,15 +183,15 @@ class ComController extends Controller {
             ];
         }else{
             $pay = [
-                2000 => ['id' => 2000,
+               2000 => ['id' => 2000,
                     'ios_id'=> 'com.htgames.nutspoker.rmb6',
                     'name' => '0.01',
-                    'diamond' => 60,
+                    'diamond' => 6,
                     'vip' => 0,
                     'desc' => '含钻石1颗',
                     'price' => 0.01
                 ],
-                /*2001 => ['id' => 2001,
+               /*  2001 => ['id' => 2001,
                     'ios_id'=> 'com.htgames.nutspoker.rmb6',
                     'name' => '6',
                     'diamond' => 60,

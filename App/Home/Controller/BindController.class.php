@@ -9,7 +9,7 @@ class BindController extends ComController {
     }
 
     public function bind(){
-        $openid = session('openid'); //echo $openid;exit;
+        $openid = session('openid');
         $username = I('username');
         $password = I('password'); 
         $ccode = I('ccode');
@@ -30,7 +30,7 @@ class BindController extends ComController {
             $data['bind_time'] = time();
             $data['status'] = 1;
             $data['ccode'] = $ccode;
-            $data['username'] = $userInfo['username']; //var_dump($data);exit;
+            $data['username'] = $userInfo['username'];
             if( $wxBindModel->add($data) ){
                 $this->redirect('Index/index');
                // session('openid', $openid);

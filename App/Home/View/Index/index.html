@@ -15,16 +15,14 @@
 	<eq name="userInfo['id']" value="0">
 	<!--头部分-->
 		<section id="one">
-			<div class="container" >
-				<div class="row">
-					<div class=" col-md-6 col-sm-6 col-xs-12">
-						
-						<div class="money1"><a href="{:U('Bind/index')}"><img src="__PUBLIC__/home/images/my3.png" class="img-responsive" id="start3"><span>绑定充值账号</span></a>
-                        <!---->  </div>
-						
-					</div>
-				</div>
-			</div>		
+			<table id="login_table" align="center" >
+                <tr class="login2">
+                    <td class="money1" >
+                        <a href="{:U('Bind/index')}"><img src="__PUBLIC__/home/images/my3.png" class="img-responsive" id="start3">
+                    </td>
+                </tr>
+            </table>
+				
 			<div class="money2"></div>
 		</section>
 	</eq>
@@ -47,11 +45,11 @@
 													<i class="extra">账号:{$info['username']}</i>
 												</span>  
 		                                    </td>
-		                                    <td class="login_u2" align="right">
+		                                    <td class="login_u2" align="left">
 		                                        <if condition="$info['os'] eq 0">
-													<img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="own8">
+													<img src="__PUBLIC__/home/images/account_ios.png" class="img-responsive" id="own8">
 												<else />
-													<img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="own8">
+													<img src="__PUBLIC__/home/images/account_android.png" class="img-responsive" id="own8">
 												</if>
 		                                    </td>
 		                                    <td class="login_u2" align="right">
@@ -67,7 +65,7 @@
 	
 							</volist>
 							<li class="mm3">
-								<a href="{:U('Bind/index')}"><img src="__PUBLIC__/home/images/1_1.png" class="img-responsive add"></a>
+								<a href="{:U('Bind/index')}"><img src="__PUBLIC__/home/images/new.png" class="img-responsive new-bind"></a>
 							</li>
 							<li class="mm4"></li>
 						</ul>
@@ -75,8 +73,6 @@
 				</div>		
 			</div>
 			<div class="yonghu">
-				<!--<img  class="img-responsive">-->
-
 				<table id="login_table" align="center" >
                     <tr class="login2">
                         <td class="login2_u1" >
@@ -87,9 +83,9 @@
                         </td>
                         <td class="login_u2" align="right">
                             <if condition="$userInfo['os'] eq 0">
-								<img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="own1">
+								<img src="__PUBLIC__/home/images/account_ios.png" class="img-responsive" id="own1">
 							<else />
-								<img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="own1">
+								<img src="__PUBLIC__/home/images/account_android.png" class="img-responsive" id="own1">
 							</if>
                         </td>
                         <td class="login_u2" align="right">
@@ -97,24 +93,6 @@
                         </td>
                     </tr>
                 </table>
-
-
-
-
-
-				<!--<img src="{$userInfo['avatar']}" class="img-responsive" id="own7">
-				<img  class="img-responsive" id="own11">
-				<span id="own12">{$userInfo['nickname']}<br>
-									<i class="extra">账号:{$userInfo['username']}
-				<if condition="$userInfo['os'] eq 0">
-					<img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="own1">
-				<else />
-					<img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="own1">
-				</if>
-				</i>
-				<img src="__PUBLIC__/home/images/more.png" class="img-responsive" id="own2">
-			</div>
-			<div class="money2" style="margin-top:0px;"></div>-->
 			<div class="money2" ></div>
 		</section>
 	</neq>
@@ -126,39 +104,14 @@
 					<div class="container">
 						<div class="row">
 							<div class=" col-md-6 col-sm-6 col-xs-12 aa">
-								<div ><img src="__PUBLIC__/home/images/my4.png" class="img-responsive"><span>{$good['diamond']}</span>
-								<a class="btn btn-warning" onclick="order({$good['id']})">&yen;{$good['price']}</a></div>
+								<div style="padding-left: 10px"><img src="__PUBLIC__/home/images/my4.png" class="img-responsive"><span>{$good['diamond']}</span>
+								<a class="btn btn-warning" onclick="order({$good['id']}, {$good['price']})">&yen;{$good['price']}</a></div>
 							</div>
 							
 						</div>
 					</div>
 				</div>
 				</volist>
-			</div>
-			<div id="two2" style="display: none;">
-				
-				<div class="kong"></div>
-				<div class="line1">
-					<div class="container">
-						<div class="row">
-							<div class=" col-md-6 col-sm-12 col-xs-12 aa">
-								<div ><img src="__PUBLIC__/home/images/white.png" class="img-responsive same">
-								<a class="btn btn-warning all " onclick="vipOrder(3001)">&yen;{$vips[3001][price]}</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="line1" style="margin-top:5px;">
-					<div class="container">
-						<div class="row">
-							<div class=" col-md-6 col-sm-12 col-xs-12 aa">
-								<div ><img src="__PUBLIC__/home/images/black.png" class="img-responsive same">
-								<a class="btn btn-warning all " onclick="vipOrder(3002)">&yen;{$vips[3002][price]}</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="kong"></div>
 			</div>
 		</div>
 	<!--底部（导航）部分-->
@@ -169,25 +122,7 @@
 	<script src="__PUBLIC__/home/js/bootstrap.js"></script>
 	<script src="__PUBLIC__/home/js/layer/layer.js"></script>
 	<script>
-	function sel_baijin(obj){
-		$(obj).attr("style","border:1px solid #b69f60;");
-		$(obj).parent().parent().parent().find('#heika').removeAttr("style");
-	}
-	function sel_heika(obj){
-		$(obj).attr("style","border:1px solid #b69f60;");
-		$(obj).parent().parent().parent().find('#baijin').removeAttr("style");
-	}
-
-	function sel_zhuan(obj){
-		$(obj).attr("src","__PUBLIC__/home/images/after1.png");
-		$(obj).parent().parent().parent().find('#tab2 img').attr("src","__PUBLIC__/home/images/buy2.png");
-		$('#two2').hide();$('#two1').show();
-	}
-	function sel_hui(obj){
-		$(obj).attr("src","__PUBLIC__/home/images/after2.png")
-		$(obj).parent().parent().parent().find('#tab1 img').attr("src","__PUBLIC__/home/images/buy1.png");
-		$('#two1').hide();$('#two2').show();
-	}
+	
 	
 	var oDiv = document.getElementById('three');
 		oDiv.style.position = 'fixed';
@@ -206,20 +141,49 @@
 			}	
 		})
 
-		$("#own2").click(function(e){
-		    $("#own3").toggle(); //意思是显示隐藏的切换
-		})
+		// $("#own2").click(function(e){
+		//     $("#own3").toggle(); //意思是显示隐藏的切换
+		// })
+
+		  $(function(){
+	    	$("#own2").click(function(e){
+	    		e.stopPropagation();
+	    		$("#own3").toggle();
+	    		return false;
+	    	});
+	    
 		
+			$(document).click(function(event){
+				var _con = $("#own3"); //设置目标区域
+				if(!_con.is(event.target)&& _con.has(event.target).length === 0) 
+				{
+					$("#own3").hide();
+				}
+			});
+		});
+
+
+	    
 	</script>
 	<script>
-		function order(id) {
+		function order(id, price) {
 			var id = id;
 			var uid = {$userInfo['id']};
 			if(uid == 0){
-				//alert('请先绑定账号');
 				Showbo.Msg.alert('请先绑定账号');
 				return false;
-			}
+			} else {
+				Showbo.Msg.confirm('金额'+price+'元，确认购买？');
+	            $(".btn2").click(function(){
+	                var flag = $(this).val();
+	                if (flag == '确认') {
+	                    submit(id, uid);
+	                } 
+	            });	
+			}					
+		}
+
+		function submit(id, uid){
 			var loading_layer = layer.load(1, {
 			  shade: [0.2,'#fff'] //0.1透明度的白色背景
 			});
@@ -235,12 +199,12 @@
 					alert(req.data);
 				}else{
 					onBridgeReady(req.data);
-					console.log("成功调起支付");
+					Showbo.Msg.console.log("成功调起支付");
 				}
 			})
 			.fail(function() {
 				layer.close(loading_layer);
-				alert('请求失败，请重试！');
+				Showbo.Msg.alert('请求失败，请重试！');
 			})
 		}
 
@@ -271,7 +235,7 @@
 			})
 			.fail(function() {
 				layer.close(loading_layer);
-				alert('请求失败，请重试！');
+				Showbo.Msg.alert('请求失败，请重试！');
 			})
 		}
 

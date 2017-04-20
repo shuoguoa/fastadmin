@@ -11,25 +11,24 @@ a:hover{color:#c00; text-decoration:underline;}
 .box-163css{ width:350px; margin:220px auto; position:relative;}
 .box-163css input{ margin-left:10px; border:none; border:1px solid #a10000; background:#c00; text-align:center; height:24px; line-height:20px; color:#fff; cursor:pointer;}
 #dvMsgBox{display:none;position:absolute;
-	border-color: #544E3E;
-    border-radius: 6px; border: 2px #544E3E;
-	font-size:12px;width:250px;overflow:hidden;z-index:999; font-family:微软雅黑;}  
+    border-radius: 6px; border: 1px #D5D5D5;
+	font-size:12px;width:250px;overflow:hidden;z-index:999; font-family:微软雅黑;opacity:1}  
 /*#dvMsgBox .top{height:40px; padding-left:16px; float:left; width:100%;}  
 #dvMsgBox .top .right{height:100%;padding-right:6px;}  
 #dvMsgBox .top .right .title{height:100%;line-height:40px;color:#fff;vertical-align:middle;font-size:14px;overflow:hidden;}  
 */
-#dvMsgBox .body{background:#fff;padding-left:10px; border-color: #544E3E;border-radius: 6px 6px 0 0;}  
-#dvMsgBox .body .right{background:#fff;padding-right:2px; border-color: #544E3E;border-radius: 6px 6px 0 0;}  
-#dvMsgBox .body .right .ct{  line-height: 60px; vertical-align: middle; width: 100%; text-align: center;
+#dvMsgBox .body{background:#fff;padding-left:10px; border-color: #544E3E;border-radius: 10px 10px 0 0;}  
+#dvMsgBox .body .right{background:#fff;padding-right:2px; border-color: #F6F6F6;border-radius: 10px 10px 0 0;}  
+#dvMsgBox .body .right .ct{  line-height: 75px; vertical-align: middle; width: 100%; text-align: center;
   font-size: 14px;}  
 #dvMsgBox .body .right .ct td{ line-height:3rem;font-size: 15px;} 
 #dvMsgBox .body .right .ct .pro{width:280px;border:solid 1px #6593cf;height:25px;background:#ffffff;line-height:23px;overflow:hidden;}  
 #dvMsgBox .body .right .ct .pro .bg{width:0%;height:100%;background:#c9dffc;}  
-#dvMsgBox .bottom{background:#fff;padding-left:6px;border-radius: 0 0 6px 6px ;border-top: 1px solid #b2c9d4}  
+#dvMsgBox .bottom{background:#fff;padding-left:6px;border-radius: 0 0 10px 10px ;border-top: 0.5px solid #C8C7CC}  
 #dvMsgBox .bottom .right{height:100%;/*background:transparent url(right-corners.png) no-repeat right bottom;*/padding-right:6px;}  
 input.btn2{width:70px; border-radius: 3px; font-family:微软雅黑; cursor:pointer; color:#3F8CE5;font-size: 16px; 
     
-	border:none; height:25px; text-align:center;  background-color:#FFF;text-align:center; margin:0px auto;}  
+	border:none; height:25px; text-align:center;  background-color:#FFF;text-align:center; margin:0px 15px;}  
 input.btnfocus{ background-color:#EC6D51; font-family:微软雅黑;   border-radius: 3px;width:56px;margin:0px auto; border:none; height:25px; cursor:pointer; color:#fff;}  
 #dvMsgBox .icon{width:32px;height:32px;float:left;margin-right:10px;}  
 #dvMsgBox .error{background:url(icon-error.gif) no-repeat;}  

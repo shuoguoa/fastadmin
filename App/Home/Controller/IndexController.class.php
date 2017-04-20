@@ -13,8 +13,12 @@ class IndexController extends ComController {
             $user = $wxBindModel->getCurrentUser($openid);
             if($user['uid']){ 
                 $userInfo = D('User')->getUserInfoByUid($user['uid']); 
+                $userInfo['avatar'] = $userInfo['avatar']=='' ? $this->getDefaultAvatar() : $userInfo['avatar'];
                 $this->assign('userInfo',$userInfo);//当前绑定用户id
                 $allUserInfo = $wxBindModel->getAllUserInfo($openid);
+                foreach ($allUserInfo as $key => $value) {
+                    $allUserInfo[$key]['avatar'] = $value['avatar']=='' ? $this->getDefaultAvatar() : $value['avatar'];
+                }
                 $this->assign('allUserInfo',$allUserInfo);//当前绑定用户id   
             }
         }

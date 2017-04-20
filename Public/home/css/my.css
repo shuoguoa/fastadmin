@@ -1,3 +1,5 @@
+
+
 .start {
 	background-color:#000000;
 	height:3rem;
@@ -6,7 +8,7 @@
 }
 .money1{
 	
-	height:4rem;
+	height:5rem;
 
 	margin-top:0rem;
 	margin-left:auto;
@@ -79,20 +81,19 @@
 	height:25px;
 	float:left;
 	margin-right:0.5rem;
-	margin-top:0.8rem;
+	top:1.4rem;
 }
 
 .select-style{
-  position:relative;
   overflow:hidden;
-  width:50%;
-  height: 2rem;
-  
+  height: 30px;
+  line-height: 30px; 
 }
 .select-style select{
  margin:-2px; border:none;
  appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none; -webkit-appearance:none;
  -webkit-tap-highlight-color: transparent;    background: 0 0 ;
+ font-size: 1.5rem;
 }
 
 .line0{
@@ -111,11 +112,12 @@
 }
 .line1{
 	background-color:#FFFFFF;
+	min-height: 30%;
 }
 #two1 img{
 	display:inline-block;
 	
-	width:4rem;
+	width:5rem;
 }
 #two1 span{
 	color:#555;
@@ -128,18 +130,17 @@
 	background-color:#37BECD;
 	border-color:#48BABD;
 	position:absolute;
-	top:0.5rem;
+	top:1rem;
 	right:1rem;
 	width:7rem;
 	vertical-align: middle;
 }
 .a1{
 	color:#37BECD;
-
-
 	right:1rem;
-	width:7rem;
-	font-size: 15px;
+	width:8rem;
+	height: 2.3rem;
+	font-size: 16px;
 	vertical-align: middle;
 }
 #radio1{
@@ -237,14 +238,18 @@ label.checked {
 	
 }
 
+.login2_u1{
+	vertical-align: middle;	
+}
+
 #check .login_u1{
 	color:#A29C9C;
 	font-family:'NSimSun';
 	padding:0 auto;
 	line-height: 4rem;
-	width:45%;
+	width: 30%;
 	font-family:inherit;
-	font-size: 15px;
+	font-size: 130%
 }
 
 
@@ -259,12 +264,12 @@ label.checked {
 	background: 0 0;
 	padding: 0;
 	border: 0;
-	margin-left: 10px;
+
 	-webkit-tap-highlight-color: transparent;
 	-webkit-box-flex: 1;
 	display: block;
 	font-family:inherit;
-	min-width: 60%;
+	
 	font-size: initial;
 }
 
@@ -300,15 +305,15 @@ label.checked {
 	}
 	.header-logo a {
 		display: inline-block;
-		width:33.3%;
+		width:100%;
 		text-align: center;
 		height:100%;
-		line-height: 280%;
+		line-height: 5rem;
 		font-size:1.8rem;
-		color: #cac2ad;
+		color: #83B3C9;
 		text-decoration:none;
 	}
-	.header-logo{height:5rem;margin-top: 0;}
+	.header-logo{height:5rem;margin-top: 0; position: absolute;bottom: 0;width: 100%}
 	#a0{width:33.3%;/*transition:left 0.3s linear;*/}
 	.header-logo a.a1234{
 		opacity:0.9;
@@ -323,6 +328,7 @@ label.checked {
 	}
 	#extra{
 		text-align:center;
+		font-size: 14px;
 	}
 	#dd{
 		margin-bottom:5%;
@@ -336,17 +342,18 @@ label.checked {
 	}
 	/********************µÚÈý(ËÄ)¸ö½çÃæ**************************************/
 	#own1{
-		width:7%;
+		width:4.5%;
 		display:inline-block;
 		position:absolute;
-		padding-top:5%;
+		padding-top:8%;
+		left:65%;
 	}
 	#own2{
 		width:6%;
 		display:inline-block;
 		position:absolute;
 		right:7%;
-		padding-top:5.5%;
+		padding-top:6%;
 	}
 	.mm .mm1#{
 		background-color:#232323;
@@ -362,7 +369,7 @@ label.checked {
 		position:absolute;
 		width:100%;
 		z-index:1;
-		top:5rem;
+		top:5.2rem;
 	}
 	.mm .mm2{
 		background-color:#ccc;
@@ -384,8 +391,8 @@ label.checked {
 		display:inline-block;
 	}
 	#own5{
-		width:50px;
-		height:50px;
+		width:45px;
+		height:45px;
 		display:inline-block;
 		border-radius:50%;
 	}
@@ -394,17 +401,27 @@ label.checked {
 		color:#555555;
 		margin-top:1%;
 		margin-left:3%;
+		font-size: 16px;
+		color: #3D3F40;
 	}
 	#own8{
-		width:5.5%;
+		width:5.2%;
 		display:inline-block;
 		position:absolute;
-		right:30%;
-		top:25%;
+		right:37%;
+		top:52%;
+	}
+
+	#nolist{
+		width:20%;
+		display:inline-block;
+		position:absolute;
+		right:40%;
+		top:35%;
 	}
 	#own10{
 		position:absolute;
-		right:6%;
+		right:2%;
 		top:15%;
 		color:#b69f60;
 		font-size:1rem;
@@ -412,9 +429,17 @@ label.checked {
 	 .extra{
 		display:inline-block;
 		font-style:normal;
+		font-size: 14px;
+		color: #96999C;
 	}
 	.add{
 		margin-left:5%;
+	}
+
+	.new-bind{
+		margin-left:5%;
+		height: 60%;
+		margin-top: 3%;
 	}
 	
 	.word span{
@@ -675,16 +700,16 @@ label.checked {
 #own12{
 	position:absolute;
 	left:22%;
-	top:1.2rem;
-	color:#5D5A5A;
-
+	color:#3D3F40;
 	font-family: inherit;
+	top:1rem;
+	font-size: 16px;
 }
 #own7{
 	position:absolute;
-	width:50px; 
-	height:50px;
-	top:0.5rem;
+	width:45px; 
+	height:45px;
+	top:0.7rem;
 	border-radius:50%;
 }
 
@@ -705,7 +730,6 @@ label.checked {
 #own7_1{
 	width:45px; 
 	height:45px;
-	top:0.4rem;
 	border-radius:50%;
 	position:relative;
 }
@@ -732,6 +756,17 @@ label.checked {
 .zj1{
 	height:45px;
 }
+ .col-md-6 .col-sm-6 .col-xs-12{
+ 	position: relative !important;
+    min-height: 4rem !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+ #two1 img {
+    display: inline-block !important;
+    width: 4rem !important;
+}
+
 #own11{
 		width:40%;
 		position:absolute;
@@ -741,33 +776,93 @@ label.checked {
 	}
 	#own12{
 		position:absolute;
-		left:35%;
-		top:0.5rem;
-		color:#cccccc;
+		left:25%;
+		top:1.2rem;
+		color:#3D3F40;
+		font-size: 16px;
+		line-height: 1.6rem;
+	}
+
+	#own1{
+		width: 4.5%;
+	    display: inline-block;
+	    position: absolute;
+	    padding-top: 11%;
+	    left: 70%;
+	}
+	#own2{
+		width: 6%;
+	    display: inline-block;
+	    position: absolute;
+	    right: 7%;
+	    padding-top: 8.5%;
+	}
+
+
+	#own5 {
+	    width: 45px;
+	    height: 45px;
+	    display: inline-block;
+	    border-radius: 50%;
+	    top:0.2rem;
+	    position: absolute;
+	}
+
+	.a1{
+		color:#37BECD;
+		right:1rem;
+		width:8rem;
+		height: 1.8rem;
+		font-size: 14px;
+		vertical-align: middle;
 	}
 	#own7{
 		position:absolute;
-		width:70px; 
-		height:70px;
-		left:2rem;
-		top:3.8rem;
+		width:45px; 
+		height:45px;
+		left:0.2rem;
+		top:0.4rem;
 		border-radius:50%;
+	}
+	#own6{
+		position:absolute;
+		left:22%;
+		top:0.3rem;
+		color:#3D3F40;
+		font-size: 16px;
+		line-height: 1.6rem;
+	}
+	#own8{
+		width: 5.3%;
+	    display: inline-block;
+	    position: absolute;
+	    left: 75%;
+	    top:2.6rem;
+	}
+
+
+	#own10{
+		position:absolute;
+		right:2%;
+		top:2rem;
+		color:#b69f60;
+		font-size:1rem;
 	}
 
 }
 #tou{
 	margin-top:0.25rem;
-	
+	width: 100%
 }
 .kong{
-	background-color:#C5B4B4;
-	height:1px;
+	background-color:#C8C7CC;
+	height:0.5px;
 }
 .col-1{
 	position: relative;
     min-height: 1px;
     padding-right: 0px;
-    padding-left: 5px;
+    padding-left: 10px;
     width:12%;
     float: left;
     font-size: 6px;
@@ -779,7 +874,7 @@ label.checked {
     min-height: 1px;
     padding-right: 0px;
     padding-left: 0px;
-    width:15%;
+    width:12%;
     float: left;
     height:50px;
 }
@@ -787,8 +882,16 @@ label.checked {
 	position: relative;
     min-height: 1px;
     padding-right: 0px;
-    padding-left: 0px;
-    width:30%;
+    width:25%;
+    float: left;
+    font-size: 8px;
+}
+
+.login-3{
+	position: relative;
+    min-height: 1px;
+    padding-right: 0px;
+    width:35%;
     float: left;
     font-size: 8px;
 }
@@ -797,7 +900,7 @@ label.checked {
     min-height: 1px;
     padding-right: 0px;
     padding-left: 0px;
-    width:30%;
+    width:25%;
     float: left;
     font-size: 8px;
 }
@@ -806,7 +909,7 @@ label.checked {
     min-height: 1px;
     padding-right: 0px;
     padding-left: 0px;
-    width:10%;
+    width:14%;
     float: left;
 }
 .container2{
@@ -833,22 +936,23 @@ label.checked {
 	color:#b69f60;
 }
 .tou5{
-	font-size:1rem;
-	line-height:4.5rem;
-	color:#555;
+	font-size:1.4rem;
+	line-height:5rem;
+	color:#000;
+	font-family: inherit;
 }
 
 .tou5_1{
-	font-size:1rem;
-	line-height:1.9rem;
-	color:#B1B1B1;
+	font-size:12px;
+	line-height:1.6rem;
+	color:#96999C;
 	top:0.6rem;
 	height:50px;
 }
 .tou5_2{
-	font-size:1.3rem;
+	font-size:16px;
 	line-height:1.9rem;
-	color:#525254;
+	color:#3D3F40;
 	top:0.6rem;
 	height:50px;
 }
@@ -1018,7 +1122,7 @@ label.checked {
 		margin:12% auto;
 	}
 	#open5{
-		width:28%;
+		width:18%;
 		display:inline-block;
 	}
 
@@ -1150,7 +1254,7 @@ label.checked {
 		font-size:1.8rem;
 	}
 	#own6{
-		font-size:1.8rem;
+		font-size:16px;
 		margin-left:2%;
 	}
 	.money1{

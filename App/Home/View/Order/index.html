@@ -7,50 +7,51 @@
         <title>扑克部落</title>        
         <link rel="stylesheet" href="__PUBLIC__/home/css/bootstrap.min.css">
         <link rel="stylesheet" href="__PUBLIC__/home/css/my.css">
+        <link rel="stylesheet" href="__PUBLIC__/home/css/showBo.css">
         <style>
         </style>
     </head>
     <body style="background-color:#ECEDF2;">
-    <!--头部分-->
-    <volist name="month" id="vo">
-        <div class="order1">{$vo.month}</div>
-        <section id="tou">
+    <if condition="$bg eq 1">
+        <img src="__PUBLIC__/home/images/nolist.png" class="img-responsive" id="nolist">
+    <else />
+        <!--头部分-->
+        <volist name="month" id="vo">
+            <div class="order1">{$vo.month}</div>
             <volist name="orders" id="v"> 
-                <div class="container2">
-                    <div class="row">
-                        
-                        <div class="col-1"><span class="tou5_1">{$v['w']}<br/>{$v['rq']}</span></div>
-                        <div class="col-2">
-                            <img src="{$v['avatar']}" class="img-responsive" id="own7_1">
-                            <img  class="img-responsive" id="own11">
-                        </div>
-                        <div class="col-3">
-                            <span class="tou5_2">{$v['nickname']}<br/></span>
-                             <span class="tou5_1">账号:{$v['username']}</span>
-                        </div>
-                       
-                        <div class=" col-5">
-                                <div style="float: left"><img src="__PUBLIC__/home/images/my4.png" class="img-responsive"></div>
-                                <span class="tou5">{$v['diamond']}</span>
-                        </div>
-                        <div class=" col-6">
-                            <span class="tou5">&yen;{$v['money'] }</span>
-                        </div>
-                    </div>
-                </div>
+                <table id="tou" align="center" >
+                    <tr class="container2">
+                        <td class="col-1" >
+                            <span class="tou5_1">{$v['w']}<br/>{$v['rq']}</span>
+                        </td>
+                        <td class="col-2" align="left">
+                            <img src="{$v['avatar']}" class="img-responsive" id="own7_1"><img  class="img-responsive" id="own11">
+                        </td>
+                        <td class="col-3" align="left">
+                            <span class="tou5_2">{$v['nickname']}<br/></span><span class="tou5_1">账号:{$v['username']}</span>
+                        </td>
+                        <td class="col-5" align="left">
+                            <div style="float: left"><img src="__PUBLIC__/home/images/my4.png" class="img-responsive" style="width: 5rem"></div><span class="tou5" style="float: left;vertical-align: middle;">{$v['diamond']}</span>
+                        </td>
+                        <td class="col-6" align="left">
+                            <span class="tou5" style="float: left;vertical-align: middle;">&yen;{$v['money'] }</span>
+                        </td>
+                    </tr>
+                </table>
                 <div class="kong"></div>
             </volist>
-                <div class="kong"></div>
-        </section>
-     </volist>
+            <div class="kong"></div>
 
-    <tr  >
-        <td colspan="3" bgcolor="#FFFFFF">
-            <div class="pages"  style="bottom:6%;position: absolute;text-align: center;width:100%">
-            {$page}
-            </div>
-        </td>  
-    </tr>
+         </volist>
+
+        <tr  >
+            <td colspan="3" bgcolor="#FFFFFF">
+                <div class="pages"  style="bottom:6%;position: absolute;text-align: center;width:100%">
+                {$page}
+                </div>
+            </td>  
+        </tr>
+    </if>
     <include file="Public/footer" />
 
     </body>

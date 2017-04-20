@@ -6,7 +6,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
         <title>扑克部落</title>        
         <link rel="stylesheet" href="__PUBLIC__/home/css/bootstrap.min.css">
-        <link rel="stylesheet" href="__PUBLIC__/home/css/my.css">
+        <link rel="stylesheet" href="__PUBLIC__/home/css/my.css?t=aa">
         <link rel="stylesheet" href="__PUBLIC__/home/css/showBo.css">
         <script src="__PUBLIC__/home/js/showBo.js"></script>
         <script src="__PUBLIC__/home/js/jquery-1.11.3.min.js"></script>
@@ -39,12 +39,12 @@
             #login_table .a1 {
               padding-right: 30px;
               cursor: pointer;
-              background: url(__PUBLIC__/home/images/others.png) no-repeat right top;
+              background: url(__PUBLIC__/home/images/others.png) no-repeat right bottom;
             }
             #login_table #checked {
               padding-right: 30px;
               cursor: pointer;
-              background: url(__PUBLIC__/home/images/others.png) no-repeat right bottom !important;
+              background: url(__PUBLIC__/home/images/others.png) no-repeat right top !important;
 
             }
 
@@ -64,7 +64,7 @@
                     <div class="line1">
                         <div class="container">
                             <div class="row" >
-                                <div class=" col-md-6 col-sm-6 col-xs-12">
+                                <!--<div class=" col-md-6 col-sm-6 col-xs-12">-->
                                    
                                     <table id="login_table" align="center">
                                         <tr class="login2">
@@ -84,9 +84,9 @@
                                         <span class="dia" >{$good['diamond']}</span>
                                         <input class="radio1" name="good_id" type="radio" id="{$good['id']}" value="{$good['id']}" onclick="price({$good['price']})"/>
                                         <div class="a1" name="{$good['id']}">&yen;{$good['price']}</div>
-                                    </div>-->
+                                    </div>
 
-                                </div>
+                                </div>-->
                                 
                             </div>
                         </div>
@@ -125,12 +125,9 @@
                     <div class="form-group hml" id="change">
                         <table id="login_table" align="center">
                                 <tr class="login2">
-                                    <td class="login2_u1" align="center">
-                                         <img src="__PUBLIC__/home/images/others6.png" class="img-responsive" id="open5" onclick="sel_ios(this)"> 
-                                    </td>
-
-                                    <td class="login_u2" align="center">
-                                        <img src="__PUBLIC__/home/images/others9.png" class="img-responsive" id="open5" onclick="sel_android(this)">
+                                    <td class="login2_u1" align="center" colspan="2">
+                                         <img src="__PUBLIC__/home/images/others6.png" class="img-responsive ios" id="open5" onclick="sel_ios(this)" style="margin-right: 10%">
+                                         <img src="__PUBLIC__/home/images/others9.png" class="img-responsive android" id="open5" onclick="sel_android(this)" style="margin-left: 10%"> 
                                     </td>
                                     <input type="hidden" name="os" value="" id="os">
                                 </tr>
@@ -197,7 +194,7 @@
                 return false;
             }
             if(os.length == 0){
-                alert('请选择操作系统');
+                Showbo.Msg.alert('请选择账号登录平台');
                 return false;
             }
             var loading_layer = layer.load(1, {
@@ -220,21 +217,21 @@
            
                     verify(uid, username, nickname, os, uuid, price);
                 }else{
-                    //alert('查不到此用户');
-                    Showbo.Msg.alert('查不到此用户');
+                   
+                    Showbo.Msg.alert('该账号不存在');
                 }
             })
             .fail(function() {
                 layer.close(loading_layer);
-                alert('验证失败，请重试！');
-            })
+                Showbo.Msg.alert('验证失败，请重试！');
+            }) 
         });
 
         function verify(uid, username, nickname, os, uuid, price) { 
             if (uid != ''){ 
-                var str= '<table style="text-align:center;width:100%"><tr style="line-height:3rem;" ><td style="width:30%;line-height:3rem;font-size:16px;" align="right">昵 称 : </td>'+
+                var str= '<table style="text-align:center;width:100%"><tr style="line-height:3rem;" ><td colspan="2"></td><tr style="line-height:3rem;" ><td style="width:30%;line-height:3rem;font-size:16px;" align="right">昵 称 : </td>'+
                     '<td style="width:60%;line-height:3rem;left:2rem;float:left; font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+nickname+'</td></tr>'+
-                    '<tr style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right">账 号 : </td>'+
+                    '<tr style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right">ID : </td>'+
                     '<td style="width:60%;line-height:3rem;left:2rem;float:left;font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+uuid+'</td></tr>'+
                     '<tr style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right">金 额 : </td>'+
                     '<td style="width:60%;line-height:3rem;font-size:16px;margin-left:2rem" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+price+'</td></tr>'+
@@ -244,14 +241,14 @@
                 Showbo.Msg.confirm(str);
                 $(".btn2").click(function(){
                     var flag = $(this).val();
-                    if (flag == '确认') {
+                    if (flag == '确认') { 
                         recharge(uid, username, nickname, os, uuid, price);
                     } 
                 }
 
                 );
             } else {
-                alert('该账号不存在');
+                Showbo.Msg.alert('该账号不存在');
                 return false;
             }
         }
@@ -267,7 +264,7 @@
               shade: [0.2,'#fff'] //0.1透明度的白色背景
             });
 
-            if (good_id < 3001) {
+            if (good_id < 3001) { //alert('{:U('Pay/friendOrder')}');
                 $.ajax({
                     url: '{:U('Pay/friendOrder')}',
                     type: 'POST',
@@ -337,34 +334,34 @@
     <script>
         
     //初始化金额
-    $('#total').text({$goods[0]['price']});
-    //
-    var oDiv = document.getElementById('three');
-        oDiv.style.position = 'fixed';
-        oDiv.style.bottom = '0px';
-    var n=1;
-    var span1=$(".r1 span")[0];
-    var price1=parseFloat(span1.innerHTML.slice(1));
-    var span2=$(".r2 span")[0];
-    var price2=parseFloat(span2.innerHTML.slice(1));
-    var span3=$(".r3 span")[0];
-    var price3=parseFloat(span3.innerHTML.slice(1));
+    // $('#total').text({$goods[0]['price']});
+    // //
+    // var oDiv = document.getElementById('three');
+    //     oDiv.style.position = 'fixed';
+    //     oDiv.style.bottom = '0px';
+    // var n=1;
+    // var span1=$(".r1 span")[0];
+    // var price1=parseFloat(span1.innerHTML.slice(1));
+    // var span2=$(".r2 span")[0];
+    // var price2=parseFloat(span2.innerHTML.slice(1));
+    // var span3=$(".r3 span")[0];
+    // var price3=parseFloat(span3.innerHTML.slice(1));
     
-    var arr=[price1,price2,price3];
+    // var arr=[price1,price2,price3];
 
-    $("#ab").click(function(){
-        var span=document.getElementById("number");
-        n=parseInt(span.innerHTML);
-        n++;
-        span.innerHTML=n;
-        //return n;
-        if($('.chosed')[0]){
-            var index=$('.chosed').index();
-            console.log(index);
-            $("#total").html( arr[index]*n);   
-        }
+    // $("#ab").click(function(){
+    //     var span=document.getElementById("number");
+    //     n=parseInt(span.innerHTML);
+    //     n++;
+    //     span.innerHTML=n;
+    //     //return n;
+    //     if($('.chosed')[0]){
+    //         var index=$('.chosed').index();
+    //         console.log(index);
+    //         $("#total").html( arr[index]*n);   
+    //     }
         
-    });
+    // });
     $("#aa").click(function(){
         var span=document.getElementById("number");
         n=parseInt(span.innerHTML);

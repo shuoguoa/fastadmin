@@ -6,7 +6,7 @@
 		  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 		<title>扑克部落</title>		
 		<link rel="stylesheet" href="__PUBLIC__/home/css/bootstrap.min.css">
-		<link rel="stylesheet" href="__PUBLIC__/home/css/my.css">
+		<link rel="stylesheet" href="__PUBLIC__/home/css/my.css?t=ff">
 		<link rel="stylesheet" href="__PUBLIC__/home/css/showBo.css">
         <script src="__PUBLIC__/home/js/showBo.js"></script>
 		<style>
@@ -73,12 +73,15 @@
 							<div id="check">
 							<table id="login_table" align="center">
 								<tr class="login">
-									<td class="login_u1" >手机号&nbsp;&nbsp;<span class="select-style"><select name="ccode" style="font-size: 10px !important;"> <volist name="stateCode" id="v"><option value="{$v}" align="right" style="height:0.8rem !important;">+{$v}</option></volist></select></span>
-									<!----><span style="font-size:2rem;color:#AACBD4;line-height:2rem">|</span>
+									<td class="login_u1" >手机号&nbsp;&nbsp;
                                     </td>
                                     <!--<td style="width:1%;height: 2rem"></td>-->
 									<td class="login_u2">
-										<input name="username" type="text" placeholder="" style="line-height: 2.5rem !important;" id="username">
+									
+										<div  style="display: inline-block;"><input name="username" type="text" placeholder="" style="line-height: 2.5rem !important;width: 120px;" id="username"></div>
+										<div style="display: inline-block;float: left;height: 30px;line-height: 30px;width: 50px;">
+										<span class="select-style"><select name="ccode" > <volist name="stateCode" id="v"><option value="{$v}" >+{$v}</option></volist></select></span>
+									</div>
 									</td>
 								</tr>
 								<tr class="login" >
@@ -95,13 +98,14 @@
 							<div class="form-group hml" id="change">
 		                        <table id="login_table" align="center">
 		                                <tr class="login2">
-		                                    <td class="login2_u1" align="center">
-		                                         <img src="__PUBLIC__/home/images/others6.png" class="img-responsive ios" id="open5" onclick="sel_ios(this)"> 
+		                                    <td class="login2_u1" align="center" colspan="2">
+		                                         <img src="__PUBLIC__/home/images/others6.png" class="img-responsive ios" id="open5" onclick="sel_ios(this)" style="margin-right: 10%">
+		                                         <img src="__PUBLIC__/home/images/others9.png" class="img-responsive android" id="open5" onclick="sel_android(this)" style="margin-left: 10%"> 
 		                                    </td>
 
-		                                    <td class="login_u2" align="center">
+		                                    <!--<td class="login_u2" align="center">
 		                                        <img src="__PUBLIC__/home/images/others9.png" class="img-responsive android" id="open5" onclick="sel_android(this)">
-		                                    </td>
+		                                    </td>-->
 		                                    <input type="hidden" name="os" value="">
 		                                </tr>
 		                               
@@ -126,20 +130,34 @@
 	</body>
 	<script src="__PUBLIC__/home/js/jquery-1.11.3.min.js"></script>	
 	<script>
-	var oDiv = document.getElementById('three');
-		oDiv.style.position = 'fixed';
-		oDiv.style.bottom = '0px';
+	// var oDiv = document.getElementById('three');
+	// 	oDiv.style.position = 'fixed';
+	// 	oDiv.style.bottom = '0px';
+
+	// function sel_ios(obj){
+	// 	$(obj).attr("src","__PUBLIC__/home/images/others7.png")
+	// 	$(".android").attr("src","__PUBLIC__/home/images/others9.png");
+	// 	$("input[name='os']").attr('value', '0'); 
+	// }
+	// function sel_android(obj){
+	// 	$(obj).attr("src","__PUBLIC__/home/images/others8.png")
+	// 	$(".ios").attr("src","__PUBLIC__/home/images/others6.png");
+	// 	$("input[name='os']").attr('value', '1'); 
+	// }
+
 
 	function sel_ios(obj){
-		$(obj).attr("src","__PUBLIC__/home/images/others7.png")
-		$(".android").attr("src","__PUBLIC__/home/images/others9.png");
-		$("input[name='os']").attr('value', '0'); 
-	}
-	function sel_android(obj){
-		$(obj).attr("src","__PUBLIC__/home/images/others8.png")
-		$(".ios").attr("src","__PUBLIC__/home/images/others6.png");
-		$("input[name='os']").attr('value', '1'); 
-	}
+        $(obj).attr("src","__PUBLIC__/home/images/others7.png")
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/others9.png");
+       //$(obj).attr("src","__PUBLIC__/home/images/others9.png");
+        $("input[name='os']").attr('value', '0'); 
+    }
+    function sel_android(obj){
+        $(obj).attr("src","__PUBLIC__/home/images/others8.png")
+        $(obj).siblings().attr("src","__PUBLIC__/home/images/others6.png");
+        //$(obj).attr("src","__PUBLIC__/home/images/others6.png");
+        $("input[name='os']").attr('value', '1'); 
+    }
 	
 	/**/
 	document.querySelector('.header-logo').addEventListener('click',function(e){

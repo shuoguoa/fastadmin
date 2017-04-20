@@ -42,8 +42,7 @@ class LoginController extends ComController
         } elseif ($password == '') {
             $this->error('密码必须！', U("login/index"));
         }
-
-        $model = M("Member");
+        $model = M("Member",CONNECTION);
         $user = $model->field('uid,user')->where(array('user' => $username, 'password' => $password))->find();
 
         if ($user) {

@@ -12,21 +12,16 @@ require_once('ThinkPHP/Library/Getui/igetui/utils/AppConditions.php');
 define('HOST','http://sdk.open.api.igexin.com/apiex.htm');
 define('Alias','10000');
 
-
-
- define('APPKEY',       C('GETUI_CN')['APP_KEY'] );
- define('APPID',        C('GETUI_CN')['APP_ID'] );
- define('MASTERSECRET', C('GETUI_CN')['MASTER_SECRET'] );
- //define('CID','OSA-0331_WySqJeYg69A7PJWMWIcx4');
- //define('DEVICETOKEN','f8e8b21d4790849b918f2a3eb14024789903464cf52af9fc9aa21bbff13d3088');
-
+define('APPKEY',       C('GETUI_CN')['APP_KEY'] );
+define('APPID',        C('GETUI_CN')['APP_ID'] );
+define('MASTERSECRET', C('GETUI_CN')['MASTER_SECRET'] );
 
 class PushMessageController extends ComController {
 
 	private $APPKEY;
 	private $APPID;
 	private $MASTERSECRET;
-/**/
+
 	public function index_CN(){
 		$region = 'CN';
 		$this->assign('region',$region);
@@ -101,6 +96,8 @@ class PushMessageController extends ComController {
 		$image = I('image');
 		if($image){
 			$image = getImage($image);
+		} else {
+			$image = getImage('/getui/Public/attached/default/new.png');
 		}
 		if(I('ANDROID')){ $OS[] = 'ANDROID'; }
 		if(I('IOS')){ $OS[] = 'IOS'; }
@@ -128,10 +125,6 @@ class PushMessageController extends ComController {
 	    } else {
 	    	$this->pushMessageToApp($config, $OS, $offlineTime);
 	    }
-		//$this->pushMessageToApp($config, $OS, $offlineTime);
-		// $redis = Redis();
-		// $uids = $redis->SMEMBERS('mtt_players:113259');
-		// $this->pushMessageToList($config, $uids, $offlineTime);
 	}
 
 	//单推接口案例

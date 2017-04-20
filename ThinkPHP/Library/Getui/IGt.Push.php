@@ -176,7 +176,7 @@ Class IGeTui
         {
             $requestId = uniqid();
         }
-        $params = $this->getSingleMessagePostData($message, $target, $requestId);//var_dump($params);exit;
+        $params = $this->getSingleMessagePostData($message, $target, $requestId);
         return $this->httpPostJSON($this->host,$params);
     }
 

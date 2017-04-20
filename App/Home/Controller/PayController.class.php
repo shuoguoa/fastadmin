@@ -8,10 +8,11 @@ class PayController extends ComController {
     public function callback(){
         
         $wechatpay = new WechatPay(C('WechatPay'));
-        $xml = file_get_contents('php://input'); var_dump($xml);exit;
+        $xml = file_get_contents('php://input'); 
         $log = ROOT_PATH.'/Public/log/wxpay.log';
-        error_log($xml . PHP_EOL, 3, $log);
-        $result = $wechatpay->getCallback($xml); //var_dump($result);exit;
+       
+        $result = $wechatpay->getCallback($xml);
+         error_log($xml . PHP_EOL, 3, $log);
         if($result){
             if($result['return_code'] != 'SUCCESS' || $result['appid'] != C('WechatPay.appid') || $result['mch_id'] != C('WechatPay.mch_id')){
                 error_log('商户信息出错' . PHP_EOL, 3, $log);
@@ -29,7 +30,8 @@ class PayController extends ComController {
             $wxOrderModel = D('WxOrder');
             $orderInfo = $wxOrderModel->getOrderInfo($out_trade_no);
             if($orderInfo || $orderInfo['status'] != 1){
-                if($orderInfo['money'] * $orderInfo['number'] == $total_fee){
+
+                if($orderInfo['money'] == $total_fee){
                     //update订单
                     $orderData['account_money'] = $total_fee;
                     $orderData['success_time'] = strtotime($time_end);
@@ -75,7 +77,7 @@ class PayController extends ComController {
             $wechatpay = new WechatPay(C('WechatPay'));
             //更新钻石余额
             $userAmountModel = D('UserAmount');
-            if($userAmountModel->where(array('uid'=>$orderInfo['uid']))->setInc('diamond', $orderInfo['diamond'] * $orderInfo['number']) != false){
+            if($userAmountModel->where(array('uid'=>$orderInfo['uid']))->setInc('diamond', $orderInfo['diamond']) != false){
                 //获取钻石余额
                 $userDiamond = $userAmountModel->getDiamond($orderInfo['uid']);
                 if($userDiamond === false){
@@ -85,17 +87,17 @@ class PayController extends ComController {
                 }
                 //插入钻石记录表
                 $logUserDiamondModel = D('LogUserDiamond');
-                if($logUserDiamondModel->addLog($orderInfo['uid'], $orderInfo['diamond'] * $orderInfo['number'], 0, 0, $userDiamond, 11) === false){
+                if($logUserDiamondModel->addLog($orderInfo['uid'], $orderInfo['diamond'], 0, 0, $userDiamond, 11) === false){
                     $model->rollback();
                     error_log('插入log_user_diamond记录表失败' . PHP_EOL, 3, $log);
                     exit($wechatpay->responseMsg('FAIL'));
                 }
                 //更新redis
-                $redis = new \Redis();
-                $redis->connect(C('REDIS_HOST'), C('REDIS_PORT'));
-                $redis->auth(C('REDIS_AUTH'));
-                $redisKey = 'user:' . $orderInfo['uid'];
-                $redis->HINCRBY($redisKey, 'diamond', $orderInfo['diamond'] * $orderInfo['number']);
+                // $redis = new \Redis();
+                // $redis->connect(C('REDIS_HOST'), C('REDIS_PORT'));
+                // $redis->auth(C('REDIS_AUTH'));
+                // $redisKey = 'user:' . $orderInfo['uid'];
+                // $redis->HINCRBY($redisKey, 'diamond', $orderInfo['diamond']);
                 $model->commit();
                 error_log('成功' . PHP_EOL, 3, $log);
                 exit($wechatpay->responseMsg('SUCCESS'));

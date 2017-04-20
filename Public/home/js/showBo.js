@@ -29,7 +29,7 @@ Showbo.Msg={
     dvBtns:null,  
     lightBox:null,  
     dvMsgBox:null,  
-    defaultWidth:300,  
+    defaultWidth:230,  
     moveProcessbar:function(){  
       var o=Showbo.$('dvProcessbar'),w=o.style.width;  
       if(w=='')w=20;  
@@ -83,11 +83,11 @@ Showbo.Msg={
         return btn;  
     },  
     alert:function(msg){  
-      this.show({buttons:{yes:'确认'},msg:msg,title:'',width:200,height:200});  
+      this.show({buttons:{yes:'ok'},msg:msg,title:'',width:240,height:200});  
     },  
     confirm:function(msg,fn){  
       //fn为回调函数，参数和show方法的一致  
-      this.show({buttons:{yes:'确认',no:'取消'},msg:msg,title:'',fn:fn});  
+      this.show({buttons:{yes:'确认',no:'取消'},msg:msg,title:'',width:240,height:230});  
     },  
     prompt:function(labelWord,defaultValue,txtId,fn){  
       if(!labelWord)labelWord='请输入：';  
@@ -162,7 +162,7 @@ Showbo.Msg={
        if(isResize)Showbo.initBodyScale();  
        Showbo.Msg.lightBox.style.width=Showbo.BodyScale.tx+'px';  
        Showbo.Msg.lightBox.style.height=Showbo.BodyScale.ty+'px';  
-       Showbo.Msg.dvMsgBox.style.top=240+'px';  
+       Showbo.Msg.dvMsgBox.style.top=240+'px'; 
        Showbo.Msg.dvMsgBox.style.left=Math.floor((Showbo.BodyScale.x-Showbo.Msg.dvMsgBox.offsetWidth)/2)+'px';  
     }  
 

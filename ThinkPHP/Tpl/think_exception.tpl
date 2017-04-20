@@ -52,7 +52,7 @@ h1{ font-size: 32px; line-height: 48px; }
 </div>
 </div>
 <div class="copyright">
-<p><a title="恰维网络" href="http://www.qiawei.com" target="_blank">恰维网络</a><sup><?php echo THINK_VERSION ?></sup></p>
+<p>扑克部落</p>
 </div>
 </body>
 </html>

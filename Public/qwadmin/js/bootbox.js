@@ -241,7 +241,7 @@
    * this entry-level method makes heavy use of composition to take a simple
    * range of inputs and return valid options suitable for passing to bootbox.dialog
    */
-  function mergeDialogOptions(className, labels, properties, args) {
+  function mergeDialogOptions(className, labels, properties, args) { //alert(className);alert(labels);alert(properties); alert(args); return false;
     //  build up a base set of dialog properties
     var baseOptions = {
       className: "bootbox-" + className,

@@ -3,7 +3,7 @@ namespace Home\Model;
 use Think\Model;
 
 class WxBindModel extends Model{
-
+    //protected $connection = 'DB_CONFIG2';
     public function getCurrentUser($openid){
        return $this->where(array('openid'=>$openid, 'status'=>1))->order('id desc')->find();
        // return $this->where(array('uid'=>$uid, 'status'=>1))->find();

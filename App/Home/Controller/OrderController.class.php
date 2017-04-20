@@ -5,20 +5,18 @@ use Think\Controller;
 class OrderController extends ComController {
 
     public function index(){
-        //$openid = session('openid'); 
-        $uid = session('uid'); 
+        $uid = session('uid');
         $wxOrderModel = D('WxOrder'); 
         $bgn = strtotime(date('Y-m', strtotime('-1 month')));
         $end = strtotime(date('Y-m-d H:i:s', time()));
 
-        $pageSize = 3;
+        $pageSize = 8;
         $firstRow = $_GET['p'] == null ? '0' : ($_GET['p']-1)*$pageSize;
 
         $field = 'b.avatar as avatar,b.nickname as nickname, a.time, a.date, a.diamond, a.money, a.username';
         $sql = 'select '.$field.' from wx_order a left join user b on b.id= a.uid where a.uid="'.$uid.
         '" and status = 1 and time between '.$bgn.' and '.$end.' order by a.id desc  limit '.$firstRow.' ,'. $pageSize;
-        $orders = $wxOrderModel->query($sql);
-   
+        $orders = $wxOrderModel->query($sql); 
         $sql2 = 'select count(*) as num from wx_order  where uid="'.$uid.
         '" and status = 1 and time between '.$bgn.' and '.$end;
 
@@ -36,11 +34,13 @@ class OrderController extends ComController {
         	$orders[$key]['w'] = $weekarray[$w];
         	$orders[$key]['d'] = $k;
             $orders[$key]['rq'] = date('m-d', $value['time']);
- 
+            
+            $orders[$key]['avatar'] = $value['avatar'] == '' ? $this->getDefaultAvatar() : $value['avatar'];
+
         	$res[$i]['d'] = $k;
         	$month[$k]['month'] = $k;
         }  
-
+//var_dump($orders);exit;
         $this->assign('month',$month);
         $this->assign('orders', $orders);
         $this->assign('check', I('get.flag'));
