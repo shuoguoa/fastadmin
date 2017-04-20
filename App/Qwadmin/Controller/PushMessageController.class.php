@@ -10,7 +10,7 @@ require_once('ThinkPHP/Library/Getui/IGt.Batch.php');
 require_once('ThinkPHP/Library/Getui/igetui/utils/AppConditions.php');
 
 define('HOST','http://sdk.open.api.igexin.com/apiex.htm');
-define('Alias','10114');
+define('Alias','10000');
 
 
 
