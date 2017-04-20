@@ -22,6 +22,7 @@ return array(
     'LOAD_EXT_CONFIG' => 'db2',
     'URL_MODEL'=>0,
 
+   
     //数据库配置2
     'DB_CONFIG2' => array(
         'DB_TYPE'   => 'mysql',          // 数据库类型
@@ -32,6 +33,16 @@ return array(
         'DB_PORT'   => 30306,            // 端口
         'DB_CHARSET'=> 'utf8',           // 数据库编码默认采用utf8
     ),
+    //数据库配置3
+    'DB_CONFIG3' => array(
+        'DB_TYPE'   => 'mysql',         // 数据库类型
+        'DB_HOST'   => '192.168.0.190', // 服务器地址
+        'DB_NAME'   => 'qwadmin',         // 数据库名
+        'DB_USER'   => 'root',          // 用户名
+        'DB_PWD'    => '',              // 密码
+        'DB_PORT'   => 3306,            // 端口
+        'DB_CHARSET'=>  'utf8',         // 数据库编码默认采用utf8
+    ),
     
     //云信配置
     'NETEASE' => array(
@@ -41,27 +52,22 @@ return array(
 
     //个推大陆配置
     'GETUI_CN' => array(
-        'APP_KEY'       => '5TdKabYayX6INx80w5v2g7',
-        'APP_ID'        => 'Lo3mEjH0RbAUoeFviFPDj8',
-        'MASTER_SECRET' => 'HsZhohKfzk7eyQGIrbwP2'
+        'APP_KEY'       => 'WgB9IwPeCf6ZG9GPTpidTA',
+        'APP_ID'        => 'DBQNwvMBG598R7tNtGTB24',
+        'MASTER_SECRET' => 't3jAYaxNXsAphr0zaqFBz5'
     ),
 
     //个推台湾配置
     'GETUI_TW' => array(
-        'APP_KEY'       => '5TdKabYayX6INx80w5v2g7',
-        'APP_ID'        => 'Lo3mEjH0RbAUoeFviFPDj8',
-        'MASTER_SECRET' => 'HsZhohKfzk7eyQGIrbwP2'
+        'APP_KEY'       => 'WgB9IwPeCf6ZG9GPTpidTA',
+        'APP_ID'        => 'DBQNwvMBG598R7tNtGTB24',
+        'MASTER_SECRET' => 't3jAYaxNXsAphr0zaqFBz5'
     ),
 
-    /*个推测试服配置
+    /*个推测试服配置*/
     'GETUI_BETA' => array(
-        'APP_KEY'       => 'CErmKdb6xO7qV2hJ9o0MQ5',
-        'APP_ID'        => 'pQU1PpWli97vxbw8SSJNCA',
-        'MASTER_SECRET' => 'V2GPxXpyom8o9BZSaC2UT4'
-    )*/
-    'GETUI_BETA' => array(
-        'APP_KEY'       => '5TdKabYayX6INx80w5v2g7',
-        'APP_ID'        => 'Lo3mEjH0RbAUoeFviFPDj8',
-        'MASTER_SECRET' => 'HsZhohKfzk7eyQGIrbwP2'
+       'APP_KEY'       => 'WgB9IwPeCf6ZG9GPTpidTA',
+        'APP_ID'        => 'DBQNwvMBG598R7tNtGTB24',
+        'MASTER_SECRET' => 't3jAYaxNXsAphr0zaqFBz5'
     )
 );
