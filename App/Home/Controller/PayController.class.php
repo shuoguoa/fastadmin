@@ -73,7 +73,7 @@ class PayController extends ComController {
     protected function buyDiamond(&$model, $orderInfo)
     {   
         try {
-            $log = '/data/nginx/logs/wxpay/wxpay.log';
+            $log = ROOT_PATH.'/Public/log/wxpay.log';
             $wechatpay = new WechatPay(C('WechatPay'));
             //更新钻石余额
             $userAmountModel = D('UserAmount');
@@ -148,10 +148,7 @@ class PayController extends ComController {
             $wechatpay = new WechatPay(C('WechatPay'));
             $prepayId = $wechatpay->getPrepayId($goodInfo['name'], $orderData['order_id'], $orderData['money']*100, $openid);
             $log = ROOT_PATH.'/Public/log/wxpay.log';
-        error_log($prepayId . PHP_EOL, 3, $log);
-            $data  = $wechatpay->getPackage($prepayId);
-        error_log($data . PHP_EOL, 3, $log);
-            
+            $data  = $wechatpay->getPackage($prepayId);  
             exit(json_encode(array('status'=>1, 'data'=>$data)));
         }
     }

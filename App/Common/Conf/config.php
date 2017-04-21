@@ -43,9 +43,9 @@ return array(
 
     //个推大陆配置
     'GETUI_CN' => array(
-        'APP_KEY'       => 'WgB9IwPeCf6ZG9GPTpidTA',
-        'APP_ID'        => 'DBQNwvMBG598R7tNtGTB24',
-        'MASTER_SECRET' => 't3jAYaxNXsAphr0zaqFBz5'
+        'APP_KEY'       => 'm97n6iSeH49UdCDe1wo1j2',
+        'APP_ID'        => 'Iz5GTdQMK06AZPtAsd5Oz7',
+        'MASTER_SECRET' => '5aR6KWgWkIAUFMqT3Jwt47'
     ),
 
     //个推台湾配置
