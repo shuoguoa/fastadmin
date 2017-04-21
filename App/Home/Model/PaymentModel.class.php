@@ -4,7 +4,7 @@ use Think\Model;
 use Think\Model\RelationModel;
 
 class PaymentModel extends RelationModel{
-	//protected $connection = 'DB_CONFIG2';
+	protected $connection = 'DB_CONFIG2';
 
 	protected $_link = array(
 		'user'=>array(

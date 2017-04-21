@@ -27,7 +27,6 @@ class LoginController extends ComController
 
     public function login()
     {
-        
         $verify = isset($_POST['verify']) ? trim($_POST['verify']) : '';
         if (!$this->check_verify($verify, 'login')) {
             $this->error('验证码错误！', U("login/index"));
@@ -42,7 +41,8 @@ class LoginController extends ComController
         } elseif ($password == '') {
             $this->error('密码必须！', U("login/index"));
         }
-        $model = M("Member",CONNECTION);
+
+        $model = M("Member");
         $user = $model->field('uid,user')->where(array('user' => $username, 'password' => $password))->find();
 
         if ($user) {

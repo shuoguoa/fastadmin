@@ -87,6 +87,9 @@ class Model {
             $this->tablePrefix = '';
         }elseif('' != $tablePrefix) {
             $this->tablePrefix = $tablePrefix;
+        }elseif($this->connection){
+            $config = C($this->connection);
+            $this->tablePrefix = $config['DB_PREFIX'];
         }elseif(!isset($this->tablePrefix)){
             $this->tablePrefix = C('DB_PREFIX');
         }
@@ -1478,9 +1481,10 @@ class Model {
      * @return void
      */
     public function startTrans() {
-        $this->commit();
-        $this->db->startTrans();
-        return ;
+        // $this->commit(); 
+        // $this->db->startTrans();
+        // return ;
+        return  $this->db->startTrans();
     }
 
     /**

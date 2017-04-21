@@ -43,6 +43,7 @@ class WechatPay {
         $data['notify_url']   = $this->_config['notify_url'];
         $data['trade_type']   = $trade_type;
         $data['openid'] =     $openid;
+
         $result = $this->post(self::PREPAY_GATEWAY, $data);
         if ($result['return_code'] == 'SUCCESS') {
             return $result['prepay_id'];

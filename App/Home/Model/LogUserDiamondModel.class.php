@@ -3,7 +3,7 @@ namespace Home\Model;
 use Think\Model;
 
 class LogUserDiamondModel extends Model{
-    //protected $connection = 'DB_CONFIG2';
+    protected $connection = 'DB_CONFIG2';
     protected $trueTableName;
 
     public function _initialize(){

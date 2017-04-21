@@ -19,10 +19,9 @@ return array(
     'DB_COMPRESS' => '1',         //压缩备份文件需要PHP环境支持gzopen,gzwrite函数        0:不压缩 1:启用压缩
     'DB_LEVEL' => '9',         //压缩级别   1:普通   4:一般   9:最高
     //扩展配置文件
-    'LOAD_EXT_CONFIG' => 'db2',
+    'LOAD_EXT_CONFIG' => 'db1',
     'URL_MODEL'=>0,
-
-   
+  
     //数据库配置2
     'DB_CONFIG2' => array(
         'DB_TYPE'   => 'mysql',          // 数据库类型
@@ -30,19 +29,11 @@ return array(
         'DB_NAME'   => 'nutsporker', // 数据库名
         'DB_USER'   => 'liufuqing',    // 用户名
         'DB_PWD'    => 'Liufuqing!2sql',    // 密码
-        'DB_PORT'   => 30306,            // 端口
+        'DB_PORT'   => 30306,  
+        'DB_PREFIX' => '', // 数据库表前缀          // 端口
         'DB_CHARSET'=> 'utf8',           // 数据库编码默认采用utf8
     ),
-    //数据库配置3
-    'DB_CONFIG3' => array(
-        'DB_TYPE'   => 'mysql',         // 数据库类型
-        'DB_HOST'   => '192.168.0.190', // 服务器地址
-        'DB_NAME'   => 'qwadmin',         // 数据库名
-        'DB_USER'   => 'root',          // 用户名
-        'DB_PWD'    => '',              // 密码
-        'DB_PORT'   => 3306,            // 端口
-        'DB_CHARSET'=>  'utf8',         // 数据库编码默认采用utf8
-    ),
+    
     
     //云信配置
     'NETEASE' => array(

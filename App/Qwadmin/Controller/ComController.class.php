@@ -13,16 +13,15 @@ namespace Qwadmin\Controller;
 
 use Common\Controller\BaseController;
 use Think\Auth;
-define("DB_CONFIG2", "mysql://root:@localhost/qwadmin#utf8");
-define('CONNECTION2', 'qw_'.','.DB_CONFIG2);
 
 class ComController extends BaseController
 {
     public $USER;
-    public $connection = 'DB_CONFIG3';
+
     public function _initialize()
     {
-        //C(setting());
+
+        C(setting());
         if (!C("COOKIE_SALT")) {
             $this->error('请配置COOKIE_SALT信息');
         }
@@ -39,7 +38,7 @@ class ComController extends BaseController
             header("Location: {$url}");
             exit(0);
         }
-        $m = M('', 'qw_', DB_CONFIG2);
+        $m = M();
         $prefix = C('DB_PREFIX');
         $UID = $this->USER['uid'];
         $userinfo = $m->query("SELECT * FROM {$prefix}auth_group g left join {$prefix}auth_group_access a on g.id=a.group_id where a.uid=$UID");
@@ -72,7 +71,7 @@ class ComController extends BaseController
 
             $menu_where = '';
         }
-        $menu = M('auth_rule',CONNECTION2)->field('id,title,pid,name,icon')->where("islink=1 $menu_where ")->order('o ASC')->select();
+        $menu = M('auth_rule')->field('id,title,pid,name,icon')->where("islink=1 $menu_where ")->order('o ASC')->select();
         $menu = $this->getMenu($menu);
         $this->assign('menu', $menu);
 
@@ -118,7 +117,7 @@ class ComController extends BaseController
         $auth = cookie('auth');
         $uid = session('uid');
         if ($uid) {
-            $user = M('member','qw_', DB_CONFIG2)->where(array('uid' => $uid))->find();
+            $user = M('member')->where(array('uid' => $uid))->find();
 
             if ($user) {
                 if ($auth ==  password($uid.$user['user'].$ip.$ua.$salt)) {

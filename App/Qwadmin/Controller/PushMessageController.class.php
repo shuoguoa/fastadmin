@@ -15,7 +15,7 @@ define('Alias','10000');
 define('APPKEY',       C('GETUI_CN')['APP_KEY'] );
 define('APPID',        C('GETUI_CN')['APP_ID'] );
 define('MASTERSECRET', C('GETUI_CN')['MASTER_SECRET'] );
-
+ 
 class PushMessageController extends ComController {
 
 	private $APPKEY;
@@ -47,16 +47,21 @@ class PushMessageController extends ComController {
 	}
 
 	public function index_BETA(){
-
 		$this->display('index');
 	}
 
+	/*
+	*个推
+	*/
 	public function index_Single(){
 		$flag = '1'; //个推
 		$this->assign('flag',$flag);
 		$this->display('index');
 	}
 
+	/*
+	*群推
+	*/
 	public function index_App(){
 		$flag = '2'; //群推
 		$this->assign('flag', $flag);
@@ -99,6 +104,7 @@ class PushMessageController extends ComController {
 		} else {
 			$image = getImage('/getui/Public/attached/default/new.png');
 		}
+		
 		if(I('ANDROID')){ $OS[] = 'ANDROID'; }
 		if(I('IOS')){ $OS[] = 'IOS'; }
 		$config = array(
@@ -127,7 +133,7 @@ class PushMessageController extends ComController {
 	    }
 	}
 
-	//单推接口案例
+	/*单推接口案例*/
 	public function pushMessageToSingle(array $config){
 	    $igt = new \IGeTui(HOST,$this->APPKEY,$this->MASTERSECRET);
 	    $template = $this->IGtTransmissionTemplateDemo(json_encode($config));
@@ -144,7 +150,7 @@ class PushMessageController extends ComController {
 	    try {
 	        $rep = $igt->pushMessageToSingle($message, $target);
 	        incGetuiID();
-	        var_dump($rep);
+	        var_dump($rep);	
 	    }catch(RequestException $e){
 	        $requstId =e.getRequestId();
 	        $rep = $igt->pushMessageToSingle($message, $target,$requstId);
@@ -177,7 +183,7 @@ class PushMessageController extends ComController {
 	    $message->set_conditions($cdt->getCondition());
 
 	    $rep = $igt->pushMessageToApp($message, 'task');
-	     var_dump($rep);exit;
+	     
 	    if($rep['result'] == 'ok'){
 	    	incGetuiID();
 	    	$this->success('推送成功');
@@ -229,29 +235,6 @@ class PushMessageController extends ComController {
 	    $template->set_appkey($this->APPKEY);//应用appkey
 	    $template->set_transmissionType(2);//透传消息类型
 	    $template->set_transmissionContent($config);//透传内容
-
-	    //APN高级推送
-	    // $apn = new \IGtAPNPayload();
-	    // $alertmsg = new \DictionaryAlertMsg();
-	    // $alertmsg->body = '{"type":2,"data":{"time":1466478836,"fromid":1,"targetid":1,"type":2,"info":{"id":21,"title":"\u66f4\u65b0\u901a\u77e5","content":"测试","image":"","url":""},"content":"测试"}}';
-	    // $alertmsg->actionLocKey="ActionLockey";
-	    // $alertmsg->locKey="LocKey";
-	    // $alertmsg->locArgs=array("locargs");
-	    // $alertmsg->launchImage="launchimage";
-		//IOS8.2 支持
-	    // $alertmsg->title="Title";
-	    // $alertmsg->titleLocKey="TitleLocKey";
-	    // $alertmsg->titleLocArgs=array("TitleLocArg");
-
-	    // $apn->alertMsg=$alertmsg;
-	    // $apn->badge=7;
-	    // $apn->sound="";
-	    // $apn->add_customMsg("payload","payload");
-	    // $apn->contentAvailable=1;
-	    // $apn->category="ACTIONABLE";
-	    // $template->set_apnInfo($apn);
-	    //iOS推送需要设置的pushInfo字段
-		// $template ->set_pushInfo($actionLocKey,$badge,$message,$sound,$payload,$locKey,$locArgs,$launchImage);
 		$config = json_decode($config, true);
 		$template ->set_pushInfo("", "", $config['data']['info']['title'], "", "payload", "", "", "");
 
