@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 use Wechat\WechatPay;
 
-class PayController extends ComController {
+class PayController extends Controller {
 
     public function callback(){
         
@@ -113,6 +113,17 @@ class PayController extends ComController {
     }
 
     public function order(){
+        //过滤首页和绑定页
+        $page = CONTROLLER_NAME.'/'.ACTION_NAME;
+        if($page == 'Pay/order'){
+            //判断是否已经绑定
+            $wxBindModel = D('WxBind');
+            $openid = session('openid');
+            $data = $wxBindModel->where(array('openid'=>$openid))->select();
+            if(!$data){
+                $this->redirect('Bind/index'); //跳转绑定页
+            }
+        }
         $goodId = I('id', 0 ,'intval');//商品id
         $openid = session('openid');
         if(C('ENV_DEBUG') && $openid != 'ogxy0w7hrmz4I-RsAaaPT-_emYIA'){//测试账号
