@@ -70,8 +70,8 @@ class ComController extends Controller {
 
         $url = "http://liufuqin.test.htgames.cn";
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.urlencode($url).'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-//        header("Location:".$url);
-//        die();
+        header("Location:".$url);
+        die();
     }
 
                                 
