@@ -27,9 +27,13 @@ class ComController extends Controller {
 //            }
 //
             $data = $this->httpGet($get_token_url);
-            $data = json_decode($data, true); 
-            session('openid',$data['openid']);
-        } 
+            if ($data) {
+                $data = json_decode($data, true);
+            }
+            if (isset($data['openid'])) {
+                session('openid',$data['openid']);
+            }
+        }
     
         //过滤首页和绑定页
         $page = CONTROLLER_NAME.'/'.ACTION_NAME;
