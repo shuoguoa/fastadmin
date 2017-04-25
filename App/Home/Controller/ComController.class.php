@@ -18,15 +18,15 @@ class ComController extends Controller {
             }
 
             $get_token_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$secret.'&$test='.$param.'&code='.$code.'&grant_type=authorization_code';
-            $get_token_url0 = 'http://liufuqin.test.htgames.cn/qwadmin/index.php?m=Home&c=Bind&a=index';
-             $param = I('test');
-            if ($param) {
-                $data = $this->httpGet($get_token_url0);
-            } else {
-                $data = $this->httpGet($get_token_url);
-            }
-            
-            //$data = $this->httpGet($get_token_url);
+//            $get_token_url0 = 'http://liufuqin.test.htgames.cn/qwadmin/index.php?m=Home&c=Bind&a=index';
+//             $param = I('test');
+//            if ($param) {
+//                $data = $this->httpGet($get_token_url0);
+//            } else {
+//                $data = $this->httpGet($get_token_url);
+//            }
+//
+            $data = $this->httpGet($get_token_url);
             $data = json_decode($data, true); 
             session('openid',$data['openid']);
 
