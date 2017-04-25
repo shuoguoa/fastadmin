@@ -391,14 +391,14 @@ class PayController extends Controller {
             ];
         }else{
             $pay = [
-                2000 => ['id' => 2000,
-                    'ios_id'=> 'com.htgames.nutspoker.rmb6',
-                    'name' => '0.01',
-                    'diamond' => 6,
-                    'vip' => 0,
-                    'desc' => '含钻石1颗',
-                    'price' => 0.01
-                ],
+//                2000 => ['id' => 2000,
+//                    'ios_id'=> 'com.htgames.nutspoker.rmb6',
+//                    'name' => '0.01',
+//                    'diamond' => 6,
+//                    'vip' => 0,
+//                    'desc' => '含钻石1颗',
+//                    'price' => 0.01
+//                ],
                 /*  2001 => ['id' => 2001,
                      'ios_id'=> 'com.htgames.nutspoker.rmb6',
                      'name' => '6',
