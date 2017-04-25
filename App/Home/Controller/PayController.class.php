@@ -29,8 +29,7 @@ class PayController extends Controller {
 
             $wxOrderModel = D('WxOrder');
             $orderInfo = $wxOrderModel->getOrderInfo($out_trade_no);
-            if($orderInfo || $orderInfo['status'] != 1){
-
+            if($orderInfo && $orderInfo['status'] != 1){
                 if($orderInfo['money'] == $total_fee){
                     //update订单
                     $orderData['account_money'] = $total_fee;
