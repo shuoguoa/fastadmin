@@ -33,7 +33,11 @@ return array(
         'DB_PREFIX' => '', // 数据库表前缀          // 端口
         'DB_CHARSET'=> 'utf8',           // 数据库编码默认采用utf8
     ),
-    
+
+    //redis
+    'REDIS_HOST'=> '120.27.162.46',
+    'REDIS_PORT'=> 6415,
+    'REDIS_AUTH'=> 'qaz#htgames#wsx',
     
     //云信配置
     'NETEASE' => array(

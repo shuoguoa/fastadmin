@@ -99,11 +99,11 @@ class PayController extends Controller {
                     exit($wechatpay->responseMsg('FAIL'));
                 }
                 //更新redis
-                // $redis = new \Redis();
-                // $redis->connect(C('REDIS_HOST'), C('REDIS_PORT'));
-                // $redis->auth(C('REDIS_AUTH'));
-                // $redisKey = 'user:' . $orderInfo['uid'];
-                // $redis->HINCRBY($redisKey, 'diamond', $orderInfo['diamond']);
+                $redis = new \Redis();
+                $redis->connect(C('REDIS_HOST'), C('REDIS_PORT'));
+                $redis->auth(C('REDIS_AUTH'));
+                $redisKey = 'user:' . $orderInfo['uid'];
+                $redis->HINCRBY($redisKey, 'diamond', $orderInfo['diamond']);
                 $model->commit();
                 error_log('成功' . PHP_EOL, 3, $log);
                 exit($wechatpay->responseMsg('SUCCESS'));
