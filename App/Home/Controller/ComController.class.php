@@ -67,6 +67,7 @@ class ComController extends Controller {
         $appid = C('WechatPay.appid');
 //        $secret = C('WechatPay.secret');
 //        $code = I('get.id',0);
+        
         $url = "http://liufuqin.test.htgames.cn";
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.urlencode($url).'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         header("Location:".$url);
