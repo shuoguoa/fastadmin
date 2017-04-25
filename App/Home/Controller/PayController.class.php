@@ -48,22 +48,29 @@ class PayController extends Controller {
                         }else{
                             $wxOrderModel->rollback();
                             error_log('更新订单失败' . PHP_EOL, 3, $log);
-                            exit($wechatpay->responseMsg('FAIL'));
+                            $wechatpay->responseMsg('FAIL');
+                            exit;
                         }
                     }catch(\Exception $e){
                         $wxOrderModel->rollback();
-                        error_log($e->getMessage() . PHP_EOL, 3, $log);
-                        exit($wechatpay->responseMsg('FAIL'));
+                        error_log(json_encode($e->getMessage()) . PHP_EOL, 3, $log);
+                        $wechatpay->responseMsg('FAIL');
+                        exit;
                     }
                 }else{
                     error_log('金额不符' . PHP_EOL, 3, $log);
+                    $wechatpay->responseMsg('FAIL');
+                    exit;
                 }
             }else{
                 error_log('订单不存在或已完成' . PHP_EOL, 3, $log);
+                $wechatpay->responseMsg('FAIL');
+                exit;
             }
         }else{
             error_log('验签失败' . PHP_EOL, 3, $log);
             $wechatpay->responseMsg('FAIL');
+            exit;
         }
     }
 
@@ -107,7 +114,9 @@ class PayController extends Controller {
                 exit($wechatpay->responseMsg('FAIL'));
             }
         } catch (Exception $e) {
-            throw new Exception("buyvip fail error message: ".$e->getMessage);
+//            throw new Exception("buyvip fail error message: ".$e->getMessage());
+            error_log('异常' . PHP_EOL, 3, $log);
+            exit($wechatpay->responseMsg('FAIL'));
         }
         
     }
