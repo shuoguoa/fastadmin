@@ -327,4 +327,132 @@ class PayController extends Controller {
             exit(json_encode(array('status'=>0, 'data'=>'充值账号跟系统不符')));
         }
     }
+
+
+    /**
+     * 充值
+     *
+     * @return void
+     * @author
+     **/
+    function pay($id = 0)
+    {
+        $bid = $this->get('bid');
+        if ($bid) {
+            $pay = [
+                2001 => ['id' => 2001,
+                    'ios_id'=> $bid.'.rmb6',
+                    'name' => '6',
+                    'diamond' => 60,
+                    'vip' => 0,
+                    'desc' => '含钻石60颗',
+                    'price' => 6
+                ],
+                2002 => ['id' => 2002,
+                    'ios_id'=> $bid.'.rmb30',
+                    'name' => '30',
+                    'diamond' => 318,
+                    'vip' => 0,
+                    'desc' => '含钻石318颗',
+                    'price' => 30
+                ],
+                2003 => ['id' => 2003,
+                    'ios_id'=> $bid.'.rmb128',
+                    'name' => '128',
+                    'diamond' => 1388,
+                    'vip' => 0,
+                    'desc' => '含钻石1388颗',
+                    'price' => 128
+                ],
+                2004 => ['id' => 2004,
+                    'ios_id'=> $bid.'.rmb328',
+                    'name' => '328',
+                    'diamond' => 3608,
+                    'vip' => 0,
+                    'desc' => '含钻石3608颗',
+                    'price' => 328
+                ],
+                2005 => ['id' => 2005,
+                    'ios_id'=> $bid.'.rmb618',
+                    'name' => '618',
+                    'diamond' => 6888,
+                    'vip' => 0,
+                    'desc' => '含钻石6888颗',
+                    'price' => 618
+                ],
+                2006 => ['id' => 2006,
+                    'ios_id'=> $bid.'.rmb999',
+                    'name' => '999',
+                    'diamond' => 11188,
+                    'vip' => 0,
+                    'desc' => '含钻石6888颗',
+                    'price' => 999
+                ],
+            ];
+        }else{
+            $pay = [
+                2000 => ['id' => 2000,
+                    'ios_id'=> 'com.htgames.nutspoker.rmb6',
+                    'name' => '0.01',
+                    'diamond' => 6,
+                    'vip' => 0,
+                    'desc' => '含钻石1颗',
+                    'price' => 0.01
+                ],
+                /*  2001 => ['id' => 2001,
+                     'ios_id'=> 'com.htgames.nutspoker.rmb6',
+                     'name' => '6',
+                     'diamond' => 60,
+                     'vip' => 0,
+                     'desc' => '含钻石60颗',
+                     'price' => 6
+                 ],*/
+                2002 => ['id' => 2002,
+                    'ios_id'=> 'com.htgames.nutspoker.rmb30',
+                    'name' => '30',
+                    'diamond' => 318,
+                    'vip' => 0,
+                    'desc' => '含钻石318颗',
+                    'price' => 30
+                ],
+                2003 => ['id' => 2003,
+                    'ios_id'=> 'com.htgames.nutspoker.rmb128',
+                    'name' => '128',
+                    'diamond' => 1388,
+                    'vip' => 0,
+                    'desc' => '含钻石1388颗',
+                    'price' => 128
+                ],
+                2004 => ['id' => 2004,
+                    'ios_id'=> 'com.htgames.nutspoker.rmb328',
+                    'name' => '328',
+                    'diamond' => 3608,
+                    'vip' => 0,
+                    'desc' => '含钻石3608颗',
+                    'price' => 328
+                ],
+                2005 => ['id' => 2005,
+                    'ios_id'=> 'com.htgames.nutspoker.rmb618',
+                    'name' => '618',
+                    'diamond' => 6888,
+                    'vip' => 0,
+                    'desc' => '含钻石6888颗',
+                    'price' => 618
+                ],
+                2006 => ['id' => 2006,
+                    'ios_id'=> $bid.'.rmb999',
+                    'name' => '999',
+                    'diamond' => 11188,
+                    'vip' => 0,
+                    'desc' => '含钻石6888颗',
+                    'price' => 999
+                ],
+            ];
+        }
+        if ($id) {
+            return isset($pay[$id]) ? $pay[$id] : '';
+        } else {
+            return array_values($pay);
+        }
+    }
 }
