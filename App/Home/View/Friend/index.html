@@ -47,6 +47,9 @@
               background: url(__PUBLIC__/home/images/others.png) no-repeat right top !important;
 
             }
+            .main{
+                min-height: 100%;
+            }
 
         </style>
 
@@ -55,7 +58,7 @@
         
     </script>
     <body style="background-color:#ECEDF2;">
-    
+    <div class="main">
         <section id="mama" >
             <div class="container2">
                 <div id="two1" >
@@ -78,16 +81,6 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!--
-                                    <div id="diamond0">
-                                        <img src="__PUBLIC__/home/images/my4.png" class="img-responsive">
-                                        <span class="dia" >{$good['diamond']}</span>
-                                        <input class="radio1" name="good_id" type="radio" id="{$good['id']}" value="{$good['id']}" onclick="price({$good['price']})"/>
-                                        <div class="a1" name="{$good['id']}">&yen;{$good['price']}</div>
-                                    </div>
-
-                                </div>-->
-                                
                             </div>
                         </div>
                     </div>
@@ -109,7 +102,8 @@
                                           <span class="select-style"><select name="ccode" > <volist name="stateCode" id="v"><option value="{$v}" align="right" style="height:0.8rem !important">+{$v}</option></volist></select></span>
                                         
                                     </td>
-                                    <td style="width:1%;height: 2rem"><span style="font-size:2rem;color:#AACBD4;line-height:2rem">|</span></td>
+                                    <!--<td style="width:1%;height: 2rem"><span style="font-size:2rem;color:#AACBD4;line-height:2rem" id="line0">|</span></td>-->
+                                    <td style="width:1%;height: 2rem"><span id="line0">|</span></td>
                                     <td class="login_u2">
                                         <input name="username" id="username" type="text" placeholder="  请输入手机号" style="line-height: 3.2rem !important;" value="">
 
@@ -146,7 +140,7 @@
                 </div> 
             </div>
         </div>
-    
+    </div>
     <include file="Public/footer" />
 
     </body>
@@ -179,6 +173,10 @@
             $('input[type="radio"]').removeAttr('checked') && $('#' + radioId).attr('checked', 'checked');
             
         });
+        $("input[name='username']").click(function(){
+            $('.footer').hide();
+        });
+
         
         $('#open4').click(function() {
             $(".a1").each(function(i, obj){
@@ -226,6 +224,22 @@
                 Showbo.Msg.alert('验证失败，请重试！');
             }) 
         });
+
+        //点击输入账号，隐藏底部菜单栏
+        $("input[name='username']").blur(function(){
+            if ($("input[name='username']").val() != '') {
+                $("#open4").blur(function(){
+                    $('.footer').show();
+                });
+                $("#clear").click(function(){
+                    $('.footer').show();
+                });
+            } else {
+                 $('.footer').show();
+            }
+
+        });
+        
 
         function verify(uid, username, nickname, os, uuid, price) { 
             if (uid != ''){ 
@@ -321,47 +335,7 @@
         }
     </script>
 
-
-
-
-
-
-
-
-
-
-
-    <script>
-        
-    //初始化金额
-    // $('#total').text({$goods[0]['price']});
-    // //
-    // var oDiv = document.getElementById('three');
-    //     oDiv.style.position = 'fixed';
-    //     oDiv.style.bottom = '0px';
-    // var n=1;
-    // var span1=$(".r1 span")[0];
-    // var price1=parseFloat(span1.innerHTML.slice(1));
-    // var span2=$(".r2 span")[0];
-    // var price2=parseFloat(span2.innerHTML.slice(1));
-    // var span3=$(".r3 span")[0];
-    // var price3=parseFloat(span3.innerHTML.slice(1));
-    
-    // var arr=[price1,price2,price3];
-
-    // $("#ab").click(function(){
-    //     var span=document.getElementById("number");
-    //     n=parseInt(span.innerHTML);
-    //     n++;
-    //     span.innerHTML=n;
-    //     //return n;
-    //     if($('.chosed')[0]){
-    //         var index=$('.chosed').index();
-    //         console.log(index);
-    //         $("#total").html( arr[index]*n);   
-    //     }
-        
-    // });
+    <script> 
     $("#aa").click(function(){
         var span=document.getElementById("number");
         n=parseInt(span.innerHTML);
@@ -378,9 +352,6 @@
             $("#total").html( arr[index]*n);   
         }
     });
-  
-    
 
     </script>
-
 </html>
