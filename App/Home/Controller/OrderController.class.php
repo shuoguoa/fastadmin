@@ -21,24 +21,25 @@ class OrderController extends ComController {
         '" and status = 1 and time between '.$bgn.' and '.$end;
 
         $count = $wxOrderModel->query($sql2); 
+        $this->assign('num', $count[0]['num']);
         $page = new \Think\Page($count[0]['num'], $pageSize);
         $page = $page->show();
         $this->assign('page', $page);
 
-       	$res = array();
+        $res = array();
         foreach ($orders as $key => $value) {
-        	$k = date('Y年m月', $value['time']);
-        	$i = $value['date'];
-        	$weekarray=array("周 日","周 一","周 二","周 三","周 四","周 五","周 六"); 
-        	$w= date('w', $value['time']); 
-        	$orders[$key]['w'] = $weekarray[$w];
-        	$orders[$key]['d'] = $k;
+            $k = date('Y年m月', $value['time']);
+            $i = $value['date'];
+            $weekarray=array("周 日","周 一","周 二","周 三","周 四","周 五","周 六"); 
+            $w= date('w', $value['time']); 
+            $orders[$key]['w'] = $weekarray[$w];
+            $orders[$key]['d'] = $k;
             $orders[$key]['rq'] = date('m-d', $value['time']);
             
             $orders[$key]['avatar'] = $value['avatar'] == '' ? $this->getDefaultAvatar() : $value['avatar'];
 
-        	$res[$i]['d'] = $k;
-        	$month[$k]['month'] = $k;
+            $res[$i]['d'] = $k;
+            $month[$k]['month'] = $k;
         }  
 
         $this->assign('month',$month);
