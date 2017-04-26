@@ -40,7 +40,7 @@ class OrderController extends ComController {
         	$res[$i]['d'] = $k;
         	$month[$k]['month'] = $k;
         }  
-//var_dump($orders);exit;
+
         $this->assign('month',$month);
         $this->assign('orders', $orders);
         $this->assign('check', I('get.flag'));
