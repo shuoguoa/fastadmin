@@ -43,7 +43,7 @@
         $('.footer').addClass('three0');
      } 
 
-    //亮 1,3,5 灰 2,4,6/**/
+   //亮 1,3,5 灰 2,4,6/**/
     $(function(){ 
         var url = [];
         url[0] = 'Index/index'; 
@@ -52,37 +52,28 @@
         for(i in url) {
             var Request = new Object();
             Request = GetRequest();
-            var Con = Request['c'];
-            var Act= Request['a']; 
-            if(Con !='' && Act != '') {
-              var par = Con+"/"+Act; 
-              if (par == url[i]) {
-                  $("a").removeClass('check');
-                  $("#nav"+i).addClass('check');
-                  return false;
-              }
+            if (Request == url[i]) {
+                $("a").removeClass('check');
+                $("#nav"+i).addClass('check');
+                return false;
             } else {
                 $("a").removeClass('check');
                 $("#nav1").addClass('check');
             }
-            
         }
-
         
     })
 
 //js 获取url中的参数
 function GetRequest() {
    var url = location.search; //获取url中"?"符后的字串 
-   var theRequest = new Object();
-   if (url.indexOf("?") != -1) {
-      var str = url.substr(1);
-      strs = str.split("&");
-      for(var i = 0; i < strs.length; i ++) {
-         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
-      }
-   }
-   return theRequest;
+   //var url = 'http://pay.htgames.cn/everpoker/wx/Home/Bind/index';
+   var theRequest = new Object(); 
+   if (url.indexOf("Home") != -1) {
+      var str = url.substr(1); 
+      strs = str.split("Home/");
+   } alert(strs[1]);
+   return strs[1];
 }
 
 

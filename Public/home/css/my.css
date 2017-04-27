@@ -2721,13 +2721,13 @@ label.checked {
 	
   height: 30px;
   line-height: 30px; 
-}*/
+}
 .select-style select{
  margin:-2px; border:none;
  appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none; -webkit-appearance:none;
  -webkit-tap-highlight-color: transparent;    background: 0 0 ;
  font-size: 1.5rem;
-}
+}*/
 
 .line0{
   position:relative;
