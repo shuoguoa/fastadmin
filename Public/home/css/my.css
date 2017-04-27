@@ -1266,6 +1266,19 @@ label.checked {
 		width: 60%;
 		
 	}
+	#one1 .container {
+	    padding-right: 15px;
+	    padding-left: 15px;
+	    margin-right: auto;
+	    margin-left: auto;
+	    height: 100%;
+	    margin-top: 15%;
+	}
+	.scode{
+		line-height: 2.5rem;
+		height: 2.5rem;
+		margin-bottom: -2px;
+	}
 	#open5{
 		width:16%;
 		margin-left:1%;
@@ -2233,7 +2246,7 @@ label.checked {
     height: 7rem;
 }
 #login_table {
-    width: 90%;
+    width: 100%;
     position: relative;
     margin: 0 auto;
     height: 100%;
@@ -3157,7 +3170,7 @@ label.checked {
 		background-color:#39BDCC;
 		border-radius:6px;
 		letter-spacing:3px;
-		font-size: 20px !important;
+		font-size: 2.5rem !important;
 	}
 	.mone{
 	background-color:#000000;
@@ -3189,7 +3202,7 @@ label.checked {
     font-size: 3rem;
     color: #AACBD4;
 }
-.select-style select {
+/*.select-style select {
     border: none;
     appearance: none;
     -moz-appearance: none;
@@ -3202,7 +3215,7 @@ label.checked {
     float: right;
     vertical-align: middle;
  
-} 
+} */
 
 #check .login_u2 input {
     color: #A29C9C;
@@ -3266,6 +3279,7 @@ label.checked {
 		background-color:#39BDCC;
 		border-color:#5fbcd4;
 		border-radius:6px;
+		font-size: 2.5rem;
 	}
 	.mone{
 	background-color:#000000;
@@ -3771,6 +3785,13 @@ label.checked {
 	    position: absolute;
 	    padding-top: 5%;
 	    left: 43%;
+	}
+	.three0 {
+	    position: relative !important;
+	    bottom: 0 !important;
+	    top: 300px !important;
+	    width: 100 !important;
+	    width: 100% !important;
 	}
 	#line0 {
 	    width: 50%;
@@ -4306,7 +4327,7 @@ label.checked {
     height: 100%;
 }
 #login_table {
-    width: 90%;
+    width: 100%;
     position: relative;
     margin: 0 auto;
     height: 100%;
@@ -4496,7 +4517,8 @@ label.checked {
 		line-height:6rem;
 	}
 	#start3{
-		margin-top:2.5rem;
+		margin-top:1.5rem;
+		margin-left: 6%;
 	}
 	#two1 span{
 		font-size:2.5rem;
@@ -4735,7 +4757,7 @@ label.checked {
     height: 7rem;
 }
 #login_table {
-    width: 90%;
+    width: 100%;
     position: relative;
     margin: 0 auto;
     height: 100%;
@@ -4911,7 +4933,8 @@ label.checked {
 		line-height:6rem;
 	}
 	#start3{
-		margin-top:1.8rem;
+		margin-top:1.5rem;
+		margin-left: 6%;
 	}
 	#two1 span{
 		font-size:1.8rem;
@@ -5095,16 +5118,6 @@ label.checked {
 	line-height:5rem;
 }
 }
-
-
-
-
-
-
-
-
-
-
 
 /************************¸Ä¶¯²¿·Ö*****************************/
 #two2 .all{
