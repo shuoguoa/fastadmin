@@ -19,4 +19,8 @@ class BaseController extends Controller
     {
         C(setting());
     }
+    public function getConnectDb2(){
+    	$result = C('DB_CONFIG2');
+    	return  'mysql://'.$result['DB_USER'].':'.$result['DB_PWD'].'@'.$result['DB_HOST'].':'.$result['DB_PORT'].'/'.$result['DB_NAME'].'#utf8';
+    }
 }
