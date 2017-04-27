@@ -66,13 +66,13 @@
 
 //js 获取url中的参数
 function GetRequest() {
-   var url = location.search; //获取url中"?"符后的字串 
+   var url = window.location.href;//获取url中"?"符后的字串 
    //var url = 'http://pay.htgames.cn/everpoker/wx/Home/Bind/index';
    var theRequest = new Object(); 
    if (url.indexOf("Home") != -1) {
       var str = url.substr(1); 
       strs = str.split("Home/");
-   } alert(strs[1]);
+   }
    return strs[1];
 }
 
