@@ -5542,7 +5542,11 @@ fieldset[disabled] .btn-primary.active {
 .btn-info,
 .btn-info:focus {
   background-color: #6fb3e0 !important;
-  border-color: #6fb3e0;
+  /*border-color: #6fb3e0;*/
+    background-color: #6fb3e0 !important;
+    border-color: #d5e4ef;
+    border: none;
+    border-radius: 5%;
 }
 .btn-info:hover,
 .btn-info:active,
@@ -16590,8 +16594,13 @@ img.editable-click:hover {
 .ui-jqdialog .ui-dialog-title,
 .ui-dialog .ui-jqdialog-title,
 .ui-jqdialog .ui-jqdialog-title {
-  float: none !important;
+ /* float: none !important;*/
   width: auto;
+  height: 30px;
+  font-size: 16px;
+  margin-left: 15px;
+  vertical-align: middle;
+  color: #ecae77;
 }
 .ui-dialog .widget-header,
 .ui-jqdialog .widget-header {

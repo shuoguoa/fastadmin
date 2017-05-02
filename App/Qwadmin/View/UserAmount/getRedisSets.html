@@ -1,0 +1,254 @@
+
+<include file="Public/head"/>
+<body class="no-skin">
+<include file="Public/header"/>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <include file="Public/sidebar"/>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <include file="Public/breadcrumbs"/>
+            <div class="page-content">
+                <include file="Public/set"/>
+                <style>
+                    .grouptd {
+                        position: relative;
+                    }
+                    .group {
+                        display: inline-block;
+                        width: 100%;
+                    }
+                    .groupselect {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        border: 0;
+                    }
+                    input{
+                        text-align: left;
+                    }
+                    /*td{
+                        text-align: left;
+                    }*/
+                    input {
+                        border: none;
+                    }
+
+                </style>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div class="row" style="margin-left: 40px;">
+                            <form class="form-inline" action="{:U('UserAmount/getRedisSets')}" method="post">
+                                <label class="inline">集 合 :</label>
+                                <select name="keyNum" class="form-control">
+                                    <volist name="setList" id="vo">
+                                        <option  value="{$vo}">{$vo}</option>
+                                    </volist>
+                                </select>&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-purple btn-sm" >
+                                    <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                    Search
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-purple btn-sm addSet" style="margin-right: 50px;float: right;">
+                                    Add set
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-purple btn-sm addRow" style="margin-right: 20px;float: right;">
+                                    Add row
+                                </button>
+                            </form>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="row" style="margin-left: 20px;">
+                           
+                                <!----><table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="center">row</th>
+                                            <th class="center">value</th>
+                                            <th class="center">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                           
+                                        <volist name="list" id="val">
+                                            <tr>
+                                                <td align="center">{$val['row']}</td>
+                                                <td align="center">{$val['val']}</td>
+                                                <td align="center">
+                                                    <!--<button class="btn btn-info recharge" id="dialog-recharge" onclick="updateRow('{$val['keyNames']}', '{$val['val']}')">修改</button>
+                                                        &nbsp;&nbsp;&nbsp;-->
+                                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="deleteRow('{$val['keyNames']}', '{$val['val']}')">Delete row</button>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                            
+                           <div style="margin:0 auto">{$page}</div>
+                        </div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+    <include file="Public/footer"/>
+
+</div><!-- /.main-container -->
+
+<div id="dialog1" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
+    <form  method="post" >
+        <table align="center">
+            <tr>
+            <td align="center">集 合 名 ：</td>
+            <td><input type="text" name="setKey" value="" id="username" ></td>
+            </tr>
+            <tr>
+            <td align="center">row  ：</td>
+            <td><input type="text" name="rowVal" value="" ></td>
+            </tr>
+            
+            <tr>
+            <td  colspan="4" align="center">
+            <input type="submit" id="submit-addset" role="button" style="background-color:#f1f1f1;margin-top: 10px;width: 50px;height: 30px;border-radius: 10%;color:#ecae77;text-align: center; font-size: 15px" value="add">
+            </td></tr>
+        </table>
+    </form>
+</div>
+
+<div id="dialog2" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
+    <form  method="post" >
+        <table align="center">
+            <tr>
+            <td align="center">集 合 ：</td>
+            <td>
+                <select name="setKey" class="form-control">
+                    <volist name="setList" id="vo">
+                        <option  value="{$vo}">{$vo}</option>
+                    </volist>
+                </select>&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+            <tr>
+            <td align="center">row ：</td>
+            <td><input type="text" name="rowVal" value="" ></td>
+            </tr>
+            
+            <tr>
+            <td  colspan="4" align="center">
+            <input type="submit" id="submit-addrow" role="button" style="background-color:#f1f1f1;margin-top: 10px;width: 50px;height: 30px;border-radius: 10%;color:#ecae77;text-align: center; font-size: 15px" value="add">
+            </td></tr>
+        </table>
+    </form>
+</div>
+
+
+<include file="Public/footerjs"/>
+
+<script type="text/javascript">
+$( "#dialog1" ).dialog({
+    autoOpen: false,
+    width: 300,
+    height:180,
+    title:'add set'
+});
+$( "#dialog2" ).dialog({
+    autoOpen: false,
+    width: 300,
+    height:180,
+    title:'add row'
+});
+
+$(".addSet").click(function(){
+    $( "#dialog1" ).dialog( "open" );
+    event.preventDefault();
+});
+
+$("#submit-addset").click(function(){
+    var setKey = $("input[name='setKey']").val();
+    var rowVal = $("input[name='rowVal']").val();
+
+    if (setKey == '') {
+        alert('请输入set值');
+        return false;
+    } else if (rowVal == '') {
+        alert('请输入row 值');
+        return false;
+    }else{
+        $.post("{:U('UserAmount/addSet')}", {setKey:setKey, rowVal:rowVal}, function(data){   
+           if (data.status == 'ok') { 
+                alert(data.msg);
+                window.location.reload();
+            }else {
+                alert(data.msg);
+                return false;
+            }
+        });
+        return false;
+    }
+});
+
+function deleteRow(setKey, rowVal){
+    if (setKey == '') {
+        alert('缺少指定的set');
+        return false;
+    } else if (rowVal == '') {
+        alert('缺少row 值');
+        return false;
+    }else{
+        $.post("{:U('UserAmount/deleteSetRow')}", {setKey:setKey, rowVal:rowVal}, function(data){   
+           if (data.status == 'ok') { 
+                alert(data.msg);
+                window.location.reload();
+            }else {
+                alert(data.msg);
+                return false;
+            }
+        });
+        return false;
+    }
+}
+
+
+$(".addRow").click(function(){
+    $( "#dialog2" ).dialog( "open" );
+    event.preventDefault();
+});
+
+$("#submit-addrow").click(function(){
+    var setKey = $("select[name='setKey']").val();
+    var rowVal = $("input[name='rowVal']").val();
+// alert(setKey);alert(rowVal); return false;
+    if (setKey == '') {
+        alert('请输入指定的set');
+        return false;
+    } else if (rowVal == '') {
+        alert('请输入row 值');
+        return false;
+    }else{
+        $.post("{:U('UserAmount/addSetRow')}", {setKey:setKey, rowVal:rowVal}, function(data){   
+           if (data.status == 'ok') { 
+                alert(data.msg);
+                window.location.reload();
+            }else {
+                alert(data.msg);
+                return false;
+            }
+        });
+        return false;
+    }
+});
+
+</script>
+
+
+</body>
+</html>

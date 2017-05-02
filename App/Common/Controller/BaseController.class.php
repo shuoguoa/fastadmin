@@ -21,6 +21,14 @@ class BaseController extends Controller
     }
     public function getConnectDb2(){
     	$result = C('DB_CONFIG2');
-    	return  'mysql://'.$result['DB_USER'].':'.$result['DB_PWD'].'@'.$result['DB_HOST'].':'.$result['DB_PORT'].'/'.$result['DB_NAME'].'#utf8';
+    	return 'mysql://'.$result['DB_USER'].':'.$result['DB_PWD'].'@'.$result['DB_HOST'].':'.$result['DB_PORT'].'/'.$result['DB_NAME'].'#utf8';
     }
+
+    public function getConnectRedis($param = ''){
+    	$redis = new \Redis($param);
+		$redis->connect(C('REDIS_HOST'), C('REDIS_PORT'));
+		$redis->auth(C('REDIS_AUTH'));
+		return $redis;
+    }
+
 }
