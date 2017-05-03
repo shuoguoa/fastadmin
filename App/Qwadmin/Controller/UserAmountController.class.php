@@ -301,7 +301,7 @@ class UserAmountController extends ComController
     public function getRedisSets(){
         $redis = $this->getConnectRedis();
         $setList = $redis->keys('*_group_*');
-        $keyNames = I('keyNum') ? I('keyNum') : $setList[7];
+        $keyNames = I('keyNum') != '' ? I('keyNum') : $setList[0];
         
         $list = $redis->smembers($keyNames); 
         foreach ($list as $key => $value) {

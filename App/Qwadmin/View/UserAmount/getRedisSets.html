@@ -49,9 +49,9 @@
                         <div class="row" style="margin-left: 40px;">
                             <form class="form-inline" action="{:U('UserAmount/getRedisSets')}" method="post">
                                 <label class="inline">集 合 :</label>
-                                <select name="keyNum" class="form-control">
+                                <select name="keyNum" class="form-control" id="keyNum">
                                     <volist name="setList" id="vo">
-                                        <option  value="{$vo}">{$vo}</option>
+                                        <option value="{$vo}">{$vo}</option>
                                     </volist>
                                 </select>&nbsp;&nbsp;&nbsp;
                                 <button type="submit" class="btn btn-purple btn-sm" >
@@ -167,6 +167,17 @@ $( "#dialog2" ).dialog({
     title:'add row'
 });
 
+$(function(){
+    //设置下拉菜单的默认选中情况（主类型）
+    var check = "{$checked}";
+    $("#keyNum option").each(function(){
+        if ($(this).val() == check) {
+            $(this).attr("selected", true);
+        }
+    });
+});
+
+
 $(".addSet").click(function(){
     $( "#dialog1" ).dialog( "open" );
     event.preventDefault();
@@ -226,7 +237,7 @@ $(".addRow").click(function(){
 $("#submit-addrow").click(function(){
     var setKey = $("select[name='setKey']").val();
     var rowVal = $("input[name='rowVal']").val();
-// alert(setKey);alert(rowVal); return false;
+
     if (setKey == '') {
         alert('请输入指定的set');
         return false;
@@ -248,7 +259,6 @@ $("#submit-addrow").click(function(){
 });
 
 </script>
-
 
 </body>
 </html>
