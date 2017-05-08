@@ -113,7 +113,6 @@ class PayController extends Controller {
                 exit($wechatpay->responseMsg('FAIL'));
             }
         } catch (Exception $e) {
-//            throw new Exception("buyvip fail error message: ".$e->getMessage());
             error_log('异常' . PHP_EOL, 3, $log);
             exit($wechatpay->responseMsg('FAIL'));
         }
@@ -177,9 +176,9 @@ class PayController extends Controller {
         if(C('ENV_DEBUG') && $openid != 'ogxy0w7hrmz4I-RsAaaPT-_emYIA'){//测试账号
             exit(json_encode(array('status'=>0, 'data'=>'维护中')));
         }
-        $uid = I('uid');
         $os = I('os');
-        $goodId = I('good_id');
+        $goodId = I('good_id', 0 , 'intval');
+        $uid = I('uid', 0 ,'intval');
         
         if(!$openid || !$uid || $os === '' || !$goodId ){
             exit(json_encode(array('status'=>0, 'data'=>'参数错误，请刷新重试')));
@@ -391,14 +390,14 @@ class PayController extends Controller {
             ];
         }else{
             $pay = [
-//                2000 => ['id' => 2000,
-//                    'ios_id'=> 'com.htgames.nutspoker.rmb6',
-//                    'name' => '0.01',
-//                    'diamond' => 6,
-//                    'vip' => 0,
-//                    'desc' => '含钻石1颗',
-//                    'price' => 0.01
-//                ],
+               2000 => ['id' => 2000,
+                   'ios_id'=> 'com.htgames.nutspoker.rmb6',
+                   'name' => '0.01',
+                   'diamond' => 6,
+                   'vip' => 0,
+                   'desc' => '含钻石1颗',
+                   'price' => 0.01
+               ],
                 /*  2001 => ['id' => 2001,
                      'ios_id'=> 'com.htgames.nutspoker.rmb6',
                      'name' => '6',
