@@ -22,7 +22,6 @@ class IndexController extends ComController {
                 $this->assign('allUserInfo',$allUserInfo);//当前绑定用户id   
             }
         }
-        echo $userInfo['avatar'];
         $goods = $this->getGoods();
         $this->assign('goods',$goods);
         $flag = I('get.flag') != '' ? I('get.flag') : 1;
