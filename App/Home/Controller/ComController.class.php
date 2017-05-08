@@ -64,7 +64,7 @@ class ComController extends Controller {
     }
 
     public function getDefaultAvatar(){
-        return  ROOT_PATH.'/Public/home/images/head.png';
+        return  '/wx/Public/home/images/head.png';
     }
 
     private function getCode(){
