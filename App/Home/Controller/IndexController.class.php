@@ -5,7 +5,7 @@ use Think\Controller;
 class IndexController extends ComController {
     
     public function index(){
-        $uid = I('uid', 0, 'intval');
+        $uid = I('post.uid');
         $openid = session('openid');
         $this->assign('userInfo',array('id'=>0));//设置默认值，不然js过不了
         if($openid){ 
@@ -37,7 +37,7 @@ class IndexController extends ComController {
     }
     public function switchUser(){
         $openid = session('openid');
-        $uid = I('uid', 0, 'intval');
+        $uid = I('post.uid');
         session('uid', $uid);
         if($openid && $uid){
             $wxBindModel = D('WxBind');
