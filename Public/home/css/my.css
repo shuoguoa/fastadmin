@@ -505,6 +505,26 @@ label.checked {
 	font-size:2%;
 }
 /*************Õë¶ÔÆ»¹û5×öµÄµ÷Õû****************/
+@media screen and (width: 414px){
+	.three0{
+		position: relative !important;
+		bottom: 0 !important;
+		top: 187px !important;
+		width: 100 !important;
+		width: 100% !important;
+	}
+}
+/*************Õë¶ÔÆ»¹û5×öµÄµ÷Õû****************/
+@media screen and (width: 375px) {
+	.three0{
+		position: relative !important;
+		bottom: 0 !important;
+		top: 150px !important;
+		width: 100 !important;
+		width: 100% !important;
+	}
+}
+/*************Õë¶ÔÆ»¹û5×öµÄµ÷Õû****************/
 @media screen and (min-width: 361px) and (max-width:767px) {
   .hh{
 	width:120%;
