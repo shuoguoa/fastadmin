@@ -112,7 +112,7 @@
 }
 .line1{
 	background-color:#FFFFFF;
-	min-height: 30%;
+	/*min-height: 30%;*/
 }
 #two1 img{
 	display:inline-block;
@@ -2765,7 +2765,7 @@ label.checked {
 }
 .line1{
 	background-color:#FFFFFF;
-	min-height: 30%;
+/*	min-height: 30%;*/
 }
 #two1 img{
 	display:inline-block;
