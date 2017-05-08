@@ -5,7 +5,7 @@ use Think\Controller;
 class IndexController extends ComController {
     
     public function index(){
-        $uid = I('post.uid');
+        $uid = I('uid', 0, 'intval');
         $openid = session('openid');
         $this->assign('userInfo',array('id'=>0));//设置默认值，不然js过不了
         if($openid){ 
@@ -22,10 +22,12 @@ class IndexController extends ComController {
                 $this->assign('allUserInfo',$allUserInfo);//当前绑定用户id   
             }
         }
+        echo $userInfo['avatar'];
         $goods = $this->getGoods();
         $this->assign('goods',$goods);
         $flag = I('get.flag') != '' ? I('get.flag') : 1;
         $this->assign('check', $flag);
+        $this->assign('uid', $user['uid']);
         $this->display();
     }
 
