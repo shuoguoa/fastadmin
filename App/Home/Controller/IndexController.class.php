@@ -36,7 +36,7 @@ class IndexController extends ComController {
     }
     public function switchUser(){
         $openid = session('openid');
-        $uid = I('post.uid');
+        $uid = I('uid', 0, 'intval');
         session('uid', $uid);
         if($openid && $uid){
             $wxBindModel = D('WxBind');
