@@ -64,7 +64,7 @@ class ComController extends Controller {
     }
 
     public function getDefaultAvatar(){
-        return 'qwadmin/Public/home/images/head.png';
+        return  ROOT_PATH.'/Public/home/images/head.png';
     }
 
     private function getCode(){
