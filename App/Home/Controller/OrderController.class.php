@@ -28,6 +28,7 @@ class OrderController extends ComController {
             $this->assign('page', $page);
 
             $res = array();
+            $month = array();
             foreach ($orders as $key => $value) {
                 $k = date('Y年m月', $value['time']);
                 $i = $value['date'];
@@ -40,12 +41,14 @@ class OrderController extends ComController {
                 $orders[$key]['avatar'] = $value['avatar'] == '' ? $this->getDefaultAvatar() : $value['avatar'];
 
                 $res[$i]['d'] = $k;
-                $month[$k]['month'] = $k;
+                $month[] = $k;
             }  
         } else {
            $this->redirect('Index/index', '', 3,'获取不到uid,请重新登录，点“切换按扭”选本账号即可重新登录~');
         }
-
+        $month = array_unique($month);
+        $month = array_reverse($month);
+        $month = implode($month, '~');
         $this->assign('month',$month);
         $this->assign('orders', $orders);
         $this->assign('check', I('get.flag'));
