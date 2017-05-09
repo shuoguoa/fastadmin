@@ -530,25 +530,25 @@ label.checked {
 	width:120%;
 	margin-left:-5%;
 	margin-top:25%;
-}
-.hz{
-	margin-left:-10%;
-}
-.hj{
-	margin-left:-15%;
-}
-.wo1{
-	width:25%;
-}
-#h1{
-	padding:6px 25px;
-	background-color:#B69F60;
-	border-color:#191919;
-	position:absolute;
-	top:26px;
-	right:12%;
-}
-#open4{
+	}
+	.hz{
+		margin-left:-10%;
+	}
+	.hj{
+		margin-left:-15%;
+	}
+	.wo1{
+		width:25%;
+	}
+	#h1{
+		padding:6px 25px;
+		background-color:#B69F60;
+		border-color:#191919;
+		position:absolute;
+		top:26px;
+		right:12%;
+	}
+	#open4{
 		height:50px;
 		width:84%;
 		background-color:#39BDCC;
@@ -557,22 +557,27 @@ label.checked {
 		font-size: 20px !important;
 	}
 	.mone{
-	background-color:#000000;
-	height:4.2rem;
-	border-radius:5px;
-	margin-top:1rem;
-	margin-left:auto;
-	margin-right:auto;
-	opacity:0.9;
-	width:90%
-}
-
-.m1{
-	line-height:4rem;
-}
-.m2{
-	line-height:4rem;
-}
+		background-color:#000000;
+		height:4.2rem;
+		border-radius:5px;
+		margin-top:1rem;
+		margin-left:auto;
+		margin-right:auto;
+		opacity:0.9;
+		width:90%
+	}
+	#own7_1 {
+	    width: 45px;
+	    height: 45px;
+	    border-radius: 50%;
+	    position: relative;
+	}
+	.m1{
+		line-height:4rem;
+	}
+	.m2{
+		line-height:4rem;
+	}
 }
 @media screen and (max-width:360px) {
 .hh{
@@ -1809,6 +1814,49 @@ label.checked {
     margin-left: auto;
     background-color: #FFF;
 }
+	.col-1 {
+	    position: relative;
+	    min-height: 1px;
+	    padding-right: 0px;
+	    padding-left: 2% !important;
+	    width: 8% !important;
+	    float: left;
+	    font-size: 6px;
+	    height: 50px;
+	    vertical-align: center;
+	}
+	.col-2 {
+	    position: relative;
+	    min-height: 1px;
+	    padding-right: 0px;
+	    padding-left: 0px;
+	    width: 5% !important;
+	    float: left;
+	    height: 50px;
+	}
+	.col-5 {
+	    position: relative;
+	    min-height: 1px;
+	    padding-right: 0px;
+	    padding-left: 0px;
+	    width: 8% !important;
+	    float: left;
+	    font-size: 8px;
+	}
+	.col-6 {
+	    position: relative;
+	    min-height: 1px;
+	    padding-right: 0px;
+	    padding-left: 0px;
+	    width: 5% !important;
+	    float: left;
+	}
+	.tou5 {
+	    font-size: 1.8rem;
+	     margin-left: 2% !important; 
+	    line-height: 6.5rem;
+	    color: #c3c3c3;
+	}
 
 #two1 a {
     background-color: #37BECD;
@@ -2200,77 +2248,77 @@ label.checked {
 
 
 /***************************ÐÂ¼Óipad×¨ÓÃ************************************************/
-@media screen and (min-width: 1024px) and (max-width:1400px) {
-.yonghu {
-    height: 7rem;
-    margin-bottom: 2%;
-    bottom: 1.2rem;
-    background-color: #FFF;
-}
-.col-md-6{
-	width:100% !important;
-}
-.duoyu{
-	padding-left:12%;
-	margin-bottom:4%;
-}
-#one1 .container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    height: 98%;
-    padding-top: 16%;
-}
+@media screen and (min-width: 1024px) and (max-width:1600px) {
+	.yonghu {
+	    height: 7rem;
+	    margin-bottom: 2%;
+	    bottom: 1.2rem;
+	    background-color: #FFF;
+	}
+	.col-md-6{
+		width:100% !important;
+	}
+	.duoyu{
+		padding-left:12%;
+		margin-bottom:4%;
+	}
+	#one1 .container {
+	    padding-right: 15px;
+	    padding-left: 15px;
+	    margin-right: auto;
+	    margin-left: auto;
+	    height: 98%;
+	    padding-top: 16%;
+	}
 
-#two1 img {
-    display: inline-block;
-    width: 8rem;
-    padding-left: 3%;
-}
-#two1 span {
-    font-size: 2.5rem;
-}
-.a1 {
-    color: #37BECD;
-    right: 1rem;
-    width: 8rem;
-    height: 2.2rem;
-    font-size: 16px;
-    vertical-align: middle;
-}
+	#two1 img {
+	    display: inline-block;
+	    width: 8rem;
+	    padding-left: 3%;
+	}
+	#two1 span {
+	    font-size: 2.5rem;
+	}
+	.a1 {
+	    color: #37BECD;
+	    right: 1rem;
+	    width: 8rem;
+	    height: 2.2rem;
+	    font-size: 16px;
+	    vertical-align: middle;
+	}
 
-#own3 {
-    position: absolute;
-    width: 100%;
-    z-index: 1;
-    top: 7rem;
-}
-#own6 {
-    font-size: 2.2rem;
-    margin-left: 2%;
-    margin-top: 0;
-}
-#own8 {
-    width: 2.6%;
-    left: 30%;
-}
-.new-bind {
-    margin-left: 8%;
-    height: 60%;
-    margin-top: 1%;
-}
-.mm .mm3 {
-    padding: 1rem;
-    list-style-type: none;
-    height: 7rem;
-}
-#login_table {
-    width: 100%;
-    position: relative;
-    margin: 0 auto;
-    height: 100%;
-}
+	#own3 {
+	    position: absolute;
+	    width: 100%;
+	    z-index: 1;
+	    top: 7rem;
+	}
+	#own6 {
+	    font-size: 2.2rem;
+	    margin-left: 2%;
+	    margin-top: 0;
+	}
+	#own8 {
+	    width: 2.6%;
+	    left: 30%;
+	}
+	.new-bind {
+	    margin-left: 8%;
+	    height: 60%;
+	    margin-top: 1%;
+	}
+	.mm .mm3 {
+	    padding: 1rem;
+	    list-style-type: none;
+	    height: 7rem;
+	}
+	#login_table {
+	    width: 100%;
+	    position: relative;
+	    margin: 0 auto;
+	    height: 100%;
+	}
 	#open4{
 		height:6rem;
 		width:88%;
@@ -2296,6 +2344,55 @@ label.checked {
 		margin-top:1rem;
 		margin-bottom:1rem;
 		display:inline-block;
+	}
+	#own7_1 {
+	    width: 45px;
+	    height: 45px;
+	    border-radius: 50%;
+	    position: relative;
+	}
+	.col-1 {
+	    position: relative;
+	    min-height: 1px;
+	    padding-right: 0px;
+	    padding-left: 2% !important;
+	    width: 4% !important;
+	    float: left;
+	    font-size: 6px;
+	    height: 50px;
+	    vertical-align: center;
+	}
+	.col-2 {
+	    position: relative;
+	    min-height: 1px;
+	    padding-right: 0px;
+	    padding-left: 0px;
+	    width: 3% !important;
+	    float: left;
+	    height: 50px;
+	}
+	.col-5 {
+	    position: relative;
+	    min-height: 1px;
+	    padding-right: 0px;
+	    padding-left: 0px;
+	    width: 5% !important;
+	    float: left;
+	    font-size: 8px;
+	}
+	.col-6 {
+	    position: relative;
+	    min-height: 1px;
+	    padding-right: 0px;
+	    padding-left: 0px;
+	    width: 5% !important;
+	    float: left;
+	}
+	.tou5 {
+	    font-size: 1.8rem;
+	     margin-left: 2% !important; 
+	    line-height: 6.5rem;
+	    color: #c3c3c3;
 	}
 	.login_u2 {
 	    height: 4rem;
