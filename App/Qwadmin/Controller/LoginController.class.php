@@ -77,11 +77,9 @@ class LoginController extends ComController
     public function verify()
     {
         $config = array(
-            'fontSize' => 14, // 验证码字体大小
+            'fontSize' => 30, // 验证码字体大小
             'length' => 4, // 验证码位数
             'useNoise' => false, // 关闭验证码杂点
-            'imageW' => 100,
-            'imageH' => 30,
         );
         $verify = new \Think\Verify($config);
         $verify->entry('login');

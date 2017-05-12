@@ -1,151 +1,86 @@
-<include file="Public/head"/>
-<body class="login-layout">
-<div class="main-container login-main-container">
-    <div class="main-content">
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="login-container">
-                    <div class="space-6"></div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <script src="__PUBLIC__/qwadmin/js/jquery-1.9.1.min.js"></script>
+    <script src="__PUBLIC__/qwadmin/js/plugins/layer/layer.js"></script>
+    <script src="__PUBLIC__/qwadmin/js/jquery.selectlist.js"></script>
+    <script src="__PUBLIC__/qwadmin/js/jquery-ui.js"></script>
+    <link href="__PUBLIC__/qwadmin/css/common.css" rel="stylesheet"/>
+    <link href="__PUBLIC__/qwadmin/css/login.css" rel="stylesheet"/>
+    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js">
+    </script>
+    <title>用户登录(User Login )</title>
+</head>
+<body style="height: 100% ">
 
-                    <div class="position-relative">
-                        <div id="login-box" class="login-box visible widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header blue lighter bigger">
-                                        <i class="ace-icon fa fa-coffee green"></i>
-                                        <b>{$Think.CONFIG.sitename}</b>
-                                    </h4>
+<header class="top">
+    <article class="main">
+        <h2>管理后台</h2>
+    </article>
+</header>
 
-                                    <div class="space-6"></div>
-
-                                    <form action="{:U('login/login')}" method="post">
-                                        <fieldset>
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" name="user"
-                                                                   placeholder="用户名"/>
-															<i class="ace-icon fa fa-user"></i>
-														</span>
-                                            </label>
-
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" name="password"
-                                                                   placeholder="密码"/>
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-                                            </label>
-
-                                            <div class="space"></div>
-                                            <label class="block clearfix">
-														<span class="block input-icon ">
-															<span class="inline"><input type="text" class="form-control"
-                                                                                        name="verify" placeholder="验证码"
-                                                                                        id="code" required/></span>
-															<img style="cursor:pointer;" src="{:U('login/verify')}"
-                                                                 width="100" height="30" title="看不清楚？点击刷新"
-                                                                 onclick="this.src = '{:U('login/verify')}?'+new Date().getTime()">
-														</span>
-                                            </label>
-
-                                            <div class="space"></div>
-
-                                            <div class="clearfix">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" name="remember"/>
-                                                    <span class="lbl"> 记住我</span>
-                                                </label>
-
-                                                <button type="submit"
-                                                        class="width-35 pull-right btn btn-sm btn-primary">
-                                                    <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">登录</span>
-                                                </button>
-                                            </div>
-
-                                            <div class="space-4"></div>
-                                        </fieldset>
-                                    </form>
-                                </div><!-- /.widget-main -->
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.login-box -->
-                    </div><!-- /.position-relative -->
-
-                    <div class="navbar-fixed-top align-right">
-                        <br/>
-                        &nbsp;
-                        <a id="btn-login-dark" href="#">Dark</a>
-                        &nbsp;
-                        <span class="blue">/</span>
-                        &nbsp;
-                        <a id="btn-login-blur" href="#">Blur</a>
-                        &nbsp;
-                        <span class="blue">/</span>
-                        &nbsp;
-                        <a id="btn-login-light" href="#">Light</a>
-                        &nbsp; &nbsp; &nbsp;
-                    </div>
-                </div>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.main-content -->
-</div><!-- /.main-container -->
-
-<!-- basic scripts -->
-
-<!--[if !IE]> -->
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='__PUBLIC__/qwadmin/js/jquery.js'>" + "<" + "/script>");
-</script>
-
-<!-- <![endif]-->
-
-<!--[if IE]>
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='__PUBLIC__/qwadmin/js/jquery1x.js'>" + "<" + "/script>");
-</script>
-<![endif]-->
-<script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='__PUBLIC__/qwadmin/js/jquery.mobile.custom.js'>" + "<" + "/script>");
-</script>
-
-<!-- inline scripts related to this page -->
-<script type="text/javascript">
-    jQuery(function ($) {
-        $(document).on('click', '.toolbar a[data-target]', function (e) {
-            e.preventDefault();
-            var target = $(this).data('target');
-            $('.widget-box.visible').removeClass('visible');//hide others
-            $(target).addClass('visible');//show target
-        });
-    });
-
-
-    //you don't need this, just used for changing background
-    jQuery(function ($) {
-        $('#btn-login-dark').on('click', function (e) {
-            $('body').attr('class', 'login-layout');
-            $('#id-text2').attr('class', 'white');
-            $('#id-company-text').attr('class', 'blue');
-
-            e.preventDefault();
-        });
-        $('#btn-login-light').on('click', function (e) {
-            $('body').attr('class', 'login-layout light-login');
-            $('#id-text2').attr('class', 'grey');
-            $('#id-company-text').attr('class', 'blue');
-
-            e.preventDefault();
-        });
-        $('#btn-login-blur').on('click', function (e) {
-            $('body').attr('class', 'login-layout blur-login');
-            $('#id-text2').attr('class', 'white');
-            $('#id-company-text').attr('class', 'light-blue');
-
-            e.preventDefault();
-        });
-
-    });
-</script>
+<section class="main login-main clear">
+    <aside class="left fl">
+        <img width="380" height="390" src="__PUBLIC__/qwadmin/images/login.png" alt="ad" class="ad"/>
+    </aside>
+    <aside class="right fr">
+        <article class="login-box">
+            <form action="{:U('login/login')}" method="post">
+                <ul class="form-items">
+                    <li>
+                        <input type="text" name="user" id="username" placeholder="username"/>
+                        <span>not null</span>
+                    </li>
+                    <li>
+                        <input type="password" name="password" id="password" placeholder="password"/>
+                        <span>not null</span>
+                    </li>
+                    <li>
+                        <img src="{:U('login/verify')}" onclick="this.src = '{:U('login/verify')}'" alt="verification code" title="Click the refresh"/><span>点验证码刷新</span>
+                    </li>
+                    <li>
+                        <input type="text" name="verify" id="validation" placeholder="input validation"/>
+                        <span>not null</span>
+                    </li>
+                    <li>
+                        <input type="submit" id="submit" value="LOGIN"/>
+                    </li>
+                </ul>
+            </form>
+        </article>
+    </aside>
+</section>
 </body>
+
 </html>
+<!-- 引入公共脚文件 -->
+<include file="Public:footer" />
+
+<script type="text/javascript">
+ $(function () {
+    $("#submit").click(function(){
+        
+        if ($("#username").val() == '')
+        {
+            alert('please input the username！');
+            history.back(-1);
+        }
+        if ($("#password").val() == '')
+        {
+            alert('please input the password！');
+            history.back(-1);
+        }
+        
+        if ($("#validation").val() == '')
+        {
+            alert('please input the validation！');
+            history.back(-1);
+        }
+    });
+
+
+});
+</script>

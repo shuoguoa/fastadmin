@@ -13,24 +13,17 @@
     <include file="Public/sidebar"/>
     <div class="main-content">
         <div class="main-content-inner">
-            <!-- #section:basics/content.breadcrumbs -->
             <include file="Public/breadcrumbs"/>
-
-            <!-- /section:basics/content.breadcrumbs -->
             <div class="page-content">
                 <include file="Public/set"/>
-
-                <!-- /section:settings.box -->
                 <style>
                     .grouptd {
                         position: relative;
                     }
-
                     .group {
                         display: inline-block;
                         width: 100%;
                     }
-
                     .groupselect {
                         position: absolute;
                         top: 0;
@@ -39,14 +32,24 @@
                         height: 100%;
                         border: 0;
                     }
+                    input{
+                        text-align: left;
+                    }
+                    td{
+                        text-align: left;
+                    }
+                    input {
+                        border: none;
+                    }
+
                 </style>
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        <div class="row" style="margin-left: 40px;">
+                        <div class="row" style="margin-left: 18px;">
                             <form class="form-inline" action="{:U('UserAmount/index')}" method="post">
-                                <label class="inline">用户搜索</label>
-                                <label class="inline">&nbsp;&nbsp;uid : </label><input type="text" name="id" value="{:I(uid)}" class="form-control">
+                                <!-- <label class="inline">用户搜索</label> -->
+                                <label class="inline">&nbsp;&nbsp;uid : </label><input type="text" name="uid" value="{:I(uid)}" class="form-control">
                                 <label class="inline">&nbsp;&nbsp;uuid : </label> <input type="text" name="uuid" value="{:I(uuid)}" class="form-control">
                                 <label class="inline">&nbsp;&nbsp;iphone : </label> <input type="text" name="iphone" value="{:I(iphone)}" class="form-control">
                                 <label class="inline">&nbsp;&nbsp;nickname : </label> <input type="text" name="nickname" value="{:I(nickname)}" class="form-control">
@@ -58,38 +61,47 @@
                         </div>
                         <div class="space-4"></div>
                         <div class="row" style="margin-left: 20px;">
-                            <form id="form" method="post" action="">
+                           
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="center">UID</th>
-                                            <th class="center">UUID</th>
-                                            <th class="center">USERNAME</th>
-                                            <th class="center">NICKNAME</th>
-                                            <th class="center">DIAMOND</th>
-                                            <th class="center">COINS</th>
-                                            <th class="center">OS</th>
-                                            <th class="center">第三方类型</th>
-                                            <th class="center">第三方账号ID</th>
+                                            <th >UID</th>
+                                            <th >UUID</th>
+                                            <th >USERNAME</th>
+                                            <th >NICKNAME</th>
+                                            <th >DIAMOND</th>
+                                            <th >COINS</th>
+                                            <th >OS</th>
+                                            <th >第三方类型</th>
+                                            <th style="text-align: center !important;">第三方账号ID</th>
+                                            <th style="text-align: center !important;">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>                           
                                         <volist name="list" id="val">
                                             <tr>
-                                                <td align="center">{$val['id']}</td>
-                                                <td align="center">{$val['uuid']}</td>
-                                                <td align="center">{$val['username']}</td>
-                                                <td align="center">{$val['nickname']}</td>
-                                                <td align="center">{$val['diamond']}</td>
-                                                <td align="center">{$val['coins']}</td>
-                                                <td align="center">{$val['os']}</td>
-                                                <td align="center">{$val['account_type']}</td>
-                                                <td align="center">{$val['account_id']}</td>
+                                                <td >{$val['id']}</td>
+                                                <td >{$val['uuid']}</td>
+                                                <td >{$val['username']}</td>
+                                                <td >{$val['nickname']}</td>
+                                                <td >{$val['diamond']}</td>
+                                                <td >{$val['coins']}</td>
+                                                <td >{$val['os']}</td>
+                                                <td >{$val['account_type']}</td>
+                                                <td >{$val['account_id']}</td>
+                                                <td style="text-align: center !important" >
+                                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="rechargeCoins('{$val['id']}', '{$val['os']}', '{$val['username']}')">充德州币</button>
+                                                        &nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="rechargeDia('{$val['id']}', '{$val['os']}', '{$val['username']}')">充钻</button>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    
+                                                    <button class="btn btn-info freeze"  onclick="freeze('{$val['id']}', '{$val['is_block']}', '{$val['status']}')">{$val['status']}</button>
+                                                </td>
                                             </tr>
                                         </volist>
                                     </tbody>
                                 </table>
-                            </form>
+                            
                            <div style="margin:0 auto">{$page}</div>
                         </div>
                         <!-- PAGE CONTENT ENDS -->
@@ -102,8 +114,182 @@
 
 </div><!-- /.main-container -->
 
+<div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
+    <form  method="post" >
+        <table >
+            <tr>
+            <td >用 户 id ：</td>
+            <td><input type="text" name="uid" value="" id="username" readonly="true"></td>
+            </tr>
+            <tr>
+            <td >用 户 名 ：</td>
+            <td><input type="text" name="username" value="" readonly="true"></td>
+            </tr>
+            <tr>
+            <td >操作系统 ：</td>
+            <td><input type="text" name="os" value="" readonly="true"></td>
+            </tr>
+           
+            <tr>
+            <td >钻 石 数 ：</td>
+            <td><input type="text" name="diamond" value=""> </td>
+            </tr>
+
+            <tr>
+            <td  colspan="4" align="center" >
+            <input type="submit" id="submit-recharge" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 50px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px;margin-left: 110px" value="充 值">
+            </td></tr>
+        </table>
+    </form>
+</div>
+
+<div id="dialog1" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
+    <form  method="post" >
+        <table >
+            <tr>
+            <td >用 户 id ：</td>
+            <td><input type="text" name="uid" value="" id="username" readonly="true"></td>
+            </tr>
+            <tr>
+            <td >用 户 名 ：</td>
+            <td><input type="text" name="username" value="" readonly="true"></td>
+            </tr>
+            <tr>
+            <td >操作系统 ：</td>
+            <td><input type="text" name="os" value="" readonly="true"></td>
+            </tr>
+           
+            <tr>
+            <td >德 州 币 ：</td>
+            <td><input type="text" name="coins" value=""> </td>
+            </tr>
+
+            <tr>
+            <td  colspan="4" >
+            <input type="submit" id="submit-recharge1" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 50px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px;margin-left: 110px" value="充 值">
+            </td></tr>
+        </table>
+    </form>
+</div>
+
+
 <include file="Public/footerjs"/>
-<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+
+$( "#dialog" ).dialog({
+    autoOpen: false,
+    width: 300,
+    height:230,
+    title:'充 钻 石'
+});
+
+$( "#dialog1" ).dialog({
+    autoOpen: false,
+    width: 300,
+    height:230,
+    title:'充 德 州 币'
+});
+
+function rechargeDia(uid, os, username){ 
+    $("input[name='uid']").val(uid);
+    $("input[name='os']").val(os);
+    $("input[name='username']").val(username);
+    $( "#dialog" ).dialog( "open" );
+    event.preventDefault();
+}
+
+function rechargeCoins(uid, os, username){ 
+    $("input[name='uid']").val(uid);
+    $("input[name='os']").val(os);
+    $("input[name='username']").val(username);
+    $( "#dialog1" ).dialog( "open" );
+    event.preventDefault();
+}
+
+var rule = /^[0-9]*[1-9][0-9]*$/;
+
+$("input[name='diamond']").blur(function(){
+    var dia = $("input[name='diamond']").val();
+    if (!rule.test(dia)){
+        alert('请输入正整数！');
+        return false;
+    }
+});
+
+$("#submit-recharge").click(function(){
+    var uid = $("input[name='uid']").val();
+    var os = $("input[name='os']").val();
+    var username = $("input[name='username']").val();
+    var diamond = $("input[name='diamond']").val();
+    if (diamond == '') {
+        alert('请输入要充值的钻石数量');
+        return false;
+    } else if (!rule.test(diamond)){
+        alert('输入正整数！');
+        return false;
+    } else{
+        $.post("{:U('UserAmount/rechargeDia')}", {uid:uid, os:os, diamond:diamond}, function(data){   
+           if (data.status == 'ok') { 
+                alert(data.msg);
+                window.location.reload();
+            }else {
+                alert(data.msg);
+                return false;
+            }
+        });
+       
+    }
+});
+
+$("#submit-recharge1").click(function(){
+    var uid = $("input[name='uid']").val();
+    var os = $("input[name='os']").val();
+    var username = $("input[name='username']").val();
+    var coins = $("input[name='coins']").val();
+    if (coins == '') {
+        alert('请输入要充值的德州币数量');
+        return false;
+    } else if (!rule.test(coins)){
+        alert('输入正整数！');
+        return false;
+    } else{
+        $.post("{:U('UserAmount/rechargeCoins')}", {uid:uid, os:os, coins:coins}, function(data){   
+           if (data.status == 'ok') { 
+                alert(data.msg);
+                window.location.reload();
+            }else {
+                alert(data.msg);
+                return false;
+            }
+        });
+       // return false;
+    }
+});
+
+function freeze(uid, isblock, status){
+    if (uid == '' || isblock == '') {
+        alert('缺少'+status+'参数');
+        return false;
+    } else{
+        $.post("{:U('UserAmount/freeze')}", {uid:uid, isblock:isblock}, function(data){   
+           if (data.status == 'ok') { 
+                alert(data.msg);
+                window.location.reload();
+            }else {
+                alert(data.msg);
+                return false;
+            }
+        });     
+    }
+   
+}
+
+
+
+</script>
+
+
 <script type="text/javascript">
     $(function () {
         $(".group").click(function () {
@@ -153,25 +339,25 @@
                 }
             });
         });
-        $(".del").click(function () {
-            var url = $(this).attr('val');
-            bootbox.confirm({
-                title: "系统提示",
-                message: "是否要删除该用户?",
-                callback: function (result) {
-                    if (result) {
-                        window.location.href = url;
-                    }
-                },
-                buttons: {
-                    "cancel": {"label": "取消"},
-                    "confirm": {
-                        "label": "确定",
-                        "className": "btn-danger"
-                    }
-                }
-            });
-        });
+        // $(".freeze").click(function () {
+        //     var url = $(this).attr('val');
+        //     bootbox.confirm({
+        //         title: "系统提示",
+        //         message: "是否要冻结该用户?",
+        //         callback: function (result) {
+        //             if (result) {
+        //                 window.location.href = url;
+        //             }
+        //         },
+        //         buttons: {
+        //             "cancel": {"label": "取消"},
+        //             "confirm": {
+        //                 "label": "确定",
+        //                 "className": "btn-danger"
+        //             }
+        //         }
+        //     });
+        // });
     })
 </script>
 </body>
