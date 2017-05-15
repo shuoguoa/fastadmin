@@ -1153,6 +1153,7 @@ pre.prettyprint {
   padding-top: 10px;
   padding-bottom: 10px;
   height: auto;
+  direction: none !important;
 }
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
@@ -2424,13 +2425,13 @@ body.mob-safari .sidebar.sidebar-fixed {
   }
 }
 .nav-list li.active > a:after {
-  display: block;
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 4px;
-  border: 8px solid transparent;
-  border-width: 14px 10px;
+    display: block;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 10px;
+    border: 4px solid transparent;
+    border-width: 7px 6px;
 }
 .nav-list li.open > a:after {
   display: none;
@@ -2439,8 +2440,8 @@ body.mob-safari .sidebar.sidebar-fixed {
   display: block;
 }
 .nav-list > li li.active > a:after {
-  top: 2px;
-  border-width: 14px 8px;
+  top: 10px;
+  border-width: 7px 8px;
 }
 .nav-list li.active:not(.open) li.active > a:after {
   display: none !important;
@@ -19187,6 +19188,7 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
   border-top-color: #e4e4e4;
   background-color: #ffffff;
   color: #616161;
+  text-decoration: none;
 }
 .no-skin .nav-list > li .submenu > li > a:hover {
   color: #4b88b7;
@@ -19291,8 +19293,8 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
   top: -1px;
   bottom: 0;
   z-index: 1;
-  border: 2px solid;
-  border-width: 0 2px 0 0;
+  border: 1px solid;
+  border-width: 0 1px 0 0;
   border-color: #2b7dbc;
 }
 .no-skin .sidebar-scroll .nav-list > li.active:after {

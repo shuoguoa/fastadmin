@@ -2,28 +2,39 @@
 body{
     margin: 0;
     padding: 0;
+    font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif;
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
 }
 
 .top{
     background: #2d6c82;
     color: #EEEEEE;
-    line-height: 50px;
+    /*line-height: 50px;*/
     font-size: 16px;
     height: 60px;
     position: absolute;
     top: 0;
     width: 100%;
 }
-
+.main1 {
+    width: 1000px;
+    height: inherit;
+    /*margin: auto;*/
+    position: relative;
+    float: left;
+}
 .login-main{
-    height: 790px;
+    height: 100%;
+    /*margin-bottom: 150px;*/
 }
 input[type=checkbox]{
     width: 50% !important;
 }
 .left{
     width: 550px;
-    padding: 150px 30px;
+    padding: 200px 30px 0 30px;
 }
 
 .right{
@@ -32,7 +43,7 @@ input[type=checkbox]{
 .login-box {
     height: 400px;
     width: 330px;
-    margin: 145px 0;
+    margin: 190px 0;
     border: 1px solid #bceaf7;
     border-radius: 10px;
     box-shadow: 0 0 15px #cdcdcd;
@@ -87,7 +98,7 @@ input[type=checkbox]{
     color: #76c7de;
     font-size: 12px;
     line-height: 30px;
-    position: relative;
+    position: absolute;
     bottom: 0;
     width: 100%;
 }
