@@ -190,11 +190,17 @@
             username = $("input[name='username']").val();
             os = $("input[name='os']").val();
             if(username.length == 0){
-                Showbo.Msg.alert('请输入需要充值的账号');
+                layer.alert('请输入需要充值的账号',{
+                    time: 20000, //20s后自动关闭
+                    btn: ['ok']
+                });
                 return false;
             }
             if(os.length == 0){
-                Showbo.Msg.alert('请选择账号登录平台');
+                layer.alert('请选择账号登录平台',{
+                    time: 20000, //20s后自动关闭
+                    btn: ['ok']
+                });
                 return false;
             }
             var loading_layer = layer.load(1, {
@@ -217,13 +223,18 @@
            
                     verify(uid, username, nickname, os, uuid, price, good_id);
                 }else{
-                   
-                    Showbo.Msg.alert('该账号不存在');
+                   layer.alert('该账号不存在',{
+                        time: 20000, //20s后自动关闭
+                        btn: ['ok']
+                      });
                 }
             })
             .fail(function() {
                 layer.close(loading_layer);
-                Showbo.Msg.alert('验证失败，请重试！');
+                layer.alert('验证失败，请重试！',{
+                    time: 20000, //20s后自动关闭
+                    btn: ['ok']
+                });
             }) 
         });
 
@@ -246,13 +257,13 @@
         function verify(uid, username, nickname, os, uuid, price, good_id) { 
             if (uid != ''){ 
                 var str= '<table style="text-align:center;width:100%"><tr style="line-height:3rem;" ><td colspan="2"></td><tr style="line-height:3rem;" ><td style="width:30%;line-height:3rem;font-size:16px;" align="right">昵 称 : </td>'+
-                    '<td style="width:60%;line-height:3rem;left:2rem;float:left; font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+nickname+'</td></tr>'+
+                    '<td style="width:70%;line-height:3rem;left:2rem;float:left; font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+nickname+'</td></tr>'+
                     '<tr style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right">ID : </td>'+
-                    '<td style="width:60%;line-height:3rem;left:2rem;float:left;font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+uuid+'</td></tr>'+
+                    '<td style="width:70%;line-height:3rem;left:2rem;float:left;font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+uuid+'</td></tr>'+
                     '<tr style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right">金 额 : </td>'+
-                    '<td style="width:60%;line-height:3rem;font-size:16px;margin-left:2rem" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+price+'</td></tr>'+
+                    '<td style="width:70%;line-height:3rem;font-size:16px;margin-left:2rem" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+price+'</td></tr>'+
                     '<tr align="center" style="line-height:3rem;"><td style="width:30%;line-height:3rem;font-size:16px;" align="right"></td>'+
-                    '<td style="width:60%;line-height:3rem;left:2rem;float:left;font-size:16px;">确定充值？</td></tr></table>';
+                    '<td style="width:70%;line-height:3rem;left:2rem;float:left;font-size:16px;">确定充值？</td></tr></table>';
 
                 Showbo.Msg.confirm(str);
                 $(".btn2").click(function(){
@@ -264,7 +275,10 @@
 
                 );
             } else {
-                Showbo.Msg.alert('该账号不存在');
+                layer.alert('该账号不存在',{
+                    time: 20000, //20s后自动关闭
+                    btn: ['ok']
+                });
                 return false;
             }
         }
