@@ -183,6 +183,7 @@
             $(".a1").each(function(i, obj){
                 if ($(this).attr('id') == 'checked') {
                     price = $(this).attr('value');
+                    good_id = $(this).attr('name');
                 }
             });
 
@@ -214,7 +215,7 @@
                     var os = req.data.os;
                     var uuid = req.data.uuid;
            
-                    verify(uid, username, nickname, os, uuid, price);
+                    verify(uid, username, nickname, os, uuid, price, good_id);
                 }else{
                    
                     Showbo.Msg.alert('该账号不存在');
@@ -242,7 +243,7 @@
         });
         
 
-        function verify(uid, username, nickname, os, uuid, price) { 
+        function verify(uid, username, nickname, os, uuid, price, good_id) { 
             if (uid != ''){ 
                 var str= '<table style="text-align:center;width:100%"><tr style="line-height:3rem;" ><td colspan="2"></td><tr style="line-height:3rem;" ><td style="width:30%;line-height:3rem;font-size:16px;" align="right">昵 称 : </td>'+
                     '<td style="width:60%;line-height:3rem;left:2rem;float:left; font-size:16px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;'+nickname+'</td></tr>'+
@@ -257,7 +258,7 @@
                 $(".btn2").click(function(){
                     var flag = $(this).val();
                     if (flag == '确认') { 
-                        recharge(uid, username, nickname, os, uuid, price);
+                        recharge(uid, username, nickname, os, uuid, price, good_id);
                     } 
                 }
 
@@ -268,8 +269,7 @@
             }
         }
 
-        function recharge(uid, username, nickname, os, uuid, price) {
-            good_id = $("input[name='good_id']").val();
+        function recharge(uid, username, nickname, os, uuid, price, good_id) {
             if(good_id.length == 0){
                 alert('请选择商品！');
                 return false;
@@ -279,7 +279,7 @@
               shade: [0.2,'#fff'] //0.1透明度的白色背景
             });
 
-            if (good_id < 3001) { //alert('{:U('Pay/friendOrder')}');
+            if (good_id < 3001) {
                 $.ajax({
                     url: '{:U('Pay/friendOrder')}',
                     type: 'POST',
