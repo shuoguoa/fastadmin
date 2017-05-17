@@ -1,0 +1,102 @@
+body{  
+    margin:0;  
+    width:100%;  
+    height:100%;  
+    overflow:hidden;  
+}  
+html{  
+    width:100%;  
+    height:100%;  
+}  
+*{  
+    padding: 0;  
+    margin: 0;  
+}
+.design-grid-panel {  
+    position:relative;  
+    width: 100%;   
+    height: 630px;  
+    margin-top: 5px;  
+    margin-left: 10px;  
+    border: 1px solid #ccc;  
+    font-size: 13px;  
+    color: #808080;  
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  
+}  
+.design-grid-panel .grid-container{  
+    float:left;  
+    overflow: hidden;  
+    position:relative;  
+}  
+.design-grid-panel {  
+    overflow: hidden;  
+}  
+.design-grid-panel td{  
+    border-right: 1px solid #DCDFE1;  
+    border-bottom: 1px solid #DCDFE1;  
+    -moz-user-select: none;  
+    -webkit-user-select: none;  
+    user-select: none;  
+}  
+.design-grid-panel table {  
+    position:relative;  
+    border-collapse: collapse;  
+    table-layout: fixed;  
+}  
+.design-grid-panel tr {  
+      
+    height: 30px;  
+}  
+  
+.design-grid-panel td div {  
+    padding-left: 5px;  
+    height: 25px;  
+    line-height: 25px;  
+    overflow: hidden;  
+    text-overflow: ellipsis;  
+    white-space: nowrap;  
+} 
+.mark1 {
+    background-color: #7dceec;
+    color:#fff;
+}
+.header-text {  
+    font-size: 15px;  
+    padding-left: 0;  
+    font-weight: bolder;  
+    text-align: center;  
+    color: #808080;  
+    width: 100%;  
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  
+}  
+  
+.header-resize {  
+    cursor: col-resize;  
+    width:10px;  
+    float:right;  
+    padding-left:0px  
+} 
+
+/*Tooltips*/
+.tooltips{
+    position:relative; /*这个是关键*/
+    z-index:2;
+}
+.tooltips:hover{
+    z-index:3;
+    background:none; /*没有这个在IE中不可用*/
+}
+.tooltips span{
+    display: none;
+}
+.tooltips:hover span{ /*span 标签仅在 :hover 状态时显示*/
+    display:block;
+    position:absolute;
+    top:10px;
+    left:5px;
+    width:15em;
+    border:1px solid #ccc;
+    background-color:#ccc;
+    padding: 3px;
+    color:black;
+} 
