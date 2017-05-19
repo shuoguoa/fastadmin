@@ -54,22 +54,28 @@ html{
     line-height: 25px;  
     overflow: hidden;  
     text-overflow: ellipsis;  
-    white-space: nowrap;  
+    white-space: nowrap; 
+    width: 120px; 
 } 
 .mark1 {
-    background-color: #7dceec;
+    background-color: #87eac9;
     color:#fff;
 }
 .header-text {  
     font-size: 15px;  
     padding-left: 0;  
     font-weight: bolder;  
-    text-align: center;  
-    color: #808080;  
+    text-align: left;  
     width: 100%;  
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;  
-}  
-  
+}
+.title{
+    color: #f7f7f7;
+    font-weight: normal;
+    background: #F2F2F2;
+    background-image: linear-gradient(to bottom, #c0dcef 0%, #4aa1da 100%);
+    background-repeat: repeat-x;
+} 
 .header-resize {  
     cursor: col-resize;  
     width:10px;  

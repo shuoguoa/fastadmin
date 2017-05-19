@@ -35,9 +35,129 @@ class UserAmountController extends ComController
         }
 
         $page = new \Think\Page($count, $pagesize);
+        if(!empty($where)) {
+            foreach ($where as $key => $value) {
+                $page->parameter[$key] = urlencode($value);
+            }
+        } 
         $page = $page->show();
         $this->assign('list', $list);
         $this->assign('page', $page);
+        $this->display();
+    }
+    /**
+     * 支付宝，app充值
+     */
+    public function order()  
+    {
+        I('id') ? $where['id'] = I('id') : '';
+        I('uid') ? $where['uid'] = I('uid') : '';
+
+        C('DB_PREFIX', '');
+        $pagesize = 18;
+        $p = intval($_GET['p']) > 0 ? $_GET['p'] : 1;
+        $first = $pagesize * ($p - 1);
+        $dbModel = M('payment', '',$this->getConnectDb2());
+        $list = $dbModel->where($where)->limit($first . ',' . $pagesize)->order('time desc')->select();
+        $count = $dbModel->where($where)->count('*');
+        foreach ($list as $key => $value) {
+            $list[$key]['time'] = $value['time'] != 0 ? date('Y-m-d H:i:s', $value['time']) : '';
+            $list[$key]['success_time'] = $value['success_time'] != 0 ? date('Y-m-d H:i:s', $value['success_time']) : '';
+            $list[$key]['invoice'] = $value['invoice'] == 1 ? '有发票' : '不需要发票';
+            $list[$key]['channel'] = $value['channel'] == 1 ? '支付宝' : ($value['channel'] == 2 ? 'ios' : '微信');
+            $list[$key]['status'] = $value['status'] == 1 ? '充值成功' : '默认充值成功';
+            $list[$key]['platform'] = $value['platform'] == 1 ? 'pc平台' : 'ios';
+        }
+        $page = new \Think\Page($count, $pagesize);
+        if(!empty($where)) {
+            foreach ($where as $key => $value) {
+                $page->parameter[$key] = urlencode($value);
+            }
+        } 
+        $page = $page->show();
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        $this->display();
+    }
+
+    /**
+     * 微信公众号充值
+     */
+    public function OfficialAccountsOrder()  
+    {
+        I('id') ? $where['id'] = I('id') : '';
+        I('uid') ? $where['uid'] = I('uid') : '';
+
+        C('DB_PREFIX', '');
+        $pagesize = 18;
+        $p = intval($_GET['p']) > 0 ? $_GET['p'] : 1;
+        $first = $pagesize * ($p - 1);
+        $dbModel = M('wx_order', '',$this->getConnectDb2());
+        $list = $dbModel->where($where)->limit($first . ',' . $pagesize)->order('time desc')->select();
+        $count = $dbModel->where($where)->count('*');
+        foreach ($list as $key => $value) {
+            $list[$key]['time'] = $value['time'] != 0 ? date('Y-m-d H:i:s', $value['time']) : '';
+            $list[$key]['success_time'] = $value['success_time'] != 0 ? date('Y-m-d H:i:s', $value['success_time']) : '';
+            $list[$key]['status'] = $value['status'] == 1 ? '充值成功' : '默认充值成功';
+            $list[$key]['platform'] = '微信公众号充值';
+        }
+
+        $page = new \Think\Page($count, $pagesize);
+        if(!empty($where)) {
+            foreach ($where as $key => $value) {
+                $page->parameter[$key] = urlencode($value);
+            }
+        } 
+        $page = $page->show();
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        $this->display();
+    } 
+
+    public function getCountlyGraph(){
+        I('id') ? $where['id'] = I('id') : '';
+        I('uid') ? $where['uid'] = I('uid') : '';
+        I('flag') ? $where['flag'] = I('flag') : '';
+        $table = I('flag') == 1 ? 'payment' : 'wx_order';
+        $field = I('flag') == 1 ? 'uid, money, time, platform' : 'uid, money, time';
+        $bgn_time = strtotime('-2 month');
+        $end_time = time();
+        $where['time'] = array('between', array($bgn_time, $end_time)); 
+
+        C('DB_PREFIX', '');
+        $dbModel = M($table, '',$this->getConnectDb2());
+        $list = $dbModel->field($field)->where($where)->limit($first . ',' . $pagesize)->order('time asc')->select();
+        $result = array();
+        foreach ($list as $key => $value) {
+            $index = date('Y-m-d',$value['time']);
+            $result[$index]['time'] = $index;
+            $result[$index]['money'] += $value['money'];
+        } 
+        $xlist = array();
+        $ylist = array();
+        $point = array();
+        $script = array();
+
+        foreach ($result as $key => $value) {
+            $xlist['time'][]  = $value['time'];
+            $xlist['birthday'][]  = $value['time'];
+            $ylist[] = $value['money'];
+            $point[] = $value['money'];
+            $script[] = $value['time']."<br/>".$value['money'];
+        }
+        
+        $title = I('flag') == 1 ? '平台充值统计' : '公众号充值统计';
+        $action = I('flag') == 1 ? 'order' : 'OfficialAccountsOrder';
+        $this->assign('title', $title);
+        $this->assign('action', $action);
+        $this->assign('bgn_time', $bgn_time ? date('Y-m-d',$bgn_time) : '');
+        $this->assign('end_time', $end_time ? date('Y-m-d',$end_time) : '');
+        $this->assign('xlistId', json_encode($xlist['time']));
+        $this->assign('xlistBir', json_encode($xlist['birthday']));
+        $this->assign('ylist', json_encode($ylist));
+        $this->assign('point', $point);
+        $this->assign('script', json_encode($script));
+        $this->assign('country', $country);
         $this->display();
     }
 
@@ -80,7 +200,6 @@ class UserAmountController extends ComController
                     $redis = $this->getConnectRedis();
                     $redisKey = 'user:' . $uid;
                     $re = $redis->HINCRBY($redisKey, 'diamond', $diamond);
-
                     $dbModel->commit();
                     error_log('钻石充值成功' . PHP_EOL, 3, $log);
 
@@ -306,8 +425,7 @@ class UserAmountController extends ComController
         $list = $redis->smembers($keyNames); 
         foreach ($list as $key => $value) {
             $list[$key] = array('row' => $key, 'val'=> $value, 'keyNames' => $keyNames);
-        }
-        
+        }    
         $this->assign('setList', $setList);
         $this->assign('list', $list);
         $this->assign('checked', $keyNames);

@@ -53,8 +53,9 @@
                                     <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
                                     Search
                                 </button>
+                                <a href="{:U('UserAmount/getCountlyGraph')}" class="btn btn-purple btn-sm btn-countly" style="text-decoration: none;float: right;">统计图</a>
                             </form>
-                             <a href="{:U('UserAmount/Order')}" class="btn btn-purple btn-sm" style="text-decoration: none;float: left;">平台充值列表</a>
+                            <a href="{:U('UserAmount/Order')}" class="btn btn-purple btn-sm" style="text-decoration: none;float: left;">平台充值列表</a>
                         </div>
                         <div class="space-4"></div>
                         <div class="row" style="margin-left: 20px;">
@@ -71,7 +72,6 @@
                                             <th >充值成功时间</th>
                                             <th >状态</th>
                                             <th >交易号</th>
-                                            <th >充值渠道</th>
                                             <th >产品id</th>
                                             <th >第三方订单ID</th>
                                             <th >钻石余额</th>
@@ -89,7 +89,6 @@
                                                 <td >{$val['success_time']}</td>
                                                 <td >{$val['status']}</td>
                                                 <td >{$val['order_id']}</td>
-                                                <td >{$val['channel']}</td>
                                                 <td >{$val['product_id']}</td>
                                                 <td >{$val['extend_order_id']}</td>
                                                 <td >{$val['diamond']}</td>
@@ -110,3 +109,12 @@
 <include file="Public/footerjs"/>
 </body>
 </html>
+<script type="text/javascript">
+    $(function(){
+        $('.btn-countly').click(function(){
+            var href = $(this).attr('href');
+            href = href+'&flag=2';
+            $(this).attr('href', href);
+        });
+    });
+</script>

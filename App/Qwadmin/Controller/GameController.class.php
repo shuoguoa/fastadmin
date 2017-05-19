@@ -17,9 +17,10 @@ class GameController extends ComController
         I('id') ? $where['id'] = I('id') : '';
         I('name') ? $where['name'] = I('name') : '';
         I('room_id') ? $where['room_id'] = I('room_id') : '';
+        I('status') != '' ? $where['status'] = (I('status') == 0 ? 0 :I('status', '0', 'intval')) : $where['status'] = 0;
 
         C('DB_PREFIX', '');
-        $pagesize = 18;
+        $pagesize = 19;
         $p = intval($_GET['p']) > 0 ? $_GET['p'] : 1;
         $first = $pagesize * ($p - 1);
         $dbModel = M('game', '',$this->getConnectDb2());
@@ -30,10 +31,8 @@ class GameController extends ComController
             $columns[] = array('id' => $value['id'], 'name' => $value['name'], 'display' => $flag);
             $list[$key]['type'] = $value['type'] == '1' ? '游戏' : '高级';
             $list[$key]['match_rebuy_cnt'] = $value['match_rebuy_cnt'] == '1' ? '支持' : '不支持';
-
             $list[$key]['rest_mode'] = $value['rest_mode'] == '1' ? '支持' : '不支持';
             $list[$key]['match_addon'] = $value['match_addon'] == '1' ? '支持' : '不支持';
-
             $list[$key]['horde_id'] = $value['horde_id'] == '0' ? '非牌局部落' : $value['horde_id'];
             $list[$key]['club_channel'] = $value['club_channel'] == '1' ? '管理员牌局' : '个人牌局';
             $list[$key]['is_auto'] = $value['is_auto'] == '1' ? '是' : '否';
@@ -70,11 +69,18 @@ class GameController extends ComController
                     break;
             }
         }
+
         $page = new \Think\Page($count, $pagesize);
+        if(!empty($where)) {
+            foreach ($where as $key => $value) {
+                $page->parameter[$key] = urlencode($value);
+            }
+        }  
         $page = $page->show();
         $this->assign('list', $list);
         $this->assign('columns', $columns);
         $this->assign('page', $page);
+        $this->assign('status', I('status'));
         $this->display();
     }
 
@@ -85,27 +91,23 @@ class GameController extends ComController
     {   
        try {
             $log = ROOT_PATH.'/Public/log/geme.log';
-            //更新钻石余额
+            //修改牌局状态
             C('DB_PREFIX', '');
             $dbModel = M('game', '',$this->getConnectDb2());
             if ($_POST) { 
                 $id = $_POST['id'];
                 $data['status'] = 3;
-                // $result = 
                 if($dbModel->where(array('id'=>$id))->save($data) != false){
                     $dbModel->commit();
                     error_log('牌局解散成功' . PHP_EOL, 3, $log);
-
                     $returnData['status'] = 'ok';
                     $returnData['msg'] = '牌局解散成功';
                 }else{
                     $dbModel->rollback();
                     error_log('牌局解散失败' . PHP_EOL, 3, $log);
-
                     $returnData['status'] = 'faile';
                     $returnData['msg'] = '牌局解散失败';
                 }
-
                 $this->ajaxReturn($returnData, 'JSON', 1);
                 exit;
                 die;
