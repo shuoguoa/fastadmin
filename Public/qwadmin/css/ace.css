@@ -5572,6 +5572,14 @@ fieldset[disabled] .btn-primary.active {
     background-image: linear-gradient(to bottom, #d5e4ef 0.1%, #3e9bd8 100%);
     background-repeat: repeat-x;
 }
+.is_recommend {
+    background-image: linear-gradient(to bottom, #d5e4ef 0.1%, #0acc8b  100%);
+    background-repeat: repeat-x;
+}
+.no_recommend {
+    background-image: linear-gradient(to bottom, #d5e4ef 0.1%, #af5843 100%);
+    background-repeat: repeat-x;
+}
 .btn-info:hover,
 .btn-info:active,
 .open > .btn-info.dropdown-toggle {

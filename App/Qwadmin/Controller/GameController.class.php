@@ -36,6 +36,8 @@ class GameController extends ComController
             $list[$key]['horde_id'] = $value['horde_id'] == '0' ? '非牌局部落' : $value['horde_id'];
             $list[$key]['club_channel'] = $value['club_channel'] == '1' ? '管理员牌局' : '个人牌局';
             $list[$key]['is_auto'] = $value['is_auto'] == '1' ? '是' : '否';
+            $list[$key]['is_recommend_1'] = $value['is_recommend'] == '1' ? '是' : '否';
+            $list[$key]['recommend'] = $value['is_recommend'] == '1' ? 'is_recommend' : 'no_recommend';
             $list[$key]['create_time'] = date("Y-m-d H:i:s",$value['create_time']);
             $list[$key]['begin_time'] = $value['begin_time'] !='0' ? date("Y-m-d H:i:s",$value['begin_time']) : 'null';
             $list[$key]['end_time'] = $value['end_time'] !='0' ? date("Y-m-d H:i:s",$value['end_time']) : 'null';
@@ -107,6 +109,39 @@ class GameController extends ComController
                     error_log('牌局解散失败' . PHP_EOL, 3, $log);
                     $returnData['status'] = 'faile';
                     $returnData['msg'] = '牌局解散失败';
+                }
+                $this->ajaxReturn($returnData, 'JSON', 1);
+                exit;
+                die;
+            }
+        } catch(Exception $e) {
+            error_log('异常' . PHP_EOL, 3, $log);
+        } 
+    }
+
+    /**
+     * 是否推荐
+     */
+    public function isRecommend(){
+        try {
+            $log = ROOT_PATH.'/Public/log/geme.log';
+            //修改牌局推荐状态
+            C('DB_PREFIX', '');
+            $dbModel = M('game', '',$this->getConnectDb2());
+            if ($_POST) { 
+                $id = $_POST['id'];
+                $recommend = $_POST['recommend'];
+                $data['is_recommend'] = $recommend;
+                if($dbModel->where(array('id'=>$id))->save($data) != false){
+                    $dbModel->commit();
+                    error_log('操作成功' . PHP_EOL, 3, $log);
+                    $returnData['status'] = 'ok';
+                    $returnData['msg'] = '操作成功';
+                }else{
+                    $dbModel->rollback();
+                    error_log('操作失败' . PHP_EOL, 3, $log);
+                    $returnData['status'] = 'faile';
+                    $returnData['msg'] = '操作失败';
                 }
                 $this->ajaxReturn($returnData, 'JSON', 1);
                 exit;

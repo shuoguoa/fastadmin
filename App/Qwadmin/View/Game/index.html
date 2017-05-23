@@ -140,6 +140,7 @@
                                             <td><div class = "header-text">群id</td>
                                             <td><div class = "header-text">owner</td>
                                             <td><div class = "header-text">blinds<br/></td>
+                                            <td><div class = "header-text" style="text-align: center;"  >推荐</td>
                                             <td><div class = "header-text">保险模式</td>
                                             <td><div class = "header-text" style="text-align: center;">群类型</td>
                                             <td class="mark1" style="text-align: center;"><div>状态</td>
@@ -168,7 +169,6 @@
                                             <td><div class = "header-text" style="text-align: center;"  >重构</td>
                                             <td><div class = "header-text" style="text-align: center;"  >休息模式</td>
                                             <td><div class = "header-text" style="text-align: center;"  >增购</td>
-                                            <td><div class = "header-text" style="text-align: center;"  >推荐</td>
                                             <td><div class = "header-text">最小带入记分牌</td>
                                             <td><div class = "header-text">最大带入记分牌</td>
                                             <td><div class = "header-text">总代入记分牌</td>
@@ -184,6 +184,9 @@
                                             <td ><div>{$v.tid}</div></td>
                                             <td ><div>{$v.owner}</div></td>
                                             <td ><div>{$v.blinds}</div></td>
+                                            <td ><div style="text-align: center;">
+                                            <button class="btn btn-info freeze {$v.recommend}"  onclick="isRecommend('{$v.id}','{$v.is_recommend}')">{$v.is_recommend_1}</button>
+                                            </div></td>
                                             <td ><div>{$v.tilt_mode}</div></td>
                                             <td ><div style="text-align: center;">{$v.type}</div></td>
                                             <td class="mark1"><div style="text-align: center;">{$v.status}</div></td>
@@ -212,7 +215,7 @@
                                             <td ><div style="text-align: center;">{$v.match_rebuy_cnt}</div></td>
                                             <td ><div style="text-align: center;">{$v.rest_mode}</div></td>
                                             <td ><div style="text-align: center;">{$v.match_addon}</div></td>
-                                            <td ><div style="text-align: center;">{$v.is_recommend}</div></td>
+                                            
                                             <td ><div>{$v.min_buy_chips}</div></td>
                                             <td ><div>{$v.max_buy_chips}</div></td>
                                             <td ><div>{$v.total_buy_chips}</div></td>
@@ -257,11 +260,18 @@
        
     }
 
-    $("#status option").each(function(){
-        if ($(this).val() == {$status}) {
-            $(this).attr("selected", true);
-        }
-    });
+    function isRecommend(param0, param1){
+        var param2 = param1 == 1 ? '0' : '1';
+        $.post("{:U('Game/isRecommend')}", {id:param0,recommend:param2}, function(data){   
+           if (data.status == 'ok') { 
+                alert(data.msg);
+                window.location.reload();
+            }else {
+                alert(data.msg);
+                return false;
+            }
+        });     
+    }
 </script>   
 </body>
 </html>
