@@ -10,7 +10,7 @@ require_once('ThinkPHP/Library/Getui/IGt.Batch.php');
 require_once('ThinkPHP/Library/Getui/igetui/utils/AppConditions.php');
 
 define('HOST','http://sdk.open.api.igexin.com/apiex.htm');
-define('Alias','10000');
+// define('Alias','10038');
 
 define('APPKEY',       C('GETUI_CN')['APP_KEY'] );
 define('APPID',        C('GETUI_CN')['APP_ID'] );
@@ -56,6 +56,7 @@ class PushMessageController extends ComController {
 	public function index_Single(){
 		$flag = '1'; //个推
 		$this->assign('flag',$flag);
+		$this->assign('flag0', 'display');
 		$this->display('index');
 	}
 
@@ -65,11 +66,12 @@ class PushMessageController extends ComController {
 	public function index_App(){
 		$flag = '2'; //群推
 		$this->assign('flag', $flag);
+		$this->assign('flag0', 'none');
 		$this->display('index');
 	}
 	public function push(){
-		$region = I('region', 'BETA');
-		if($region == 'CN'){ //正式服安卓
+		$region = I('region');
+		if($region == 'CN'){//正式-大陆 IOS
 			$this->APPKEY 		= C('GETUI_CN')['APP_KEY'];
 			$this->APPID  		= C('GETUI_CN')['APP_ID'];
 			$this->MASTERSECRET = C('GETUI_CN')['MASTER_SECRET'];
@@ -77,7 +79,7 @@ class PushMessageController extends ComController {
 			$this->APPKEY 		= C('GETUI_CN_IOS')['APP_KEY'];
 			$this->APPID  		= C('GETUI_CN_IOS')['APP_ID'];
 			$this->MASTERSECRET = C('GETUI_CN_IOS')['MASTER_SECRET'];
-		}elseif($region == 'TW'){
+		}elseif($region == 'TW'){ //正式-台湾
 			$this->APPKEY 		= C('GETUI_TW')['APP_KEY'];
 			$this->APPID  		= C('GETUI_TW')['APP_ID'];
 			$this->MASTERSECRET = C('GETUI_TW')['MASTER_SECRET'];
@@ -85,7 +87,7 @@ class PushMessageController extends ComController {
 			$this->APPKEY 		= C('GETUI_TW_IOS')['APP_KEY'];
 			$this->APPID  		= C('GETUI_TW_IOS')['APP_ID'];
 			$this->MASTERSECRET = C('GETUI_TW_IOS')['MASTER_SECRET'];
-		}else{
+		}else{//大陆-测试
 			$this->APPKEY 		= C('GETUI_BETA')['APP_KEY'];
 			$this->APPID  		= C('GETUI_BETA')['APP_ID'];
 			$this->MASTERSECRET = C('GETUI_BETA')['MASTER_SECRET'];
@@ -98,12 +100,9 @@ class PushMessageController extends ComController {
 		$content = I('content','','html_entity_decode');
 		$offlineTime = I('offlineTime');
 		$url = I('url');
-		$image = I('image');
-		if($image){
-			$image = getImage($image);
-		} else {
-			$image = getImage('/getui/Public/attached/default/new.png');
-		}
+		$image = I('image') ;
+		$image = I('image') ? getImage($image) : '';
+		$alias = I('alias') ? I('alias') : '';
 		
 		if(I('ANDROID')){ $OS[] = 'ANDROID'; }
 		if(I('IOS')){ $OS[] = 'IOS'; }
@@ -127,14 +126,14 @@ class PushMessageController extends ComController {
 	    
 	    $flag = I('flag', 1);
 	    if ($flag == 1) { 
-	    	$this->pushMessageToSingle($config);
+	    	$this->pushMessageToSingle($config, $alias);
 	    } else {
 	    	$this->pushMessageToApp($config, $OS, $offlineTime);
 	    }
 	}
 
 	/*单推接口案例*/
-	public function pushMessageToSingle(array $config){
+	public function pushMessageToSingle(array $config, $alias){
 	    $igt = new \IGeTui(HOST,$this->APPKEY,$this->MASTERSECRET);
 	    $template = $this->IGtTransmissionTemplateDemo(json_encode($config));
 	    //个推信息体
@@ -145,7 +144,7 @@ class PushMessageController extends ComController {
 
 	    $target = new \IGtTarget();
 	    $target->set_appId($this->APPID);
-	    $target->set_alias(Alias);
+	    $target->set_alias($alias);
 
 	    try {
 	        $rep = $igt->pushMessageToSingle($message, $target);
@@ -257,4 +256,29 @@ class PushMessageController extends ComController {
 
 	    return $template;
 	}
+
+	public function confirm(){
+		try {
+            $data = array(
+            	'1' => 'gt123',
+            	'2' => 'qt123'
+            );
+            if ($_POST) { 
+                $flag = $_POST['flag'];
+                $password = $_POST['password'];
+                if($data[$flag] == $password){
+                    $returnData['status'] = 'ok';
+                    $returnData['msg'] = '确认密码正确';
+                }else{
+                    $returnData['status'] = 'fail';
+                    $returnData['msg'] = '确认密码错误';
+                }
+                $this->ajaxReturn($returnData, 'JSON', 1);
+                exit;
+                die;
+            }
+        } catch(Exception $e) {
+            error_log('异常' . PHP_EOL, 3, $log);
+        } 
+    } 
 }

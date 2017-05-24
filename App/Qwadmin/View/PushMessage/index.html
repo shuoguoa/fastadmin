@@ -30,8 +30,24 @@
 						<div style="margin:2px auto;width:750px;">
 							<div class="col-xs-12 basic-grey" style="height: 780px">
 								<!-- PAGE CONTENT BEGINS -->
-								<form action="" method="post" class="STYLE-NAME">
+								<form action="{:U('push')}" method="post" class="STYLE-NAME">
 									<h1 align="center">Push Message</h1>
+							<!----> <label style="margin-bottom: 10px !important">
+										<span>SCENE :</span>
+										<div style="padding-left: 160px !important;">
+											<input name="region" value="BETA" type="radio" class="check0" >
+											 &nbsp;&nbsp;<span style="font-weight: 500 !important">BETA</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input name="region" value="CN" type="radio" class="check0" > 
+											&nbsp;&nbsp;<span style="font-weight: 500 !important">CN</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<input name="region" value="TW" type="radio" class="check0" > 
+											&nbsp;&nbsp;<span style="font-weight: 500 !important">TW</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</div>
+								    </label> 
+									<label style="display: {$flag0}">
+										<span>Alias :</span>
+										<input type="text" name="alias" id="Alias" placeholder="个推绑定的账号" maxlength="20"  />
+									</label>
+							
 									<label>
 										<span>TITLE :</span>
 										<input type="text" name="title" id="title" placeholder="请输入通知标题，最多20个字" maxlength="20"/>
@@ -47,7 +63,7 @@
 									</label>
 									<label>
 										<span>URL :</span>
-										<input type="text" name="url" id="url" placeholder="请输入URL" maxlength="2" />
+										<input type="text" name="url" id="url" placeholder="请输入URL"  />
 									</label>
 									<label>
 										<span>OS :</span>
@@ -62,13 +78,15 @@
 									<label style="margin-top:15px !important;margin-bottom:45px !important;">
 										<span>IMAGE :</span>
 										<div class="col-sm-9">
-											<div class="">{:UpImage("image",400,230,$member['head'])}</div>
+											<div class="">{:UpImage("image",350,200,$member['head'])}</div>
 											<span class="middle" style="font-weight: 500 !important">小于1MB的jpg、gif、png、bmp、jpeg</span>
 										</div>
 									</label>
-									<label style="margin-left: 230px !important;margin-top: 300px !important">
+									<label style="margin-left: 230px !important;margin-top: 270px !important">
 										<span>&nbsp;</span>
-										<input type="button" class="button" value="Send" style="float: center"/>
+											<input type="hidden" name="region0" value="{$region}">
+											<input type="hidden" name="flag" value="{$flag}">
+										<input type="submit" class="button" value="Send" style="float: center"/>
 									</label>
 								</form>
 								<!-- PAGE CONTENT ENDS -->
@@ -82,12 +100,74 @@
 		</div><!-- /.main-container -->
 
 		<include file="Public/footerjs" />
-		
+		<div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
+		    <form  method="post" >
+		        <table align="center">
+		            <tr>
+			            <td align="center">密 码 ：</td>
+			            <td>
+			            	<input type="text" name="password" id="password" value="" style="height: 30px;">
+			            	<input type="hidden" name="flag0" id="flag0" value="{$flag}">
+			            </td>
+		            </tr>
+		         	<tr>
+			            <td  colspan="4" align="center">
+			            <input type="submit" id="submit-addrow" role="button" style="background-color:#6ab6e8;margin-left:10px;margin-top: 10px;width: 55px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 12px;vertical-align: middle;" value="submit">
+			            </td>
+		            </tr>
+		        </table>
+		    </form>
+		</div>
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+		$( "#dialog" ).dialog({
+		    autoOpen: false,
+		    width: 250,
+		    height:140,
+		    title:'推送确认'
+		});
+		
 		$(".submit").click(function(){
 			$("#form").submit();
 		})
+		$(".button").click(function(){
+			var title = $("input[name='title']").val();
+			var content = $("input[name='content']").val();
+			var Expire = $("input[name='offlineTime']").val();
+			var url = $("input[name='url']").val();
+			if (title == '') {
+				alert('缺少标题');
+			}
+			if (content == '') {
+				alert('缺少内容');
+			} 
+			if (Expire == '') {
+				alert('缺少有效期');
+			}
+			if (url == '') {
+				alert('缺少附加连接，确定不需要？');
+			}
+			if (title == '' || content == '' || Expire == ''){
+				alert('标题，内容，有效期 为必填内容');
+				return false;
+			} else {
+				$( "#dialog" ).dialog( "open" );
+			    event.preventDefault();
+			    $("#submit-addrow").click(function(){
+			    	var password = $("#password").val();
+			    	var flag = $("#flag0").val();
+			    	$.post("{:U('PushMessage/confirm')}", {flag:flag, password:password}, function(data){   
+		               if (data.status == 'ok') {
+		                    alert(data.msg);
+		                    $("#form").submit();
+		                }else {
+		                    alert(data.msg);
+		                    return false;
+		                }
+		            });
+			    });
+			}
+		});
 		</script>
 	</body>
 </html>

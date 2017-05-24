@@ -242,6 +242,11 @@
 <include file="Public/footerjs"/>
 
 <script type="text/javascript">
+    $("#status option").each(function(){
+        if ($(this).val() == {$status}) {
+            $(this).attr("selected", true);
+        }
+    });
     function dissolve(id){
         if (id == '') {
             alert('缺少'+id+'参数');

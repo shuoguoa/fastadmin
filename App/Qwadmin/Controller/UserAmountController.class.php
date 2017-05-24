@@ -45,6 +45,7 @@ class UserAmountController extends ComController
         $this->assign('page', $page);
         $this->display();
     }
+   
     /**
      * 支付宝，app充值
      */

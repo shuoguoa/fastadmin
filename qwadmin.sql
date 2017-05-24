@@ -10,10 +10,32 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-05-03 09:29:40
+Date: 2017-05-24 17:49:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for banner_image
+-- ----------------------------
+DROP TABLE IF EXISTS `banner_image`;
+CREATE TABLE `banner_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of banner_image
+-- ----------------------------
+INSERT INTO `banner_image` VALUES ('7', 'http://www.baidu.com', 'http://localhost/qwadmin/Public/attached/2017/05/24/5925415fca55b.jpeg', '2');
+INSERT INTO `banner_image` VALUES ('6', 'http://www.baidu.com', 'http://localhost/qwadmin/Public/attached/2017/05/24/5925413d9cef7.png', '1');
+INSERT INTO `banner_image` VALUES ('9', 'http://www.baidu.com', 'http://liufuqin.test.htgames.cn/qwadmin/Public/attached/2017/05/24/5925445d37105.jpg', '3');
+INSERT INTO `banner_image` VALUES ('17', 'http://www.baidu.com', 'http://liufuqin.test.htgames.cn/qwadmin/Public/attached/2017/05/24/592549368fee7.jpg', '8');
+INSERT INTO `banner_image` VALUES ('20', 'http://www.baidu.com', 'http://liufuqin.test.htgames.cn/qwadmin/Public/attached/2017/05/24/59254d38655f1.jpg', '23');
+INSERT INTO `banner_image` VALUES ('19', 'http://www.baidu.com', 'http://liufuqin.test.htgames.cn/qwadmin/Public/attached/2017/05/24/5925496af1d4c.jpg', '22');
 
 -- ----------------------------
 -- Table structure for qw_article
@@ -92,7 +114,7 @@ CREATE TABLE `qw_auth_rule` (
   `o` int(11) NOT NULL COMMENT '排序',
   `tips` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qw_auth_rule
@@ -120,7 +142,7 @@ INSERT INTO `qw_auth_rule` VALUES ('20', '13', 'Group/add', '新增用户组', '
 INSERT INTO `qw_auth_rule` VALUES ('21', '13', 'Group/edit', '编辑用户组', 'menu-icon fa fa-caret-right', '1', '1', '', '0', '21', '');
 INSERT INTO `qw_auth_rule` VALUES ('22', '13', 'Group/update', '保存用户组', 'menu-icon fa fa-caret-right', '1', '1', '', '0', '22', '');
 INSERT INTO `qw_auth_rule` VALUES ('23', '13', 'Group/del', '删除用户组', '', '1', '1', '', '0', '23', '');
-INSERT INTO `qw_auth_rule` VALUES ('24', '0', '', '网站内容', 'menu-icon fa fa-desktop', '1', '1', '', '1', '24', '');
+INSERT INTO `qw_auth_rule` VALUES ('24', '0', '', '网站内容', 'menu-icon fa fa-desktop', '1', '1', '', '0', '24', '');
 INSERT INTO `qw_auth_rule` VALUES ('25', '24', 'Article/index', '文章管理', 'menu-icon fa fa-caret-right', '1', '1', '', '1', '25', '网站虽然重要，身体更重要，出去走走吧。');
 INSERT INTO `qw_auth_rule` VALUES ('26', '24', 'Article/add', '新增文章', 'menu-icon fa fa-caret-right', '1', '1', '', '1', '26', '');
 INSERT INTO `qw_auth_rule` VALUES ('27', '24', 'Article/edit', '编辑文章', 'menu-icon fa fa-caret-right', '1', '1', '', '0', '27', '');
@@ -169,6 +191,13 @@ INSERT INTO `qw_auth_rule` VALUES ('77', '67', 'PushMessage/index_App', '推送�
 INSERT INTO `qw_auth_rule` VALUES ('78', '0', '', '数据列表', 'menu-icon fa fa-user', '1', '1', '', '1', '45', '');
 INSERT INTO `qw_auth_rule` VALUES ('79', '78', 'UserAmount/Index', '用户信息', '', '1', '1', '', '1', '0', '');
 INSERT INTO `qw_auth_rule` VALUES ('80', '78', 'UserAmount/getRedisSets', 'redis操作', '', '1', '1', '', '1', '0', '');
+INSERT INTO `qw_auth_rule` VALUES ('81', '0', '', '牌局管理', 'menu-icon fa fa-users', '1', '1', '', '1', '13', '');
+INSERT INTO `qw_auth_rule` VALUES ('82', '81', 'Game/Index', '牌局列表', '', '1', '1', '', '1', '0', '');
+INSERT INTO `qw_auth_rule` VALUES ('83', '78', 'UserAmount/Order', '订单列表', '', '1', '1', '', '1', '0', '');
+INSERT INTO `qw_auth_rule` VALUES ('84', '0', '', '数据统计', 'menu-icon fa fa-user', '1', '1', '', '1', '46', '');
+INSERT INTO `qw_auth_rule` VALUES ('85', '84', 'DataStat/insurance', '保险统计', '', '1', '1', '', '1', '0', '');
+INSERT INTO `qw_auth_rule` VALUES ('90', '0', '', 'Banner图管理', 'menu-icon fa fa-legal', '1', '1', '', '1', '48', '');
+INSERT INTO `qw_auth_rule` VALUES ('91', '90', 'Banner/Index', 'banner图列表', '', '1', '1', '', '1', '0', '');
 
 -- ----------------------------
 -- Table structure for qw_category
@@ -262,7 +291,7 @@ CREATE TABLE `qw_log` (
   `ip` varchar(16) NOT NULL,
   `log` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=149 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qw_log
@@ -343,6 +372,78 @@ INSERT INTO `qw_log` VALUES ('73', 'admin', '1493717114', '::1', '登录成功�
 INSERT INTO `qw_log` VALUES ('74', 'admin', '1493718165', '::1', '登录成功。');
 INSERT INTO `qw_log` VALUES ('75', 'admin', '1493772993', '::1', '登录失败。');
 INSERT INTO `qw_log` VALUES ('76', 'admin', '1493773059', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('77', 'admin', '1493950125', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('78', 'admin', '1493950300', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('79', 'admin', '1493954551', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('80', 'admin', '1494395581', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('81', 'admin', '1494395839', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('82', 'admin', '1494397391', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('83', 'admin', '1494400442', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('84', 'admin', '1494482269', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('85', 'admin', '1494482347', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('86', 'admin', '1494482496', '::1', '修改网站配置。');
+INSERT INTO `qw_log` VALUES ('87', 'admin', '1494482537', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('88', 'admin', '1494482912', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('89', 'admin', '1494483719', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('90', 'admin', '1494486587', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('91', 'admin', '1494488348', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('92', 'admin', '1494489119', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('93', 'admin', '1494492869', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('94', 'admin', '1494495268', '::1', '修改网站配置。');
+INSERT INTO `qw_log` VALUES ('95', 'admin', '1494495748', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('96', 'admin', '1494497323', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('97', 'admin', '1494551771', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('98', 'admin', '1494552466', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('99', 'admin', '1494556147', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('100', 'admin', '1494556384', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('101', 'admin', '1494557245', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('102', 'admin', '1494557381', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('103', 'admin', '1494830999', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('104', 'admin', '1494831622', '192.168.0.180', '登录成功。');
+INSERT INTO `qw_log` VALUES ('105', 'admin', '1494832397', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('106', 'admin', '1494841117', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('107', 'admin', '1494841555', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('108', 'admin', '1494841727', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('109', 'admin', '1494987256', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('110', 'admin', '1494988948', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('111', 'admin', '1495003698', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('112', 'admin', '1495007383', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('113', 'admin', '1495009940', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('114', 'admin', '1495070347', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('115', 'admin', '1495078673', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('116', 'admin', '1495087157', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('117', 'admin', '1495093920', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('118', 'admin', '1495157011', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('119', 'admin', '1495160358', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('120', 'admin', '1495160744', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('121', 'admin', '1495172079', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('122', 'admin', '1495173057', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('123', 'admin', '1495422355', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('124', 'admin', '1495422593', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('125', 'admin', '1495424703', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('126', 'admin', '1495434859', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('127', 'admin', '1495447829', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('128', 'admin', '1495501266', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('129', 'admin', '1495501504', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('130', 'admin', '1495507676', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('131', 'admin', '1495510450', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('132', 'admin', '1495520154', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('133', 'ADMIN', '1495522271', '::1', '登录失败。');
+INSERT INTO `qw_log` VALUES ('134', 'admin', '1495522294', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('135', 'admin', '1495524296', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('136', 'admin', '1495527588', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('137', 'admin', '1495527714', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('138', 'admin', '1495588565', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('139', 'admin', '1495588926', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('140', 'admin', '1495589216', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('141', 'admin', '1495589433', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('142', 'admin', '1495592729', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('143', 'admin', '1495594075', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('144', 'admin', '1495594333', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('145', 'admin', '1495612480', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('146', 'admin', '1495613375', '::1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('147', 'admin', '1495614375', '127.0.0.1', '登录成功。');
+INSERT INTO `qw_log` VALUES ('148', 'admin', '1495618625', '::1', '登录成功。');
 
 -- ----------------------------
 -- Table structure for qw_member
@@ -383,13 +484,13 @@ CREATE TABLE `qw_setting` (
 -- ----------------------------
 -- Records of qw_setting
 -- ----------------------------
-INSERT INTO `qw_setting` VALUES ('sitename', 'QWADMIN', '0', '');
-INSERT INTO `qw_setting` VALUES ('title', '恰维网络', '0', '');
+INSERT INTO `qw_setting` VALUES ('sitename', 'POKER', '0', '');
+INSERT INTO `qw_setting` VALUES ('title', '扑克部落', '0', '');
 INSERT INTO `qw_setting` VALUES ('keywords', '关键词', '0', '');
 INSERT INTO `qw_setting` VALUES ('description', '网站描述', '0', '');
-INSERT INTO `qw_setting` VALUES ('footer', '2016©恰维网络', '0', '');
-INSERT INTO `qw_setting` VALUES ('test', '测试', '1', '测试变量');
-INSERT INTO `qw_setting` VALUES ('GETUI_ID', '179', '1', '个推id');
+INSERT INTO `qw_setting` VALUES ('footer', '2016©巨潮网络', '0', '');
+INSERT INTO `qw_setting` VALUES ('test', '', '1', '测试变量');
+INSERT INTO `qw_setting` VALUES ('GETUI_ID', '188', '1', '个推id');
 
 -- ----------------------------
 -- Table structure for qw_user_diamond_log
@@ -425,4 +526,41 @@ CREATE TABLE `qw_wx_bind` (
 -- ----------------------------
 -- Records of qw_wx_bind
 -- ----------------------------
-SET FOREIGN_KEY_CHECKS=1;
+
+-- ----------------------------
+-- Table structure for tbl_insurance
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_insurance`;
+CREATE TABLE `tbl_insurance` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `server_group` int(11) DEFAULT NULL,
+  `server_name` varchar(32) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `code` varchar(32) DEFAULT NULL,
+  `gid` int(11) DEFAULT NULL,
+  `buy` int(11) DEFAULT NULL,
+  `pay` int(11) unsigned zerofill DEFAULT NULL,
+  `create_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_insurance
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_insurance_stat
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_insurance_stat`;
+CREATE TABLE `tbl_insurance_stat` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `server_group` int(11) DEFAULT NULL COMMENT '服务器组',
+  `buy` int(11) DEFAULT NULL,
+  `pay` int(11) unsigned zerofill DEFAULT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_insurance_stat
+-- ----------------------------

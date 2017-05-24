@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>{$current['title']}-{$Think.CONFIG.title}</title>
+		<meta name="keywords" content="{$Think.CONFIG.keywords}" />
+		<meta name="description" content="{$Think.CONFIG.description}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<include file="Public/head" />
+		
+   </head>
+	<body class="no-skin">
+		<include file="Public/header" />
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+			<include file="Public/sidebar" />
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<include file="Public/breadcrumbs" />
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						<include file="Public/set" />
+
+						<div class="row" style="margin-left: 20px;"> 
+                        	<button id="reback" style="float:right;margin-right:50px;width: 80px;color: #f5f5f5;height: 30px;border:1px solid #c7f9de;background-color: #87caf1;border-radius:3px">返回列表页</button>
+						</div>
+						<div style="margin:2px auto;width:750px;">
+							<div class="col-xs-12 basic-grey" style="height: 780px">
+								<!-- PAGE CONTENT BEGINS -->
+								<form action="{:U('upload')}" method="post" class="STYLE-NAME">
+									<h1 align="center">Upload &nbsp;&nbsp;Image</h1>
+							
+									<label>
+										<span>SORT :</span>
+										<input type="text" name="sort" id="sort" placeholder="此值用于排序" style="width: 200px"/>
+									</label>								
+									<label>
+										<span>URL :</span>
+										<input type="text" name="url" id="url" placeholder="请输入URL"  />
+									</label>
+					
+									<label></label>
+									<label style="margin-top:15px !important;margin-bottom:45px !important;">
+										<span>IMAGE :</span>
+										<div class="col-sm-9">
+											<div class="">{:UpImage("image",500,300,$member['head'])}</div>
+											<span class="middle" style="font-weight: 500 !important">小于1MB的jpg、gif、png、bmp、jpeg</span>
+										</div>
+									</label>
+									<label style="margin-left: 230px !important;margin-top: 400px !important">
+										<span>&nbsp;</span>
+											<input type="hidden" name="region0" value="{$region}">
+											<input type="hidden" name="flag" value="banner">
+										<input type="submit" class="button" value="Submit" style="float: center"/>
+									</label>
+								</form>
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+			<include file="Public/footer" />
+			
+		</div><!-- /.main-container -->
+
+		<include file="Public/footerjs" />
+		<div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
+		    <form  method="post" >
+		        <table align="center">
+		            <tr>
+			            <td align="center">密 码 ：</td>
+			            <td>
+			            	<input type="text" name="password" id="password" value="" style="height: 30px;">
+			            	<input type="hidden" name="flag0" id="flag0" value="{$flag}">
+			            </td>
+		            </tr>
+		         	<tr>
+			            <td  colspan="4" align="center">
+			            <input type="submit" id="submit-addrow" role="button" style="background-color:#6ab6e8;margin-left:10px;margin-top: 50px;width: 55px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 12px;vertical-align: middle;" value="submit">
+			            </td>
+		            </tr>
+		        </table>
+		    </form>
+		</div>
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+		$( "#dialog" ).dialog({
+		    autoOpen: false,
+		    width: 250,
+		    height:140,
+		    title:'推送确认'
+		});
+	
+	    $(function(){
+	        $("#reback").click(function(){ 
+	            var url = window.location.href;                     
+	            if (url.indexOf("?") > 0) {
+	                url0 = url.split("?");
+	                url = url0['0'];
+	            }
+	            url = url+'?m=Qwadmin&c=Banner&a=index';
+	            location.href = url;
+	        });
+	    });
+		
+
+		$(".submit").click(function(){
+			$("#form").submit();
+		})
+		$(".button").click(function(){
+			var title = $("input[name='title']").val();
+			var content = $("input[name='content']").val();
+			var Expire = $("input[name='offlineTime']").val();
+			var url = $("input[name='url']").val();
+			// if (title == '') {
+			// 	alert('缺少标题');
+			// }
+			// if (content == '') {
+			// 	alert('缺少内容');
+			// } 
+			// if (Expire == '') {
+			// 	alert('缺少有效期');
+			// }
+			// if (url == '') {
+			// 	alert('缺少附加连接，确定不需要？');
+			// }
+			// if (title == '' || content == '' || Expire == ''){
+			// 	alert('标题，内容，有效期 为必填内容');
+			// 	return false;
+			// } else {
+			// 	$( "#dialog" ).dialog( "open" );
+			//     event.preventDefault();
+			//     $("#submit-addrow").click(function(){
+			//     	var password = $("#password").val();
+			//     	var flag = $("#flag0").val();
+			//     	$.post("{:U('PushMessage/confirm')}", {flag:flag, password:password}, function(data){   
+		 //               if (data.status == 'ok') {
+		 //                    alert(data.msg);
+		 //                    $("#form").submit();
+		 //                }else {
+		 //                    alert(data.msg);
+		 //                    return false;
+		 //                }
+		 //            });
+			//     });
+			// }
+		});
+		</script>
+	</body>
+</html>

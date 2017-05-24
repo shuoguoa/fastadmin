@@ -32,7 +32,8 @@ class UploadController extends ComController
         $Height = I('Height');
         if (!$BackCall) {
             $Width = $_POST['BackCall'];
-        }
+        } 
+
         if (!$Width) {
             $Width = $_POST['Width'];
         }
