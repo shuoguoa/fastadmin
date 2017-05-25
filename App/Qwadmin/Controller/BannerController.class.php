@@ -2,13 +2,13 @@
 namespace Qwadmin\Controller;
 use Qwadmin\Controller\ComController;
 class BannerController extends ComController {
-    public function index(){
+    public function index(){ 
         $where = array();
         C('DB_PREFIX', '');
         $pagesize = 15;
         $p = intval($_GET['p']) > 0 ? $_GET['p'] : 1;
         $first = $pagesize * ($p - 1);
-        $dbModel = M('banner_image');
+        $dbModel = M('banner_image', '',$this->getConnectDb2());
         $list = $dbModel->where($where)->limit($first . ',' . $pagesize)->order('id desc')->select();
 
         $count = $dbModel->where($where)->count('*');
@@ -41,11 +41,11 @@ class BannerController extends ComController {
         );
         
         if ($img != '' && $url != '' && $sort != '') {
-            $dbModel = M('banner_image');
+            $dbModel = M('banner_image', '',$this->getConnectDb2());
             $dbModel->startTrans();
             if ($dbModel->add($data)){
-                if($dbModel->commit()){
-                    echo "<script>alert('上传成功');history.back();</script>";    
+                if($dbModel->commit()){  
+                    $this->success('上传成功');
                 }
             } else {
                 $dbModel->rollback();
@@ -58,7 +58,7 @@ class BannerController extends ComController {
         try {
             //更新sort值
             C('DB_PREFIX', '');
-            $dbModel = M('banner_image');
+            $dbModel = M('banner_image', '',$this->getConnectDb2());
             if ($_POST) { 
                 $id = $_POST['id'];
                 $sort =  $_POST['sort'];
@@ -83,17 +83,19 @@ class BannerController extends ComController {
     public function delete()
     {
         try {
-            //更新sort值
             C('DB_PREFIX', '');
-            $dbModel = M('banner_image');
+            $dbModel = M('banner_image', '',$this->getConnectDb2());
             if ($_POST) { 
                 $id = $_POST['id'];
                 $img = $_POST['img'];
                 $result = $dbModel->where(array('id'=>$id))->delete();
                 //删除指定的路径的图片
-                $deleteImg = unlink($img); 
-
-                if( $result != false){
+                //$abUrl = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+                $abUrl = dirname(dirname(dirname(dirname(__FILE__))));
+                $url = parse_url($img);
+                $fileUrl = $abUrl.$url['path'];
+                $del = unlink($fileUrl);
+                if( $result != false && $del == true){
                     $returnData['status'] = 'ok';
                     $returnData['msg'] = '删除成功';
                 }else{

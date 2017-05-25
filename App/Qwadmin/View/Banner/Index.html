@@ -71,7 +71,7 @@
                                                 <td style="text-align: center !important" >
                                                     <button class="btn btn-info recharge" id="dialog-recharge" onclick="update('{$val['id']}','{$val['url']}','{$val['img']}','{$val['sort']}')">修改</button>
                                                         &nbsp;&nbsp;&nbsp;
-                                                    <!-- <button class="btn btn-info recharge" id="dialog-recharge" onclick="del('{$val['id']}','{$val['img']}')">删除</button> -->
+                                                    <!----> <button class="btn btn-info recharge" id="dialog-recharge" onclick="del('{$val['id']}','{$val['img']}')">删除</button> 
                                                 </td>
                                             </tr>
                                         </volist>
@@ -157,15 +157,15 @@ $("#submit-update").click(function(){
 });
 
 function del(id, img){
-    $.post("{:U('Banner/delete')}", {id:id, img:img}, function(data){   
+    $.post("{:U('Banner/delete')}", {id:id, img:img}, function(data){
        if (data.status == 'ok') {
-            alert(data.msg); 
+            alert(data.msg);
             window.location.reload();
         }else {
             alert(data.msg);
             return false;
         }
-    });   return false;  
+    });
 }
 </script>
 <script type="text/javascript">

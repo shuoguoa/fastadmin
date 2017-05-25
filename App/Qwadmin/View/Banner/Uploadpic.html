@@ -90,67 +90,17 @@
 		</div>
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
-		$( "#dialog" ).dialog({
-		    autoOpen: false,
-		    width: 250,
-		    height:140,
-		    title:'推送确认'
-		});
-	
-	    $(function(){
-	        $("#reback").click(function(){ 
-	            var url = window.location.href;                     
-	            if (url.indexOf("?") > 0) {
-	                url0 = url.split("?");
-	                url = url0['0'];
-	            }
-	            url = url+'?m=Qwadmin&c=Banner&a=index';
-	            location.href = url;
-	        });
-	    });
-		
-
-		$(".submit").click(function(){
-			$("#form").submit();
-		})
-		$(".button").click(function(){
-			var title = $("input[name='title']").val();
-			var content = $("input[name='content']").val();
-			var Expire = $("input[name='offlineTime']").val();
-			var url = $("input[name='url']").val();
-			// if (title == '') {
-			// 	alert('缺少标题');
-			// }
-			// if (content == '') {
-			// 	alert('缺少内容');
-			// } 
-			// if (Expire == '') {
-			// 	alert('缺少有效期');
-			// }
-			// if (url == '') {
-			// 	alert('缺少附加连接，确定不需要？');
-			// }
-			// if (title == '' || content == '' || Expire == ''){
-			// 	alert('标题，内容，有效期 为必填内容');
-			// 	return false;
-			// } else {
-			// 	$( "#dialog" ).dialog( "open" );
-			//     event.preventDefault();
-			//     $("#submit-addrow").click(function(){
-			//     	var password = $("#password").val();
-			//     	var flag = $("#flag0").val();
-			//     	$.post("{:U('PushMessage/confirm')}", {flag:flag, password:password}, function(data){   
-		 //               if (data.status == 'ok') {
-		 //                    alert(data.msg);
-		 //                    $("#form").submit();
-		 //                }else {
-		 //                    alert(data.msg);
-		 //                    return false;
-		 //                }
-		 //            });
-			//     });
-			// }
-		});
+		    $(function(){
+		        $("#reback").click(function(){ 
+		            var url = window.location.href;                     
+		            if (url.indexOf("?") > 0) {
+		                url0 = url.split("?");
+		                url = url0['0'];
+		            }
+		            url = url+'?m=Qwadmin&c=Banner&a=Index';
+		            location.href = url;
+		        });
+		    });
 		</script>
 	</body>
 </html>
