@@ -148,7 +148,7 @@ class UserAmountController extends ComController
         }
         
         $title = I('flag') == 1 ? '平台充值统计' : '公众号充值统计';
-        $action = I('flag') == 1 ? 'order' : 'OfficialAccountsOrder';
+        $action = I('flag') == 1 ? 'Order' : 'OfficialAccountsOrder';
         $this->assign('title', $title);
         $this->assign('action', $action);
         $this->assign('bgn_time', $bgn_time ? date('Y-m-d',$bgn_time) : '');
