@@ -100,7 +100,7 @@ class PushMessageController extends ComController {
 		$content = I('content','','html_entity_decode');
 		$offlineTime = I('offlineTime');
 		$url = I('url');
-		$image = I('image') ;
+		$image = I('image') ; 
 		$image = I('image') ? getImage($image) : '';
 		$alias = I('alias') ? I('alias') : '';
 		
