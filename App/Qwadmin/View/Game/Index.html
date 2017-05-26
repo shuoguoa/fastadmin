@@ -47,9 +47,9 @@
                         <!-- PAGE CONTENT BEGINS -->
                         <div class="row" style="margin-left: 18px;">
                             <form class="form-inline" action="{:U('Game/index')}" method="post">
-                                <label class="inline">&nbsp;&nbsp;room_id : </label><input type="text" name="room_id" value="{:I(room_id)}" class="form-control">
-                                <label class="inline">&nbsp;&nbsp;牌局名称 : </label> <input type="text" name="name" value="{:I(name)}" class="form-control">
-                                <label class="inline">&nbsp;&nbsp;牌局id : </label> <input type="text" name="id" value="{:I(id)}" class="form-control">
+                                <label class="inline">&nbsp;&nbsp;room_id : </label><input type="text" name="room_id" value="{:I('room_id')}" class="form-control">
+                                <label class="inline">&nbsp;&nbsp;牌局名称 : </label> <input type="text" name="name" value="{:I('name')}" class="form-control">
+                                <label class="inline">&nbsp;&nbsp;code : </label> <input type="text" name="code" value="{:I('code')}" class="form-control">
                                 <label class="inline">&nbsp;&nbsp;牌局状态 : </label> 
                                 <select name="status" class="form-control" id="status">
                                         <option value="0">等待</option>
@@ -139,6 +139,7 @@
                                         <tr class="title" style="height: 37px;padding-top:0">  
                                             <td><div class = "header-text">群id</td>
                                             <td><div class = "header-text">owner</td>
+                                            <td><div class = "header-text">code</td>
                                             <td><div class = "header-text">blinds<br/></td>
                                             <td><div class = "header-text" style="text-align: center;"  >推荐</td>
                                             <td><div class = "header-text">保险模式</td>
@@ -183,6 +184,7 @@
                                           <tr bgcolor="#FFFFFF"> 
                                             <td ><div>{$v.tid}</div></td>
                                             <td ><div>{$v.owner}</div></td>
+                                            <td ><div>{$v.code}</div></td>
                                             <td ><div>{$v.blinds}</div></td>
                                             <td ><div style="text-align: center;">
                                             <button class="btn btn-info freeze {$v.recommend}"  onclick="isRecommend('{$v.id}','{$v.is_recommend}')">{$v.is_recommend_1}</button>
@@ -242,11 +244,7 @@
 <include file="Public/footerjs"/>
 
 <script type="text/javascript">
-    $("#status option").each(function(){
-        if ($(this).val() == {$status}) {
-            $(this).attr("selected", true);
-        }
-    });
+  
     function dissolve(id){
         if (id == '') {
             alert('缺少'+id+'参数');
@@ -277,6 +275,13 @@
             }
         });     
     }
+    $("#status option").each(function(){
+        if ('' != {$status} ) {
+            if ($(this).val() == {$status}) {
+                $(this).attr("selected", true);
+            } 
+        }
+    });
 </script>   
 </body>
 </html>

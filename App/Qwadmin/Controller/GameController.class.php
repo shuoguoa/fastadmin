@@ -14,7 +14,7 @@ class GameController extends ComController
 {
     public function index()
     {
-        I('id') ? $where['id'] = I('id') : '';
+        I('code') ? $where['code'] = I('code') : '';
         I('name') ? $where['name'] = I('name') : '';
         I('room_id') ? $where['room_id'] = I('room_id') : '';
         I('status') != '' ? $where['status'] = (I('status') == 0 ? 0 :I('status', '0', 'intval')) : $where['status'] = 0;
@@ -82,7 +82,7 @@ class GameController extends ComController
         $this->assign('list', $list);
         $this->assign('columns', $columns);
         $this->assign('page', $page);
-        $this->assign('status', I('status'));
+        $this->assign('status', I('status') ? I('status') : '');
         $this->display();
     }
 
