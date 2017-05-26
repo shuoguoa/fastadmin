@@ -232,7 +232,7 @@ function getImage($img){
         return $img;
     }else{
         // return 'http://'.$_SERVER["SERVER_NAME"].'/dezhou'.$img; //测试环境
-        return 'http://'.$_SERVER["SERVER_NAME"].''.$img; //正式环境
+        return 'http://'.$_SERVER["SERVER_NAME"].':55555'.$img; //正式环境
     }
 }
 
