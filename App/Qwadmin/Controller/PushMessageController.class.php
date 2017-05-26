@@ -57,7 +57,7 @@ class PushMessageController extends ComController {
 		$flag = '1'; //个推
 		$this->assign('flag',$flag);
 		$this->assign('flag0', 'display');
-		$this->display('index');
+		$this->display('Index');
 	}
 
 	/*
@@ -67,7 +67,7 @@ class PushMessageController extends ComController {
 		$flag = '2'; //群推
 		$this->assign('flag', $flag);
 		$this->assign('flag0', 'none');
-		$this->display('index');
+		$this->display('Index');
 	}
 	public function push(){
 		$region = I('region');
