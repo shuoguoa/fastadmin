@@ -151,21 +151,21 @@
 				alert('标题，内容，有效期 为必填内容');
 				return false;
 			} else {
-				$( "#dialog" ).dialog( "open" );
-			    event.preventDefault();
-			    $("#submit-addrow").click(function(){
-			    	var password = $("#password").val();
-			    	var flag = $("#flag0").val();
-			    	$.post("{:U('PushMessage/confirm')}", {flag:flag, password:password}, function(data){   
-		               if (data.status == 'ok') {
-		                    alert(data.msg);
-		                    $("#form").submit();
-		                }else {
-		                    alert(data.msg);
-		                    return false;
-		                }
-		            });
-			    });
+				// $( "#dialog" ).dialog( "open" );
+			 //    event.preventDefault();
+			 //    $("#submit-addrow").click(function(){
+			 //    	var password = $("#password").val();
+			 //    	var flag = $("#flag0").val();
+			 //    	$.post("{:U('PushMessage/confirm')}", {flag:flag, password:password}, function(data){   
+		  //              if (data.status == 'ok') {
+		  //                   alert(data.msg);
+		  //                   $("#form").submit();
+		  //               }else {
+		  //                   alert(data.msg);
+		  //                   return false;
+		  //               }
+		  //           });
+			 //    });
 			}
 		});
 		</script>
