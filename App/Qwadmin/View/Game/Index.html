@@ -187,7 +187,7 @@
                                             <td ><div>{$v.code}</div></td>
                                             <td ><div>{$v.blinds}</div></td>
                                             <td ><div style="text-align: center;">
-                                            <button class="btn btn-info freeze {$v.recommend}"  onclick="isRecommend('{$v.id}','{$v.is_recommend}')">{$v.is_recommend_1}</button>
+                                            <button class="btn btn-info freeze {$v.recommend}"  onclick="isRecommend('{$v.id}','{$v.is_recommend}','{$v.name}')">{$v.is_recommend_1}</button>
                                             </div></td>
                                             <td ><div>{$v.tilt_mode}</div></td>
                                             <td ><div style="text-align: center;">{$v.type}</div></td>
@@ -227,6 +227,8 @@
                                             <td ><div>{$v.ko_reward_rate}</div></td>
                                             <td ><div style="text-align: center;">{$v.horde_id}</div></td>
                                             <td ><div style="text-align: center;">{$v.club_channel}</div></td>
+
+                                            
                                           </tr>
                                         </foreach> 
                                     </table>  
@@ -243,8 +245,31 @@
 </div>
 <include file="Public/footerjs"/>
 
+<div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;display: none">
+    <form  method="post" >
+        <table align="center">
+            <tr style="text-align: center;">
+                <td align="center">牌局名称 ：</td>
+                <td id="gameName" style="color: #19e07d;font-size:16px;overflow: auto"></td>
+            </tr>
+            <tr >
+                <td colspan="2" style="text-align: center;"> 
+                    <input type="submit" id="submit" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 50px;height: 24px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px" value="是">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="reset" id="reset" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 70px;height: 24px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px" value="取消操作">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
 <script type="text/javascript">
-  
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        width: 220,
+        height:120,
+        title:'牌局推荐'
+    });
+
     function dissolve(id){
         if (id == '') {
             alert('缺少'+id+'参数');
@@ -263,17 +288,29 @@
        
     }
 
-    function isRecommend(param0, param1){
-        var param2 = param1 == 1 ? '0' : '1';
-        $.post("{:U('Game/isRecommend')}", {id:param0,recommend:param2}, function(data){   
-           if (data.status == 'ok') { 
-                alert(data.msg);
-                window.location.reload();
-            }else {
-                alert(data.msg);
-                return false;
-            }
-        });     
+    function isRecommend(param0, param1, param2){
+        $("#gameName").text(param2);
+        var button = param1 == 1 ? '不推荐' : '推荐';
+        $("#submit").val(button);
+        $( "#dialog" ).dialog( "open" );
+        event.preventDefault();
+        $("#submit").click(function(){
+            var param3 = param1 == 1 ? '0' : '1';
+            $.post("{:U('Game/isRecommend')}", {id:param0,recommend:param3}, function(data){   
+               if (data.status == 'ok') { 
+                    alert(data.msg);
+                    window.location.reload();
+                }else {
+                    alert(data.msg);
+                    return false;
+                }
+            }); 
+        });
+
+        $("#reset").click(function(){
+            $(".ui-button").click();
+        });
+
     }
     $("#status option").each(function(){
         if ('' != {$status} ) {

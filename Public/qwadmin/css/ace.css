@@ -28,6 +28,7 @@ body {
 }
 .main-container{
   height: 100%;
+  overflow: scroll;
 }
 .main-container:before {
   display: block;

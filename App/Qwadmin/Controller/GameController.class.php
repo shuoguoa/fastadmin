@@ -77,12 +77,13 @@ class GameController extends ComController
             foreach ($where as $key => $value) {
                 $page->parameter[$key] = urlencode($value);
             }
-        }  
+        }
+        $status = I('status') != '' ? (I('status') == 0 ? 0 :I('status', '0', 'intval')) : 0; 
         $page = $page->show();
         $this->assign('list', $list);
         $this->assign('columns', $columns);
         $this->assign('page', $page);
-        $this->assign('status', I('status') ? I('status') : '');
+        $this->assign('status', $status);
         $this->display();
     }
 
