@@ -68,10 +68,18 @@ class IGtAPNPayload
         }
     }
 
-    public function add_customMsg($key, $value)
+    // public function add_customMsg($key, $value)
+    // {
+    //     if ($key != null && $key != "" && $value != null) {
+    //         $this->customMsg[$key] = $value;
+    //     }
+    // }
+    public function add_customMsg($param)
     {
-        if ($key != null && $key != "" && $value != null) {
-            $this->customMsg[$key] = $value;
+        if (isset($param) && !empty($param)) {
+            foreach ($param as $key => $list) {
+                $this->customMsg[$key] = $list;
+            }
         }
     }
 

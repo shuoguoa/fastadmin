@@ -235,7 +235,27 @@ class PushMessageController extends ComController {
 	    $template->set_transmissionType(2);//透传消息类型
 	    $template->set_transmissionContent($config);//透传内容
 		$config = json_decode($config, true);
-		$template ->set_pushInfo("", "", $config['data']['info']['title'], "", "payload", "", "", "");
+		// $template ->set_pushInfo("", "", $config['data']['info']['title'], "", "payload", "", "", "");
+
+		$apn = new \IGtAPNPayload();
+		$alertmsg=new \DictionaryAlertMsg();
+        $alertmsg->body=$config['data']['info']['content'];
+        $alertmsg->actionLocKey="ActionLockey";
+        $alertmsg->locKey="LocKey";
+        $alertmsg->locArgs=array("locargs");
+        $alertmsg->launchImage="launchimage";
+		// iOS8.2 支持
+        $alertmsg->title=$config['data']['info']['title'];
+        $alertmsg->titleLocKey="TitleLocKey";
+        $alertmsg->titleLocArgs=array("TitleLocArg");
+
+        $apn->alertMsg=$alertmsg;
+        $apn->badge=1;
+        $apn->sound="";
+        $apn->add_customMsg(array("payload"=>'扑克部落系统消息','type'=>"2"));
+		//$apn->contentAvailable=1;
+        $apn->category="ACTIONABLE";
+        $template->set_apnInfo($apn);
 
 	    return $template;
 	}

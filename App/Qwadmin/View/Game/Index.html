@@ -302,13 +302,14 @@
                     window.location.reload();
                 }else {
                     alert(data.msg);
-                    return false;
+                    // return false;
                 }
             }); 
         });
 
         $("#reset").click(function(){
             $(".ui-button").click();
+            window.location.reload();
         });
 
     }
