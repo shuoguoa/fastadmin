@@ -124,7 +124,7 @@ class UserAmountController extends ComController
         $bgn_time = strtotime('-2 month');
         $end_time = time();
         $where['time'] = array('between', array($bgn_time, $end_time)); 
-
+        $where['status'] = 1;
         C('DB_PREFIX', '');
         $dbModel = M($table, '',$this->getConnectDb2());
         $list = $dbModel->field($field)->where($where)->limit($first . ',' . $pagesize)->order('time asc')->select();
