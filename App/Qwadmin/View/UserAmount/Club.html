@@ -1,0 +1,189 @@
+
+<include file="Public/head"/>
+<body class="no-skin">
+<include file="Public/header"/>
+<script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+    <style>
+        .grouptd {
+            position: relative;
+        }
+        .group {
+            display: inline-block;
+            width: 100%;
+        }
+        .groupselect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        input{
+            text-align: left;
+        }
+        td{
+            text-align: left;
+        }
+        input {
+            border: none;
+        }
+
+    </style>
+<div class="main-container" id="main-container">
+    <include file="Public/sidebar"/>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <include file="Public/breadcrumbs"/>
+            <div class="page-content">
+                <include file="Public/set"/>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row" style="margin-left: 18px;float: left;">
+                            <form class="form-inline" action="{:U('UserAmount/Club')}" method="post" style="float: left;">
+                                <label class="inline">&nbsp;&nbsp;圈子ID : </label><input type="text" name="tid" value="{:I(tid)}" class="form-control">
+                                <label class="inline">&nbsp;&nbsp;俱乐部名称 : </label> <input type="text" name="tname" value="{:I(tname)}" class="form-control">
+                                <button type="submit" class="btn btn-purple btn-sm">
+                                    <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                    Search
+                                </button>
+                            </form>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="row" style="margin-left: 20px;margin-top:50px;">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th >ID</th>
+                                            <th >圈子ID</th>
+                                            <th >俱乐部群主</th>
+                                            <th >俱乐部名称</th>
+                                            <th >创建时间</th>
+                                            <th >人数</th>
+                                            <th >能否搜索</th>
+                                            <th >开局人</th>
+                                            <th >VID</th>
+                                            <th >俱乐部基金</th>
+                                            <th >名称修改时间</th>
+                                            <th >操作</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>                           
+                                        <volist name="list" id="val">
+                                            <tr>
+                                                <td >{$val['id']}</td>
+                                                <td >{$val['tid']}</td>
+                                                <td >{$val['owner']}</td>
+                                                <td >{$val['tname']}</td>
+                                                <td >{$val['create_time']}</td>
+                                                <td >{$val['count']}</td>
+                                                <td align="center">{$val['is_private']}</td>
+                                                <td align="center">{$val['is_owner']}</td>
+                                                <td >{$val['vid']}</td>
+                                                <td >{$val['fund']}</td>
+                                                <td >{$val['modify_time']}</td>
+                                                <td >
+                                                    <button class="btn btn-info freeze"  onclick="updateVid('{$val['tid']}', '{$val['owner']}', '{$val['vid']}')">修改vid</button>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                            
+                           <div style="margin:0 auto">{$page}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
+        <form  method="post" >
+            <table >
+                <tr>
+                <td >tid ：</td>
+                <td><input type="text" name="tid" value="" id="tid" readonly="true"></td>
+                </tr>
+                <tr>
+                <td >owner ：</td>
+                <td><input type="text" name="owner" value="" readonly="true"></td>
+                </tr>
+                <tr>
+                <td >vid ：</td>
+                <td><input type="text" name="vid" value="" ></td>
+                </tr>
+               
+                <tr>
+                <td  colspan="4" align="center" >
+                <input type="submit" id="submit-vid" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 50px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px;margin-left: 110px" value="修 改">
+                </td></tr>
+            </table>
+        </form>
+    </div>
+
+
+
+
+    <include file="Public/footer"/>
+</div>
+<include file="Public/footerjs"/>
+</body>
+</html>
+<script type="text/javascript">
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        width: 300,
+        height:230,
+        title:'修改vid'
+    });
+
+    function updateVid(tid, owner, vid){ 
+        $("input[name='tid']").val(tid);
+        $("input[name='owner']").val(owner);
+        $("input[name='vid']").val(vid);
+        $( "#dialog" ).dialog( "open" );
+        event.preventDefault();
+    }
+    var rule = /^[0-9]*[1-9][0-9]*$/;
+    $("#submit-vid").click(function(){
+        var tid = $("input[name='tid']").val();
+        var vid = $("input[name='vid']").val();
+        var owner = $("input[name='owner']").val();
+        if (vid == '') {
+            alert('请输入要修改的vid值');
+            return false;
+        } else if (!rule.test(vid)){
+            alert('输入正整数！');
+            return false;
+        } else{
+            $.post("{:U('UserAmount/updatevid')}", {tid:tid, vid:vid, owner:owner}, function(data){   
+               if (data.status == 'ok') { 
+                    alert(data.msg);
+                    window.location.reload();
+                }else {
+                    alert(data.msg);
+                    return false;
+                }
+            });
+        }
+    });
+
+
+
+
+    $(function(){
+        $('.btn-countly').click(function(){
+            var href = $(this).attr('href');
+            href = href+'&flag=1';
+            $(this).attr('href', href);
+        });
+    });
+</script>

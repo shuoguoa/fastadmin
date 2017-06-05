@@ -41,8 +41,8 @@ return array(
     
     //云信配置
     'NETEASE' => array(
-        'APP_KEY'    => '12a012c762dbcc835b825e728c52e0b1',
-        'APP_SECRET' => '8f27707637f8'
+        'APP_KEY'    => '69ae7e3ecfce8e9a1cd6f85441d38f69',
+        'APP_SECRET' => 'abb55cac2d3b'
     ),
 
     //个推大陆配置

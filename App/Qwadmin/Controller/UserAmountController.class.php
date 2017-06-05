@@ -45,7 +45,93 @@ class UserAmountController extends ComController
         $this->assign('page', $page);
         $this->display();
     }
-   
+
+    /**
+     * 俱乐部列表
+     */
+    public function club()  
+    {
+        I('tid') ? $where['tid'] = I('tid') : '';
+        I('tname') ? $where['tname'] = I('tname') : '';
+
+        C('DB_PREFIX', '');
+        $pagesize = 18;
+        $p = intval($_GET['p']) > 0 ? $_GET['p'] : 1;
+        $first = $pagesize * ($p - 1);
+        $dbModel = M('team', '',$this->getConnectDb2());
+        $list = $dbModel->where($where)->limit($first . ',' . $pagesize)->order('create_time desc')->select();
+        $count = $dbModel->where($where)->count('*');
+        foreach ($list as $key => $value) {
+            $list[$key]['create_time'] = $value['create_time'] != 0 ? date('Y-m-d H:i:s', $value['create_time']) : '';
+            $list[$key]['is_owner'] = $value['is_owner'] == 1 ? '只能群主开局' : '';
+            $list[$key]['is_private'] = $value['is_private'] == 1 ? '否' : '是';
+            $list[$key]['modify_time'] = $value['modify_time'] != 0 ? date('Y-m-d H:i:s', $value['modify_time']) : '';
+        }
+        $page = new \Think\Page($count, $pagesize);
+        if(!empty($where)) {
+            foreach ($where as $key => $value) {
+                $page->parameter[$key] = urlencode($value);
+            }
+        } 
+        $page = $page->show();
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        $this->display();
+    }
+
+    /**
+     * 修改俱乐部vid
+     */
+    public function updatevid() { 
+        if ($_POST) { 
+            $vid = $_POST['vid'];
+            $tid = $_POST['tid'];
+            $owner = $_POST['owner'];
+            if ($vid == null || $tid == null || $owner == null) {
+                $this->error('params error');
+            }
+
+            C('DB_PREFIX', '');
+            $team_model = M('team', '',$this->getConnectDb2());
+            $up_data = $team_model->where('tid = '.$tid)->select();
+            if ($up_data == null) {
+                $this->error('Game update team ID failed');
+            } else {
+                $up_data = $up_data[0];
+            }
+            $send_data = 'owner=' . $owner . '&tid=' . $tid;
+
+            $custom['is_owner'] = $up_data['is_owner'];
+            $custom['update_type'] = 0;
+            $custom['is_private'] = $up_data['is_private'];
+            $custom['area_id'] = $up_data['area_id'];
+            $custom['avatar'] = $up_data['avatar'];
+            $custom['count'] = $up_data['count'];
+            $custom['end_date'] = $up_data['end_date'];
+            $custom['modify_time'] = $up_data['modify_time'];
+            $custom['vid'] = $data['vid'] = $vid;
+            $send_data .= '&custom=' . json_encode($custom);
+            $where['tid'] = $tid;
+            $where['owner'] = $owner;
+            if ($team_model->where($where)->save($data) !== false) {
+                $api_action = 'nimserver/team/update.action';
+                $res = fn_send2netease($api_action, $send_data);
+                if ($res['code'] == 200) {
+                    $returnData['status'] = 'ok';
+                    $returnData['msg'] = 'vid修改成功';
+                } else {
+                    $returnData['status'] = 'faile';
+                    $returnData['msg'] = 'vid修改失败';
+                }
+                $this->ajaxReturn($returnData, 'JSON', 1);
+                exit;
+                die;
+            } else {
+                $this->error('Game update team ID failed');
+            }
+        }
+    }
+    
     /**
      * 支付宝，app充值
      */
@@ -114,6 +200,7 @@ class UserAmountController extends ComController
         $this->assign('page', $page);
         $this->display();
     } 
+
 
     public function getCountlyGraph(){
         I('id') ? $where['id'] = I('id') : '';
