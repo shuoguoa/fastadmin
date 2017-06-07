@@ -131,6 +131,66 @@ class UserAmountController extends ComController
             }
         }
     }
+
+    /**
+     * 部落列表
+     */
+    public function horde()  
+    {
+        I('vid') ? $where['horde_vid'] = I('vid') : '';
+        I('name') ? $where['name'] = I('name') : '';
+
+        C('DB_PREFIX', '');
+        $pagesize = 18;
+        $p = intval($_GET['p']) > 0 ? $_GET['p'] : 1;
+        $first = $pagesize * ($p - 1);
+        $dbModel = M('horde', '',$this->getConnectDb2());
+        $list = $dbModel->where($where)->limit($first . ',' . $pagesize)->order('ctime desc')->select();
+        $count = $dbModel->where($where)->count('*');
+        foreach ($list as $key => $value) {
+            $list[$key]['ctime'] = $value['ctime'] != 0 ? date('Y-m-d H:i:s', $value['ctime']) : '';
+            $list[$key]['is_control'] = $value['is_control'] == 1 ? '开' : '关';
+            $list[$key]['is_modify'] = $value['is_modify'] == 0 ? '否' : '是';
+        }
+        $page = new \Think\Page($count, $pagesize);
+        if(!empty($where)) {
+            foreach ($where as $key => $value) {
+                $page->parameter[$key] = urlencode($value);
+            }
+        } 
+        $page = $page->show();
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        $this->display();
+    }
+
+    /**
+     * 修改部落vid
+     */
+    public function updateHordeVid() { 
+        if ($_POST) { 
+            $vid = $_POST['vid'];
+            $id = $_POST['id'];
+            $vid ? $data['horde_vid'] = $vid : '';
+            $id ? $where['id'] = $id : '';
+            if ($vid == null || $id == null) {
+                $this->error('params error');
+            }
+
+            C('DB_PREFIX', '');
+            $horde_model = M('horde', '',$this->getConnectDb2());
+            if ($horde_model->where($where)->save($data) !== false) {
+                $returnData['status'] = 'ok';
+                $returnData['msg'] = 'ID修改成功';
+            } else {
+                $returnData['status'] = 'faile';
+                $returnData['msg'] = 'ID修改失败';
+            }
+            $this->ajaxReturn($returnData, 'JSON', 1);
+            exit;
+            die;
+        }
+    }
     
     /**
      * 支付宝，app充值

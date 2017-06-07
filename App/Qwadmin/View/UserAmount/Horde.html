@@ -1,0 +1,207 @@
+
+<include file="Public/head"/>
+<body class="no-skin">
+<include file="Public/header"/>
+<script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+    <style>
+        .grouptd {
+            position: relative;
+        }
+        .group {
+            display: inline-block;
+            width: 100%;
+        }
+        .groupselect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        input{
+            text-align: left;
+        }
+        td{
+            text-align: left;
+        }
+        input {
+            border: none;
+        }
+
+    </style>
+<div class="main-container" id="main-container">
+    <include file="Public/sidebar"/>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <include file="Public/breadcrumbs"/>
+            <div class="page-content">
+                <include file="Public/set"/>
+                
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row" style="margin-left: 18px;float: left;">
+                            <form class="form-inline" action="{:U('UserAmount/Horde')}" method="post" style="float: left;">
+                                <label class="inline">&nbsp;&nbsp;部落名称 : </label> <input type="text" name="name" value="{:I(name)}" class="form-control">
+                                <label class="inline">&nbsp;&nbsp;ID : </label><input type="text" name="vid" value="{:I(vid)}" class="form-control">
+                                <button type="submit" class="btn btn-purple btn-sm">
+                                    <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                    Search
+                                </button>
+                            </form>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="row" style="margin-left: 20px;margin-top:50px;">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th >id</th>
+                                            <th >部落名称</th>
+                                            <th >ID&nbsp;&nbsp;(部落显示id)</th>
+                                            <th >部落创建者</th>
+                                            <th >俱乐部id</th>
+                                            <th style="text-align: center;">限制开关</th>
+                                            <th style="text-align: center;">是否修改过</th>
+                                            <th >部落创建时间</th>
+                                            <th style="text-align: center;">操作</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>                           
+                                        <volist name="list" id="val">
+                                            <tr>
+                                                <td >{$val['id']}</td>
+                                                <td >{$val['name']}</td>
+                                                <td >{$val['horde_vid']}</td>
+                                                <td >{$val['owner']}</td>
+                                                <td >{$val['tid']}</td>
+                                                <td style="text-align: center;">{$val['is_control']}</td>
+                                                <td style="text-align: center;">{$val['is_modify']}</td>
+                                                <td >{$val['ctime']}</td>
+                                                <td style="text-align: center;">
+                                                    <button class="btn btn-info freeze"  onclick="updateVid('{$val['id']}', '{$val['name']}','{$val['horde_vid']}')">修改ID</button>
+                                                </td>
+                                            </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>
+                            
+                           <div style="margin:0 auto">{$page}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
+        <form  method="post" >
+            <table >
+                <tr>
+                <td >部落名称 ：</td>
+                <td><input type="text" name="uname" value="" id="uname" readonly="true"><input type="hidden" name="uid" value="" id="id" readonly="true"></td>
+                </tr>
+                <td >ID ：</td>
+                <td><input type="text" name="uvid" value="" ></td>
+                </tr>
+                <tr>
+                <td  colspan="4" align="center" >
+                <input type="submit" id="submit-vid" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 50px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px;margin-left: 110px" value="修 改">
+                </td></tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="dialog2" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;display: none">
+    <form  method="post" >
+        <table align="center">
+            <tr style="text-align: center;">
+                <td align="center">ID修改为 ：</td>
+                <td id="updateId" style="color: #19e07d;font-size:16px;overflow: auto"></td>
+            </tr>
+            <tr >
+                <td colspan="2" style="text-align: center;"> 
+                    <input type="submit" id="submit" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 50px;height: 24px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px" value="是">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="reset" id="reset" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 70px;height: 24px;border-radius: 2px;color:#fff;text-align: center; font-size: 15px" value="取消操作">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+    <include file="Public/footer"/>
+</div>
+<include file="Public/footerjs"/>
+</body>
+</html>
+<script type="text/javascript">
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        width: 300,
+        height:230,
+        title:'修改vid'
+    });
+
+    $( "#dialog2" ).dialog({
+        autoOpen: false,
+        width: 200,
+        height:130,
+        title:'确认'
+    });
+
+    function updateVid(id, name,vid){ 
+        $("input[name='uid']").val(id);
+        $("input[name='uname']").val(name);
+        $("input[name='uvid']").val(vid);
+        $( "#dialog" ).dialog( "open" );
+        event.preventDefault();
+    }
+    var rule = /^[0-9]*[1-9][0-9]*$/;
+    $("#submit-vid").click(function(){
+        var id = $("input[name='uid']").val();
+        var vid = $("input[name='uvid']").val();
+        if (vid == '') {
+            alert('请输入ID值');
+            return false;
+        } else if (!rule.test(vid)){
+            alert('输入正整数！');
+            return false;
+        } else{
+            // alert(vid);
+            $("#updateId").text(vid);
+            $( "#dialog2" ).dialog( "open" );
+            event.preventDefault();
+            $("#submit").click(function(){
+                $.post("{:U('UserAmount/updateHordeVid')}", {id:id, vid:vid}, function(data){   
+                   if (data.status == 'ok') { 
+                        alert(data.msg);
+                        window.location.reload();
+                    }else {
+                        alert(data.msg);
+                        return false;
+                    } 
+                });
+            });
+
+            $("#reset").click(function(){
+                $(".ui-button").click();
+                window.location.reload();
+            });
+        }
+    });
+
+    $(function(){
+        $('.btn-countly').click(function(){
+            var href = $(this).attr('href');
+            href = href+'&flag=1';
+            $(this).attr('href', href);
+        });
+    });
+</script>
