@@ -51,7 +51,7 @@ class UserAmountController extends ComController
      */
     public function club()  
     {
-        I('tid') ? $where['tid'] = I('tid') : '';
+        I('vid') ? $where['vid'] = I('vid') : '';
         I('tname') ? $where['tname'] = I('tname') : '';
 
         C('DB_PREFIX', '');
@@ -118,10 +118,10 @@ class UserAmountController extends ComController
                 $res = fn_send2netease($api_action, $send_data);
                 if ($res['code'] == 200) {
                     $returnData['status'] = 'ok';
-                    $returnData['msg'] = 'vid修改成功';
+                    $returnData['msg'] = 'ID修改成功';
                 } else {
                     $returnData['status'] = 'faile';
-                    $returnData['msg'] = 'vid修改失败';
+                    $returnData['msg'] = 'ID修改失败';
                 }
                 $this->ajaxReturn($returnData, 'JSON', 1);
                 exit;
