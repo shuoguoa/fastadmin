@@ -94,8 +94,9 @@
                                                         &nbsp;&nbsp;&nbsp;
                                                     <button class="btn btn-info recharge" id="dialog-recharge" onclick="rechargeDia('{$val['id']}', '{$val['os']}', '{$val['username']}')">充钻</button>
                                                     &nbsp;&nbsp;&nbsp;
-                                                    
                                                     <button class="btn btn-info freeze"  onclick="freeze('{$val['id']}', '{$val['is_block']}', '{$val['status']}')">{$val['status']}</button>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="registration('{$val['id']}', '{$val['os']}', '{$val['username']}')">报名</button>
                                                 </td>
                                             </tr>
                                         </volist>
@@ -205,6 +206,19 @@ function rechargeCoins(uid, os, username){
     $("input[name='username']").val(username);
     $( "#dialog1" ).dialog( "open" );
     event.preventDefault();
+}
+
+//报名
+function registration(uid, os, username){ alert(uid);alert('待完善');return false;
+    $.post("url", {uid:uid, os:os, diamond:diamond}, function(data){   
+        if (data.status == 'ok') { 
+            alert(data.msg);
+            window.location.reload();
+        }else {
+            alert(data.msg);
+            return false;
+        }
+    });
 }
 
 var rule = /^[0-9]*[1-9][0-9]*$/;
