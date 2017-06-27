@@ -332,10 +332,12 @@ class UserAmountController extends ComController
 
         $result2 = $dbModel1->query($sql2); //公众号充值
         $result2 = $this->sumByTime($result2, $mark);
-
-        $result = array_merge($result1, $result2);
-        $result = $this->arr_sort($result, 'time', 'asc');
-       
+        foreach ($result2 as $key => $value) {
+            if(array_key_exists($key, $result1)){
+                $result1[$key]['money'] += $value['money'];
+            }
+        } 
+        $result = $this->arr_sort($result1, 'time', 'asc');
         $xlist = array();
         $ylist = array();
         $point = array();
