@@ -2,6 +2,7 @@
 <include file="Public/head"/>
 <body class="no-skin">
 <include file="Public/header"/>
+
 <script type="text/javascript">
         try {
             ace.settings.check('main-container', 'fixed')
@@ -53,7 +54,8 @@
                                     <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
                                     Search
                                 </button>
-                                <a href="{:U('UserAmount/getCountlyGraph')}" class="btn btn-purple btn-sm btn-countly" style="text-decoration: none;float: right;">统计图</a>
+                                <a href="{:U('UserAmount/getCountlyGraph')}" class="btn btn-purple btn-sm btn-countly" style="text-decoration: none;float: right;">平台充值统计</a>
+                                <a href="{:U('UserAmount/getGraphByDate')}" class="btn btn-purple btn-sm btn-countly" style="text-decoration: none;float: right;">按日期统计</a>
                             </form>
                             <a href="{:U('UserAmount/OfficialAccountsOrder')}" class="btn btn-purple btn-sm" style="text-decoration: none;float: right;">公众号充值列表</a>
                         </div>

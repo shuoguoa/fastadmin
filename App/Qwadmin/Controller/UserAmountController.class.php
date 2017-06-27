@@ -309,6 +309,90 @@ class UserAmountController extends ComController
         $this->display();
     }
 
+    /*
+    *订单收益不区分平台按日期统计收益
+    *默认统计近一个月的数据
+    *mark = 1 按天统计，mark = 2 按月统计
+    */
+    public function getGraphByDate(){
+        $mark = I('mark') ? I('mark') : 1;
+        $bgn_def = $mark == 1 ? -1 : -5; //按天统计默认取近一个月数据，按月统计默认统计近6个月的数据
+
+        $bgn_time = I('bgn_time') ? strtotime(I('bgn_time')) : strtotime(date('Y-m-d', strtotime($bgn_def.' month')));
+        $end_time = I('end_time') ? strtotime(I('end_time')) : strtotime(date('Y-m-d H:i:s', time()));
+        C('DB_PREFIX', '');
+        $dbModel1 = M('payment', '',$this->getConnectDb2());
+        $dbModel2 = M('wx_order', '',$this->getConnectDb2());
+
+        $sql1 = "select time,money from payment where status = 1 and time between ".$bgn_time." and ".$end_time;
+        $sql2 = "select time,money from wx_order where status = 1 and time between ".$bgn_time." and ".$end_time;
+
+        $result1 = $dbModel1->query($sql1); //平台充值
+        $result1 = $this->sumByTime($result1, $mark);
+
+        $result2 = $dbModel1->query($sql2); //公众号充值
+        $result2 = $this->sumByTime($result2, $mark);
+
+        $result = array_merge($result1, $result2);
+        $result = $this->arr_sort($result, 'time', 'asc');
+       
+        $xlist = array();
+        $ylist = array();
+        $point = array();
+        $script = array();
+
+        foreach ($result as $key => $value) {
+            $xlist['time'][]  = $value['time'];
+            $xlist['birthday'][]  = $value['time'];
+            $ylist[] = $value['money'];
+            $point[] = $value['money'];
+            $script[] = $value['time']."<br/>".$value['money'];
+        }
+        
+        $title = $mark == 1 ? '按天统计收益' : '按月统计收益';
+        $action = I('flag') == 1 ? 'Order' : 'OfficialAccountsOrder';
+        $this->assign('title', $title);
+        $this->assign('action', $action);
+        $this->assign('bgn_time', $bgn_time ? date('Y-m-d',$bgn_time) : '');
+        $this->assign('end_time', $end_time ? date('Y-m-d',$end_time) : '');
+        $this->assign('xlistId', json_encode($xlist['time']));
+        $this->assign('xlistBir', json_encode($xlist['birthday']));
+        $this->assign('ylist', json_encode($ylist));
+        $this->assign('point', $point);
+        $this->assign('script', json_encode($script));
+        $this->assign('country', $country);
+        $this->assign('bgn_time', date('Y-m-d', $bgn_time));
+        $this->assign('end_time', date('Y-m-d', $end_time));
+        $this->display();
+    }
+
+    public function sumByTime($result, $mark){
+        $list = array();
+        $str = $mark == 2 ? 'Y-m' : 'Y-m-d';
+        foreach ($result as $key => $value) {
+            $index = date($str, $value['time']);
+            $list[$index]['time'] = $index;
+            $list[$index]['money'] += $value['money'];
+        } 
+        return $list;
+    }
+
+    //按照二维数据的某个键值进行排序
+    public function arr_sort($array,$key,$order="asc"){//asc是升序 desc是降序
+        $arr_nums=$arr=array();
+        foreach($array as $k=>$v){
+            $arr_nums[$k]=$v[$key];
+        }
+        if($order=='asc'){
+            asort($arr_nums);
+        } else {
+            arsort($arr_nums);
+        }
+        foreach($arr_nums as $k=>$v){
+            $arr[$k]=$array[$k];
+        }
+        return $arr;
+    }
     /**
      * 充值钻石更新钻石记录表，账户表钻石
      */
