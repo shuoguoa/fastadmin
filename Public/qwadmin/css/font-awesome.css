@@ -369,6 +369,12 @@
 .fa-share-square-o:before {
   content: "\f045";
 }
+.glyphicon-user:before {
+    content: "\e008";
+}
+.glyphicon-lock:before {
+    content: "\e033";
+}
 .fa-check-square-o:before {
   content: "\f046";
 }
@@ -395,6 +401,9 @@
 }
 .fa-forward:before {
   content: "\f04e";
+}
+.glyphicon-user:before {
+    content: "\e008";
 }
 .fa-fast-forward:before {
   content: "\f050";

@@ -2,13 +2,6 @@
 <include file="Public/head"/>
 <body class="no-skin">
 <include file="Public/header"/>
-<div class="main-container" id="main-container">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('main-container', 'fixed')
-        } catch (e) {
-        }
-    </script>
     <style>
         .grouptd {
             position: relative;
@@ -35,214 +28,224 @@
             border: none;
         }
     </style>
+  
     <include file="Public/sidebar"/>
-    <div class="main-content">
-        <div class="main-content-inner">
-            <include file="Public/breadcrumbs"/>
-            <div class="page-content">
-                <include file="Public/set"/>
-                
-                <div class="row">
-                    <div class="col-xs-12">
-                        <!-- PAGE CONTENT BEGINS -->
-                        <div class="row" style="margin-left: 18px;">
-                            <form class="form-inline" action="{:U('Game/Index')}" method="post">
-                                <label class="inline">&nbsp;&nbsp;room_id : </label><input type="text" name="room_id" value="{:I('room_id')}" class="form-control">
-                                <label class="inline">&nbsp;&nbsp;牌局名称 : </label> <input type="text" name="name" value="{:I('name')}" class="form-control">
-                                <label class="inline">&nbsp;&nbsp;code : </label> <input type="text" name="code" value="{:I('code')}" class="form-control">
-                                <label class="inline">&nbsp;&nbsp;牌局状态 : </label> 
-                                <select name="status" class="form-control" id="status">
-                                        <option value="0">等待</option>
-                                        <option value="1">开始</option>
-                                        <option value="2">结束</option>
-                                        <option value="3">解散</option>
-                                </select>
-                                <button type="submit" class="btn btn-purple btn-sm">
-                                    <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-                                    Search
-                                </button>
-                            </form>
+    <div class="bootstrap-table" style="top:150px;left:250px;">
+        <div class="fixed-table-toolbar"> <!--搜索框 -->
+            <!-- <div class="commonsearch-table" >
+                <form class="form-inline form-commonsearch nice-validator n-default" action="{:U('Game/Index')}" novalidate="novalidate">
+                    <fieldset>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">room_id:</label>
+                            <input type="hidden" class="form-control operate" name="field-id" data-name="room_id" value="=" readonly="">
+                            <input type="text" class="form-control" name="room_id" value="{:I('room_id')}"  id="room_id">
                         </div>
-                        <div class="space-4"></div>
-                        <div class="row" style="margin-left: 20px;">
-                            <div class = "design-grid-panel"> 
-                                <div class = "grid-container grid-header-left" style = "width: 19%;height:0.1px;">  
-                                    <table  cellspacing = "0" style = "width:100px">  
-                                        <colgroup>  
-                                            <col style = "width:99px"></col>  
-                                        </colgroup>  
-                                        <tr>  
-                                            <td><div class = "header-text"></div></td>  
-                                        </tr>  
-                                    </table>  
-                                </div> 
-                                <div class = "grid-container grid-header-right" style = "width: 81%;height:0.1px;">
-                                    <table  cellspacing = "0"  id = "header-right-table" style="width:900px;">  
-                                        <colgroup>  
-                                            <col style = "width:130px"></col>  
-                                            <col style = "width:130px"></col>  
-                                            <col style = "width:130px"></col>  
-                                            <col style = "width:130px"></col>  
-                                        </colgroup>  
-                                        <tr>  
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-                                            <td><div class = "header-text"></td>
-
-                                        </tr>  
-                                    </table>  
-                                </div>
-                                <div class = "grid-container grid-body-left" style = "width: 19%; height: 630px;border-top:0">  
-                                    <table cellspacing = "0" id = "body-left-table" style = "width:100%">  
-                                        <colgroup>  
-                                            <col style = "width:4%"></col> 
-                                            <col style = "width:4%"></col>  
-                                            <col style = "width:11%"></col>
-                                        </colgroup> 
-                                        <tr class="title" style="height: 37px;border-top:0">
-                                            <td><div class="header-text">操作</div></td>
-                                            <td><div class="header-text">牌局id</div></td>
-                                            <td><div class="header-text">牌局名称</div></td>
-                                        </tr>
-                                        <foreach name="columns" item="vo"> 
-                                            <tr>
-                                                <td><div style="display: {$vo.display}">
-                                                <button class="btn btn-info freeze"  onclick="dissolve('{$vo.id}')">解散</button></div></td>
-                                                <td><div>{$vo.id}</div></td>
-                                                <td><div>{$vo.name}</div></td>
-                                            </tr>
-                                        </foreach>  
-                                         
-                                    </table>  
-                                </div> 
-                                <div class = "grid-container grid-body-right" style = "width: 81%; height: 630px; overflow: auto;border-top:0" onscroll = "onScrollDiv(this)" >  
-                                    <table cellspacing = "0"  id = "body-right-table">  
-                                        <colgroup>  
-                                            <col style = "width:13%"></col>  
-                                            <col style = "width:13%"></col>  
-                                            <col style = "width:13%"></col>  
-                                            <col style = "width:13%"></col>  
-                                        </colgroup> 
-                                        <tr class="title" style="height: 37px;padding-top:0">  
-                                            <td><div class = "header-text">群id</td>
-                                            <td><div class = "header-text">owner</td>
-                                            <td><div class = "header-text">code</td>
-                                            <td><div class = "header-text">blinds<br/></td>
-                                            <td><div class = "header-text" style="text-align: center;"  >推荐</td>
-                                            <td><div class = "header-text">保险模式</td>
-                                            <td><div class = "header-text" style="text-align: center;">群类型</td>
-                                            <td class="mark1" style="text-align: center;"><div>状态</td>
-                                            <td><div class = "header-text">创建时间</td>
-                                            <td><div class = "header-text">最大底池</td>
-                                            <td><div class = "header-text">总买入</td>
-                                            <td><div class = "header-text">总手数</td>
-                                            <td><div class = "header-text">服务器组</td>
-                                            <td><div class = "header-text">小盲注</td>
-                                            <td><div class = "header-text">带入控制</td>
-                                            <td><div class = "header-text">游戏模式</td>
-                                            <td><div class = "header-text">带入记分牌</td>
-                                            <td><div class = "header-text">单桌人数</td>
-                                            <td><div class = "header-text">报名费</td>
-                                            <td><div class = "header-text">涨盲时间</td>
-                                            <td><div class = "header-text">比赛时长</td>
-                                            <td><div class = "header-text">结束时间</td>
-                                            <td><div class = "header-text">结束方式</td>
-                                            <td><div class = "header-text">前注</td>
-                                            <td><div class = "header-text">比赛开始时间</td>
-                                            <td><div class = "header-text">比赛大厅id</td>
-                                            <td><div class = "header-text">总奖池</td>
-                                            <td><div class = "header-text">总参与人数</td>
-                                            <td><div class = "header-text">结束时的盲注级别</td>
-                                            <td><div class = "header-text">出现级别</td>
-                                            <td><div class = "header-text" style="text-align: center;"  >重构</td>
-                                            <td><div class = "header-text" style="text-align: center;"  >休息模式</td>
-                                            <td><div class = "header-text" style="text-align: center;"  >增购</td>
-                                            <td><div class = "header-text">最小带入记分牌</td>
-                                            <td><div class = "header-text">最大带入记分牌</td>
-                                            <td><div class = "header-text">总代入记分牌</td>
-                                            <td><div class = "header-text">比赛最大带入筹码</td>
-                                            <td><div class = "header-text" style="text-align: center;"  >自动</td>
-                                            <td><div class = "header-text">猎人赛模式</td>
-                                            <td><div class = "header-text">赏金比例</td>
-                                            <td><div class = "header-text" style="text-align: center;">部落id</td>
-                                            <td><div class = "header-text" style="text-align: center;">牌局类型</td>
-                                        </tr> 
-                                        <foreach name="list" item="v">
-                                          <tr bgcolor="#FFFFFF"> 
-                                            <td ><div>{$v.tid}</div></td>
-                                            <td ><div>{$v.owner}</div></td>
-                                            <td ><div>{$v.code}</div></td>
-                                            <td ><div>{$v.blinds}</div></td>
-                                            <td ><div style="text-align: center;">
-                                            <button class="btn btn-info freeze {$v.recommend}"  onclick="isRecommend('{$v.id}','{$v.is_recommend}','{$v.name}')">{$v.is_recommend_1}</button>
-                                            </div></td>
-                                            <td ><div>{$v.tilt_mode}</div></td>
-                                            <td ><div style="text-align: center;">{$v.type}</div></td>
-                                            <td class="mark1"><div style="text-align: center;">{$v.status}</div></td>
-                                            <td ><div>{$v.create_time}</div></td>
-                                            <td ><div>{$v.max_pot}</div></td> 
-                                            <td ><div>{$v.all_buys}</div></td>
-                                            <td ><div>{$v.bouts}</div></td>
-                                            <td ><div>{$v.server}</div></td>
-                                            <td ><div>{$v.sblinds}</div></td>
-                                            <td ><div>{$v.is_control}</div></td>
-                                            <td ><div>{$v.game_mode}</div></td>
-                                            <td ><div>{$v.match_chips}</div></td>
-                                            <td ><div>{$v.match_player}</div></td>
-                                            <td ><div>{$v.match_checkin_fee}</div></td> 
-                                            <td ><div>{$v.match_duration}</div></td>
-                                            <td ><div>{$v.total_time}</div></td>
-                                            <td ><div>{$v.end_time}</div></td>
-                                            <td ><div>{$v.end_type}</div></td>
-                                            <td ><div>{$v.ante}</div></td>
-                                            <td ><div>{$v.begin_time}</div></td>
-                                            <td ><div>{$v.room_id}</div></td>
-                                            <td ><div>{$v.total_chips}</div></td>
-                                            <td ><div>{$v.total_player}</div></td> 
-                                            <td ><div>{$v.sblinds_index}</div></td>
-                                            <td ><div>{$v.match_level}</div></td>
-                                            <td ><div style="text-align: center;">{$v.match_rebuy_cnt}</div></td>
-                                            <td ><div style="text-align: center;">{$v.rest_mode}</div></td>
-                                            <td ><div style="text-align: center;">{$v.match_addon}</div></td>
-                                            
-                                            <td ><div>{$v.min_buy_chips}</div></td>
-                                            <td ><div>{$v.max_buy_chips}</div></td>
-                                            <td ><div>{$v.total_buy_chips}</div></td>
-                                            <td ><div>{$v.match_max_buy_cnt}</div></td>
-                                            <td ><div style="text-align: center;">{$v.is_auto}</div></td>
-                                            <td ><div>{$v.ko_mode}</div></td>
-                                            <td ><div>{$v.ko_reward_rate}</div></td>
-                                            <td ><div style="text-align: center;">{$v.horde_id}</div></td>
-                                            <td ><div style="text-align: center;">{$v.club_channel}</div></td>
-
-                                            
-                                          </tr>
-                                        </foreach> 
-                                    </table>  
-                                </div>  
-                            </div>    
-                           <div style="margin:0 auto">{$page}</div>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">牌局名称:</label>
+                            <input type="hidden" class="form-control operate" name="field-id" data-name="name" value="=" readonly="">
+                            <input type="text" class="form-control" name="name" value="{:I('name')}"  id="name">
                         </div>
-                    </div>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">牌局状态:</label>
+                            <select name="status" class="form-control" id="status" style="border-radius:2px;height: 31px;">
+                                <option value="0">等待</option>
+                                <option value="1">开始</option>
+                                <option value="2">结束</option>
+                                <option value="3">解散</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin:5px">
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-success" style="background: #18bc9c;border-radius:3px;height:30px;">搜 索</button> 
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div> -->
+        </div>
+        <div class="fixed-table-container" ><!-- table 表格-->
+            <!-- <div class="fixed-table-body"> -->
+                <div class="row" style="margin-left: 20px;">
+                    <div class = "design-grid-panel"> 
+                        <div class = "grid-container grid-header-left" style = "width: 19%;height:0.1px;">  
+                            <table  cellspacing = "0" style = "width:100px">  
+                                <colgroup>  
+                                    <col style = "width:99px"></col>  
+                                </colgroup>  
+                                <tr>  
+                                    <td><div class = "header-text"></div></td>  
+                                </tr>  
+                            </table>  
+                        </div> 
+                        <div class = "grid-container grid-header-right" style = "width: 81%;height:0.1px;">
+                            <table  cellspacing = "0"  id = "header-right-table" style="width:900px;">  
+                                <colgroup>  
+                                    <col style = "width:130px"></col>  
+                                    <col style = "width:130px"></col>  
+                                    <col style = "width:130px"></col>  
+                                    <col style = "width:130px"></col>  
+                                </colgroup>  
+                                <tr>  
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+                                    <td><div class = "header-text"></td>
+
+                                </tr>  
+                            </table>  
+                        </div>
+                        <div class = "grid-container grid-body-left" style = "width: 19%; height: 630px;border-top:0">  
+                            <table cellspacing = "0" id = "body-left-table" style = "width:100%">  
+                                <colgroup>  
+                                    <col style = "width:4%"></col> 
+                                    <col style = "width:4%"></col>  
+                                    <col style = "width:11%"></col>
+                                </colgroup> 
+                                <tr class="title" style="height: 37px;border-top:0">
+                                    <td><div class="header-text">操作</div></td>
+                                    <td><div class="header-text">牌局id</div></td>
+                                    <td><div class="header-text">牌局名称</div></td>
+                                </tr>
+                                <foreach name="columns" item="vo"> 
+                                    <tr>
+                                        <td><div style="display: {$vo.display}">
+                                        <button class="btn btn-info freeze"  onclick="dissolve('{$vo.id}')">解散</button></div></td>
+                                        <td><div>{$vo.id}</div></td>
+                                        <td><div>{$vo.name}</div></td>
+                                    </tr>
+                                </foreach>  
+                                 
+                            </table>  
+                        </div> 
+                        <div class = "grid-container grid-body-right" style = "width: 81%; height: 630px; overflow: auto;border-top:0" onscroll = "onScrollDiv(this)" >  
+                            <table cellspacing = "0"  id = "body-right-table">  
+                                <colgroup>  
+                                    <col style = "width:13%"></col>  
+                                    <col style = "width:13%"></col>  
+                                    <col style = "width:13%"></col>  
+                                    <col style = "width:13%"></col>  
+                                </colgroup> 
+                                <tr class="title" style="height: 37px;padding-top:0">  
+                                    <td><div class = "header-text">群id</td>
+                                    <td><div class = "header-text">owner</td>
+                                    <td><div class = "header-text">code</td>
+                                    <td><div class = "header-text">blinds<br/></td>
+                                    <td><div class = "header-text" style="text-align: center;"  >推荐</td>
+                                    <td><div class = "header-text">保险模式</td>
+                                    <td><div class = "header-text" style="text-align: center;">群类型</td>
+                                    <td class="mark1" style="text-align: center;"><div>状态</td>
+                                    <td><div class = "header-text">创建时间</td>
+                                    <td><div class = "header-text">最大底池</td>
+                                    <td><div class = "header-text">总买入</td>
+                                    <td><div class = "header-text">总手数</td>
+                                    <td><div class = "header-text">服务器组</td>
+                                    <td><div class = "header-text">小盲注</td>
+                                    <td><div class = "header-text">带入控制</td>
+                                    <td><div class = "header-text">游戏模式</td>
+                                    <td><div class = "header-text">带入记分牌</td>
+                                    <td><div class = "header-text">单桌人数</td>
+                                    <td><div class = "header-text">报名费</td>
+                                    <td><div class = "header-text">涨盲时间</td>
+                                    <td><div class = "header-text">比赛时长</td>
+                                    <td><div class = "header-text">结束时间</td>
+                                    <td><div class = "header-text">结束方式</td>
+                                    <td><div class = "header-text">前注</td>
+                                    <td><div class = "header-text">比赛开始时间</td>
+                                    <td><div class = "header-text">比赛大厅id</td>
+                                    <td><div class = "header-text">总奖池</td>
+                                    <td><div class = "header-text">总参与人数</td>
+                                    <td><div class = "header-text">结束时的盲注级别</td>
+                                    <td><div class = "header-text">出现级别</td>
+                                    <td><div class = "header-text" style="text-align: center;"  >重构</td>
+                                    <td><div class = "header-text" style="text-align: center;"  >休息模式</td>
+                                    <td><div class = "header-text" style="text-align: center;"  >增购</td>
+                                    <td><div class = "header-text">最小带入记分牌</td>
+                                    <td><div class = "header-text">最大带入记分牌</td>
+                                    <td><div class = "header-text">总代入记分牌</td>
+                                    <td><div class = "header-text">比赛最大带入筹码</td>
+                                    <td><div class = "header-text" style="text-align: center;"  >自动</td>
+                                    <td><div class = "header-text">猎人赛模式</td>
+                                    <td><div class = "header-text">赏金比例</td>
+                                    <td><div class = "header-text" style="text-align: center;">部落id</td>
+                                    <td><div class = "header-text" style="text-align: center;">牌局类型</td>
+                                </tr> 
+                                <foreach name="list" item="v">
+                                  <tr bgcolor="#FFFFFF"> 
+                                    <td ><div>{$v.tid}</div></td>
+                                    <td ><div>{$v.owner}</div></td>
+                                    <td ><div>{$v.code}</div></td>
+                                    <td ><div>{$v.blinds}</div></td>
+                                    <td ><div style="text-align: center;">
+                                    <button class="btn btn-info freeze {$v.recommend}"  onclick="isRecommend('{$v.id}','{$v.is_recommend}','{$v.name}')">{$v.is_recommend_1}</button>
+                                    </div></td>
+                                    <td ><div>{$v.tilt_mode}</div></td>
+                                    <td ><div style="text-align: center;">{$v.type}</div></td>
+                                    <td class="mark1"><div style="text-align: center;">{$v.status}</div></td>
+                                    <td ><div>{$v.create_time}</div></td>
+                                    <td ><div>{$v.max_pot}</div></td> 
+                                    <td ><div>{$v.all_buys}</div></td>
+                                    <td ><div>{$v.bouts}</div></td>
+                                    <td ><div>{$v.server}</div></td>
+                                    <td ><div>{$v.sblinds}</div></td>
+                                    <td ><div>{$v.is_control}</div></td>
+                                    <td ><div>{$v.game_mode}</div></td>
+                                    <td ><div>{$v.match_chips}</div></td>
+                                    <td ><div>{$v.match_player}</div></td>
+                                    <td ><div>{$v.match_checkin_fee}</div></td> 
+                                    <td ><div>{$v.match_duration}</div></td>
+                                    <td ><div>{$v.total_time}</div></td>
+                                    <td ><div>{$v.end_time}</div></td>
+                                    <td ><div>{$v.end_type}</div></td>
+                                    <td ><div>{$v.ante}</div></td>
+                                    <td ><div>{$v.begin_time}</div></td>
+                                    <td ><div>{$v.room_id}</div></td>
+                                    <td ><div>{$v.total_chips}</div></td>
+                                    <td ><div>{$v.total_player}</div></td> 
+                                    <td ><div>{$v.sblinds_index}</div></td>
+                                    <td ><div>{$v.match_level}</div></td>
+                                    <td ><div style="text-align: center;">{$v.match_rebuy_cnt}</div></td>
+                                    <td ><div style="text-align: center;">{$v.rest_mode}</div></td>
+                                    <td ><div style="text-align: center;">{$v.match_addon}</div></td>
+                                    <td ><div>{$v.min_buy_chips}</div></td>
+                                    <td ><div>{$v.max_buy_chips}</div></td>
+                                    <td ><div>{$v.total_buy_chips}</div></td>
+                                    <td ><div>{$v.match_max_buy_cnt}</div></td>
+                                    <td ><div style="text-align: center;">{$v.is_auto}</div></td>
+                                    <td ><div>{$v.ko_mode}</div></td>
+                                    <td ><div>{$v.ko_reward_rate}</div></td>
+                                    <td ><div style="text-align: center;">{$v.horde_id}</div></td>
+                                    <td ><div style="text-align: center;">{$v.club_channel}</div></td>
+                                  </tr>
+                                </foreach> 
+                            </table>  
+                        </div>  
+                    </div>    
+                   <div style="margin:0 auto">{$page}</div>
                 </div>
             </div>
         </div>
     </div>
-    <include file="Public/footer"/>
-</div>
+
+
+
+
+
+
+
+
+
 <include file="Public/footerjs"/>
 
 <div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;display: none">

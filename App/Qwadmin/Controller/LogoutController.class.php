@@ -18,7 +18,8 @@ class LogoutController extends ComController
         cookie('auth', null);
         session('uid',null);
         $url = U("login/index");
-        header("Location: {$url}");
+        //header("Location: {$url}");
+        $this->redirect('Login/index');
         exit(0);
     }
 }

@@ -22,7 +22,6 @@ class CacheController extends ComController
         $this->rmdirr(RUNTIME_PATH); 
         $this->success('系统缓存清除成功！');
     }
-
     //递归删除缓存信息
 
     public function rmdirr($dirname)

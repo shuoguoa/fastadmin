@@ -1,0 +1,160 @@
+<include file="Public/head"/>
+    <div class="bootstrap-table1">
+        <!-- <div class="fixed-table-toolbar"></div> -->
+        <!-- <div class="fixed-table-toolbar">
+            <div class="commonsearch-table" >
+                <form class="form-inline form-commonsearch nice-validator n-default" action="{:U('UserAmount/Order')}" method="post" novalidate="novalidate">
+                    <fieldset>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">用户搜索:</label>
+                            <select name="field" class="form-control">
+                            <option <if condition="I('field') eq user">selected</if> value="user">用户名</option>
+                            <option <if condition="I('field') eq phone">selected</if> value="phone">电话</option>
+                            <option <if condition="I('field') eq qq">selected</if> value="qq">QQ</option>
+                            <option <if condition="I('field') eq email">selected</if> value="email">邮箱</option>
+                        </select>
+                        </div>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">排序:</label>
+                            <select name="order" class="form-control">
+                                <option <if condition="I('order') eq asc">selected</if> value="asc">注册时间升</option>
+                                <option <if condition="I('order') eq desc">selected</if> value="desc">注册时间降</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin:5px">
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-success form-button" >搜 索</button> 
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin:5px">
+                            <div class="col-sm-12 text-center">
+                                <a class="btn btn-info form-button" href="{:U('add')}" value="">新增</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div> -->
+        <div class="fixed-table-container" style="padding-bottom: 0px;">
+            <div class="fixed-table-body">
+                     <table id="table" class="table table-striped table-bordered table-hover" style="width: 100%;margin-top: 0"> 
+                        <thead> 
+                            <tr>
+                               <th data-field="id" class="table-th">
+                                    <div class="th-inner ">id</div>
+                                    <div class="fht-cell"></div>
+                                </th>
+                                <th data-field="id" class="table-th">
+                                    <div class="th-inner ">用户</div>
+                                    <div class="fht-cell"></div>
+                                </th>
+                                <th data-field="id-1" class="table-th-1">
+                                    <div class="th-inner ">时间</div>
+                                    <div class="fht-cell"></div>
+                                </th>
+                                <th class="table-th-1" data-field="pid">
+                                    <div class="th-inner ">IP</div>
+                                    <div class="fht-cell"></div>
+                                </th>
+                                <th class="table-th-1" data-field="status">
+                                    <div class="th-inner ">日志</div>
+                                    <div class="fht-cell"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="data-listidx">
+                            <volist name="list" id="val">
+                                <tr data-index="{$val['id']}"> 
+                                    <td class="tbody-td">{$val['id']}
+                                    </td>
+                                    <td class="tbody-td">{$val['name']}</td>
+                                    <td class="tbody-td-1">{$val['t']|date="Y-m-d H:i:s",###}</td>
+                                    <td class="tbody-td-1">{$val['ip']}</td>
+                                    <td class="tbody-td-1">{$val['log']}</td> 
+                                </tr>
+                            </volist>
+                        </tbody>
+                    </table>              
+            </div>
+            <!-- <div class="cf">
+                <input id="submit" class="btn btn-info" type="button" value="删除">
+            </div> -->
+            <div>{$page}</div>
+        </div>
+    </div>
+</div>
+
+<include file="Public/footerjs"/>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    $(function () {
+        $(".group").click(function () {
+            $(this).addClass('hide');
+            $(this).parent().find(".groupselect").removeClass('hide');
+        })
+        $(".groupselect").on("change", function () {
+            var ob = $(this);
+            var gid = ob.val();
+            var uid = ob.parent().find('.group').attr('val');
+            $.get("{:U('update')}?ajax=yes&uid=" + uid + "&gid=" + gid, function (data) {
+                var text = ob.find("option:selected").text();
+                ob.parent().find(".group").removeClass('hide').html(text);
+                ob.addClass('hide');
+            });
+        })
+
+        $(".check-all").click(function () {
+            $(".uids").prop("checked", this.checked);
+        });
+        $(".uids").click(function () {
+            var option = $(".ids");
+            option.each(function (i) {
+                if (!this.checked) {
+                    $(".check-all").prop("checked", false);
+                    return false;
+                } else {
+                    $(".check-all").prop("checked", true);
+                }
+            });
+        });
+        $("#submit").click(function () {
+            bootbox.confirm({
+                title: "系统提示",
+                message: "是否要删除所选用户？",
+                callback: function (result) {
+                    if (result) {
+                        $("#form").submit();
+                    }
+                },
+                buttons: {
+                    "cancel": {"label": "取消"},
+                    "confirm": {
+                        "label": "确定",
+                        "className": "btn-danger"
+                    }
+                }
+            });
+        });
+        $(".del").click(function () {
+            var url = $(this).attr('val');
+            bootbox.confirm({
+                title: "系统提示",
+                message: "是否要删除该用户?",
+                callback: function (result) {
+                    if (result) {
+                        window.location.href = url;
+                    }
+                },
+                buttons: {
+                    "cancel": {"label": "取消"},
+                    "confirm": {
+                        "label": "确定",
+                        "className": "btn-danger"
+                    }
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

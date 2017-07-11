@@ -102,13 +102,13 @@ class Page{
         //第一页
         $the_first = '';
         if($this->totalPages > $this->rollPage && ($this->nowPage - $now_cool_page) >= 1){
-            $the_first = '<li><a href="' . $this->url(1) . '">' . $this->config['first'] . '</a></li>';
+            $the_first = '<li><a style="border-bottom-left-radius:3px;border-top-left-radius:3px;" href="' . $this->url(1) . '">' . $this->config['first'] . '</a></li>';
         }
 
         //最后一页
         $the_end = '';
         if($this->totalPages > $this->rollPage && ($this->nowPage + $now_cool_page) < $this->totalPages){
-            $the_end = '<li><a href="' . $this->url($this->totalPages) . '">' . $this->config['last'] . '</a></li>';
+            $the_end = '<li><a style="border-bottom-right-radius:3px;border-top-right-radius:3px;" href="' . $this->url($this->totalPages) . '">' . $this->config['last'] . '</a></li>';
         }
 
         //数字连接

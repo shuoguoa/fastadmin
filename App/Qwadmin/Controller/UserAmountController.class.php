@@ -13,7 +13,7 @@ use Think\Controller;
 class UserAmountController extends ComController
 {
     public function index()
-    {
+    { echo __ROOT__;exit;
         I('uid') ? $where['user.id'] = I('uid') : '';
         I('nickname') ? $where['user.nickname'] = I('nickname') : '';
         I('iphone') ? $where['user.username'] = I('iphone') : '';
@@ -293,7 +293,7 @@ class UserAmountController extends ComController
             $point[] = $value['money'];
             $script[] = $value['time']."<br/>".$value['money'];
         }
-        
+        //echo I('flag');exit;
         $title = I('flag') == 1 ? '平台充值统计' : '公众号充值统计';
         $action = I('flag') == 1 ? 'Order' : 'OfficialAccountsOrder';
         $this->assign('title', $title);

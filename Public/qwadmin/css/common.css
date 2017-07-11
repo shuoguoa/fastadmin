@@ -17,7 +17,7 @@ input[type=text]{
     line-height: 30px;
     text-indent: 5px;
     outline: none;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     border: 1px solid #d2ebf3;
 }
 
@@ -35,7 +35,7 @@ input[type=password]{
     line-height: 30px;
     text-indent: 5px;
     outline: none;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     border: 1px solid #d2ebf3;
 }
 

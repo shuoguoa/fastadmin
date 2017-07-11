@@ -1,67 +1,42 @@
+<script src="__PUBLIC__/qwadmin/js/My97DatePicker/WdatePicker.js"></script>
 <include file="Public/head"/>
 <body class="no-skin">
-<include file="Public/header"/>
-<script src="__PUBLIC__/qwadmin/js/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript">
-    try {
-        ace.settings.check('main-container', 'fixed')
-    } catch (e) {
-    }
-</script>
-<style>
-    .grouptd {position: relative;}
-    .group {display: inline-block;width: 100%;}
-    .groupselect {position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;}
-    input{text-align: left;}
-    td{text-align: left; }
-    input{border: none;}
-</style>
-
-
-<div class="main-container" id="main-container">
-    <include file="Public/sidebar"/>
-    <div class="main-content">
-        <div class="main-content-inner">
-            <include file="Public/breadcrumbs"/>
-            <div class="page-content">
-                <include file="Public/set"/>
-                <div class="row" style="margin-left: 18px;float: left;">
-                <form class="form-inline form2" action="{:U('UserAmount/getGraphByDate')}" method="post" style="float: left;">
-                    <label class="inline">&nbsp;&nbsp;日期 : </label>
-                    <input id="bgn_time" type="text" onClick="WdatePicker({dateFmt:'yyyy-M-d'})" name="bgn_time" value="{:I(bgn_time)}" placeholder="格式:2017-06-26" class="form-control">
-
-                    <label class="inline">&nbsp;&nbsp;至 : </label>
-                    <input id="end_time" type="text" onClick="WdatePicker({dateFmt:'yyyy-M-d'})" name="end_time" value="{:I(end_time)}" placeholder="格式:2017-06-26"  class="form-control">
-                    <input type="hidden" name="mark" id="mark" value="">
-                    <button type="submit" class="btn btn-purple btn-sm btn1">
-                        日统计
-                    </button>
-                    <button type="submit" class="btn btn-purple btn-sm btn2">
-                        月统计
-                    </button>
+    <div class="bootstrap-table1">
+        <div class="fixed-table-toolbar">
+            <div class="commonsearch-table" >
+                <form class="form-inline form-commonsearch nice-validator n-default" action="{:U('UserAmount/getGraphByDate')}" method="post" novalidate="novalidate">
+                    <fieldset>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">日期:</label>
+                            <input type="text" class="form-control" name="bgn_time" value="{:I('bgn_time')}" id="bgn_time" placeholder="格式:2017-06-26" onClick="WdatePicker({dateFmt:'yyyy-M-d'})">
+                        </div>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">至</label>
+                            <input type="text" class="form-control" name="end_time" value="{:I('end_time')}" id="end_time" placeholder="格式:2017-06-27" onClick="WdatePicker({dateFmt:'yyyy-M-d'})">
+                        </div>
+                        <div class="form-group" style="margin:5px">
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-success btn1" style="background: #18bc9c;border-radius:3px;height:30px;">日统计</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="btn btn-success btn2" style="background: #18bc9c;border-radius:3px;height:30px;">月统计</button>
+                            </div>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="space-4"></div>
-                        <div class="row" style="margin-left: 20px;"> 
-                        <button id="reback" style="float:right;margin-right:300px;">返回</button>
-                            <div id="mainContent">
-                                <div class="contentBox" style="padding-top: 10px;padding-left:50px;">
-                                    <p>
-                                        <h1 style="font-size: 18px;color:#3fb77b">充值统计&nbsp;&nbsp;<i class="fa fa-line-chart"></i></h1>
-                                        
-                                    </p>
-                                    <div class="row">
-                                        <div class="div-80 m-auto">
-                                            <!-- <div class="panel panel-default"> -->
-                                            <div>
-                                                <div id="main" style="height:400px;width: 1000px"></div>
-                                                <div id="sex" style="height:400px;min-width:70%;width:auto"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        </div>
+        <div class="fixed-table-container" style="padding-bottom: 0px;">
+            <div class="fixed-table-body">
+                <div class="contentBox" style="padding-top: 10px;padding-left:50px;">
+                    <p>
+                        <h1 style="font-size: 18px;color:#3fb77b">充值统计&nbsp;&nbsp;<i class="fa fa-line-chart"></i></h1>
+                       <button id="reback" class="btn btn-success" style="float:right;margin-right:300px;border-radius: 3px">返回</button> 
+                    </p>
+                    <div class="row">
+                        <div class="div-80 m-auto">
+                            <!-- <div class="panel panel-default"> -->
+                            <div>
+                                <div id="main" style="height:400px;width: 1000px"></div>
+                                <div id="sex" style="height:400px;min-width:70%;width:auto"></div>
                             </div>
                         </div>
                     </div>
@@ -69,14 +44,12 @@
             </div>
         </div>
     </div>
-    <include file="Public/footer"/>
 </div>
-<include file="Public/footerjs"/>
 </body>
 </html>
 
-<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<!-- ECharts单文件引入 -->
+<include file="Public/footerjs"/>
+
 <script src="__PUBLIC__/qwadmin/js/jquery-1.9.1.min.js"></script>
 <script>//alert(8989);
     $(function(){
@@ -159,3 +132,5 @@ $('Document').ready(function(){
 });
 
 </script>
+</body>
+</html>

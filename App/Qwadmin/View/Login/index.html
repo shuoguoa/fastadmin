@@ -5,59 +5,71 @@
     <meta http-equiv="pragma" content="no-cache"/>
     <meta http-equiv="X-UA-Compatible" content="IE=8">
     <script src="__PUBLIC__/qwadmin/js/jquery-1.9.1.min.js"></script>
-    <script src="__PUBLIC__/qwadmin/js/plugins/layer/layer.js"></script>
-    <script src="__PUBLIC__/qwadmin/js/jquery.selectlist.js"></script>
+   <!--  <script src="__PUBLIC__/qwadmin/js/plugins/layer/layer.js"></script>
+    <script src="__PUBLIC__/qwadmin/js/jquery.selectlist.js"></script> -->
     <script src="__PUBLIC__/qwadmin/js/jquery-ui.js"></script>
     <link href="__PUBLIC__/qwadmin/css/common.css" rel="stylesheet"/>
+    <link href="__PUBLIC__/qwadmin/css/font-awesome.css" rel="stylesheet"/>
     <link href="__PUBLIC__/qwadmin/css/login.css" rel="stylesheet"/>
     <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js">
     </script>
     <title>用户登录(User Login )</title>
 </head>
-<body style="height: 100% ">
+<body style="height: 100%;">
 
-<header class="top">
+<!-- <header class="top">
     <article class="main">
         <h2>管理后台</h2>
     </article>
-</header>
+</header> -->
+<div class="container">
+        <div class="login-wrapper">
+            <div class="login-screen">
+                <div class="well">
+                    <div class="login-form">
+                        <img id="profile-img" class="profile-img-card" src="__PUBLIC__/qwadmin/images/avatar.png">
+                        <p id="profile-name" class="profile-name-card"></p>
+                        
+                        <form action="{:U('login/login')}" method="post" id="login-form" class="nice-validator n-default n-bootstrap" novalidate="novalidate">
+                            <div id="errtips" class="hide msg-container"></div>
+                            <input type="hidden" name="__token__" value="8fd10a94d2c66e7cc329465b80b69702" data-target="#errtips">                                <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+                                <input type="text" class="form-control" id="pd-form-username" placeholder="用户名" name="user" autocomplete="off" value="" aria-required="true" data-target="#errtips">
+                            </div>
 
-<section class="main login-main clear">
-    <aside class="left fl">
-        <img width="380" height="390" src="__PUBLIC__/qwadmin/images/login.png" alt="ad" class="ad"/>
-    </aside>
-    <aside class="right fr">
-        <article class="login-box">
-            <form action="{:U('login/login')}" method="post">
-                <ul class="form-items">
-                    <li>
-                        <input type="text" name="user" id="username" placeholder="username"/>
-                        <span>not null</span>
-                    </li>
-                    <li>
-                        <input type="password" name="password" id="password" placeholder="password"/>
-                        <span>not null</span>
-                    </li>
-                    <li>
-                        <img src="{:U('login/verify')}" onclick="this.src = '{:U('login/verify')}'" alt="verification code" title="Click the refresh"/><span>点验证码刷新</span>
-                    </li>
-                    <li>
-                        <input type="text" name="verify" id="validation" placeholder="input validation"/>
-                        <span>not null</span>
-                    </li>
-                    <li>
-                        <input type="submit" id="submit" value="LOGIN"/>
-                    </li>
-                </ul>
-            </form>
-        </article>
-    </aside>
-</section>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                                <input type="password" class="form-control" id="pd-form-password" placeholder="密码" name="password" autocomplete="off" value="" aria-required="true" data-target="#errtips">
+                            </div>
+                            <div class="input-group">
+                                <input type="text" name="verify" id="validation" placeholder="验证码"/>
+                                &nbsp;&nbsp;
+                                <img src="{:U('login/verify')}" onclick="this.src = '{:U('login/verify')}'" alt="verification code" title="Click the refresh"/>
+                                &nbsp;&nbsp;点验证码刷新
+                                
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label class="inline" for="keeplogin">
+                                    <input type="checkbox" name="keeplogin" id="keeplogin" value="1" data-target="#errtips">
+                                    保持会话                                    </label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-lg btn-block">登 录</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+ 
+
 </body>
-
 </html>
-<!-- 引入公共脚文件 -->
-<include file="Public:footer" />
+
 
 <script type="text/javascript">
  $(function () {

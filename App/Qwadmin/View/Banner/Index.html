@@ -1,7 +1,6 @@
 
 <include file="Public/head"/>
 <body class="no-skin">
-<include file="Public/header"/>
 <div class="main-container" id="main-container">
     <script type="text/javascript">
         try {
@@ -10,84 +9,83 @@
         }
     </script>
 
-    <include file="Public/sidebar"/>
     <div class="main-content">
         <div class="main-content-inner">
             <include file="Public/breadcrumbs"/>
-            <div class="page-content">
-                <include file="Public/set"/>
-                <style>
-                    .grouptd {
-                        position: relative;
-                    }
-                    .group {
-                        display: inline-block;
-                        width: 100%;
-                    }
-                    .groupselect {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        border: 0;
-                    }
-                    input{
-                        text-align: left;
-                    }
-                    td{
-                        text-align: left;
-                    }
-                    input {
-                        border: none;
-                    }
+            <include file="Public/set"/>
+            <style>
+                .grouptd {
+                    position: relative;
+                }
+                .group {
+                    display: inline-block;
+                    width: 100%;
+                }
+                .groupselect {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: 0;
+                }
+                input{
+                    text-align: left;
+                }
+                td{
+                    text-align: left;
+                }
+                input {
+                    border: none;
+                }
 
-                </style>
-                <div class="row" >
-                    <a href="{:U('Banner/Uploadpic')}" class="btn btn-purple btn-sm addRow" style="margin-left: 50px;float: left;text-decoration: none">上传图片</a>
+            </style>
+            <div class="bootstrap-table1">
+                <div class="fixed-table-toolbar">
+                    <a href="{:U('Banner/Uploadpic')}" class="btn btn-purple btn-sm addRow form-button" >上传图片</a>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="space-4"></div>
-                        <div class="row" style="margin-left: 20px;">
-                           
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
+            </div>
+            <div class="fixed-table-container" style="padding-bottom: 0px;">
+                <div class="fixed-table-body">
+                           <div class="col-xs-12">
+                    <div class="space-4"></div>
+                    <div class="row" style="margin-left: 20px;">
+                       
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th >ID</th>
+                                        <th >URL</th>
+                                        <th >IMG</th>
+                                        <th >SORT</th>
+                                        <th style="text-align: center !important;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                           
+                                    <volist name="list" id="val">
                                         <tr>
-                                            <th >ID</th>
-                                            <th >URL</th>
-                                            <th >IMG</th>
-                                            <th >SORT</th>
-                                            <th style="text-align: center !important;">操作</th>
+                                            <td >{$val['id']}</td>
+                                            <td >{$val['url']}</td>
+                                            <td >{$val['img']}</td>
+                                            <td >{$val['sort']}</td>
+                                            <td style="text-align: center !important" >
+                                                <button class="btn btn-info recharge" id="dialog-recharge" onclick="update('{$val['id']}','{$val['url']}','{$val['img']}','{$val['sort']}')">修改</button>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                <!----> <button class="btn btn-info recharge" id="dialog-recharge" onclick="del('{$val['id']}','{$val['img']}')">删除</button> 
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>                           
-                                        <volist name="list" id="val">
-                                            <tr>
-                                                <td >{$val['id']}</td>
-                                                <td >{$val['url']}</td>
-                                                <td >{$val['img']}</td>
-                                                <td >{$val['sort']}</td>
-                                                <td style="text-align: center !important" >
-                                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="update('{$val['id']}','{$val['url']}','{$val['img']}','{$val['sort']}')">修改</button>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                    <!----> <button class="btn btn-info recharge" id="dialog-recharge" onclick="del('{$val['id']}','{$val['img']}')">删除</button> 
-                                                </td>
-                                            </tr>
-                                        </volist>
-                                    </tbody>
-                                </table>
-                            
-                           <div style="margin:0 auto">{$page}</div>
-                        </div>
-                        <!-- PAGE CONTENT ENDS -->
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.page-content -->
+                                    </volist>
+                                </tbody>
+                            </table>
+                        
+                       <div style="margin:0 auto">{$page}</div>
+                    </div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+                </div>
+            </div>
         </div>
     </div><!-- /.main-content -->
-    <include file="Public/footer"/>
-
 </div><!-- /.main-container -->
 
 <div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">

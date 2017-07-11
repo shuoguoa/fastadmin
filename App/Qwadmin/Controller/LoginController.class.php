@@ -14,7 +14,7 @@ namespace Qwadmin\Controller;
 use Qwadmin\Controller\ComController;
 
 class LoginController extends ComController
-{
+{ 
     public function index()
     {
         $flag = $this->check_login();
@@ -77,9 +77,10 @@ class LoginController extends ComController
     public function verify()
     {
         $config = array(
-            'fontSize' => 30, // 验证码字体大小
+            'fontSize' => 12, // 验证码字体大小
             'length' => 4, // 验证码位数
             'useNoise' => false, // 关闭验证码杂点
+            'height' => 30
         );
         $verify = new \Think\Verify($config);
         $verify->entry('login');

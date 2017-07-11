@@ -1,173 +1,173 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title>{$current['title']}-{$Think.CONFIG.title}</title>
-		<meta name="keywords" content="{$Think.CONFIG.keywords}" />
-		<meta name="description" content="{$Think.CONFIG.description}" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-		<include file="Public/head" />
-		
-   </head>
-	<body class="no-skin">
-		<include file="Public/header" />
-		<div class="main-container" id="main-container">
-			<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
-			<include file="Public/sidebar" />
-			<div class="main-content">
-				<div class="main-content-inner">
-					<!-- #section:basics/content.breadcrumbs -->
-					<include file="Public/breadcrumbs" />
+<style type="text/css">
+	.control-label{
+		width: 5%!important;
+	}
+	.form-group{
+		line-height: 10% !important;
+		margin: 5% auto !important;
+	}
+	.panel-heading{
+		text-align: center;
+		background-color:rgb(24, 188, 156) ;
+		height: 50px;
+		font-size: 20px;
+		color: #fff;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+	.form-group{
+		line-height: 6% !important;
+    	margin: 1% auto !important;
+	}
+	.col-sm-2-2 {
+	    width: 25% !important;
+	    line-height: 2.5rem !important;
+	    font-weight: 500 !important;
+	    letter-spacing: 1 !important;
+	}
+	
+	input[type="radio"], input[type="checkbox"] {
+	    margin: 15px 0 0 !important;
+	    margin-top: 1px \9 !important;
+	    line-height: 2rem !important;
+	    font-size: 35px !important;
+	}
+</style>
+<include file="Public/head"/>
+<body class="no-skin">
+    <div class="bootstrap-table1">
+		<div class="col-md-4"  style="width: 100% !important;margin:20px auto!important;height:800px">
+	        <div class="box box-success" style="height: 800px;width:50%;margin: 10px auto auto 20%">
+	            <div class="panel-heading">PUSH &nbsp;&nbsp;MESSAGE</div>
+				<form id="add-form" class="form-horizontal nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="{:U('push')}" novalidate="novalidate">
+				    <div class="form-group">
+				        <label for="name" class="control-label col-xs-12 col-sm-2-2">SCENCE:</label>
+				        <div class="col-xs-12 col-sm-8">
+				            <label for="row[status]-normal">
+				            	<input id="row[status]-normal" name="BETA" type="radio" value="normal"> 测试环境
+				            </label> &nbsp;&nbsp;
+				            <label for="row[status]-hidden">
+				            	<input id="row[status]-hidden" name="CN" type="radio" value="hidden"> 大陆正式
+				            </label>&nbsp;&nbsp;
+				            <label for="row[status]-hidden">
+				            	<input id="row[status]-hidden" name="TW" type="radio" value="hidden"> 台湾正式
+				            </label>     
+				        </div>
+				    </div>
 
-					<!-- /section:basics/content.breadcrumbs -->
-					<div class="page-content">
-						<include file="Public/set" />
+				    <div class="form-group">
+				        <label class="control-label col-xs-12 col-sm-2-2">OS:</label>
+				        <div class="col-xs-12 col-sm-8">
+				            <label for="row[status]-normal">
+				            	<input id="row[status]-normal" checked="checked" name="ANDROID" type="checkbox" value="1"> ANDROID
+				            </label> &nbsp;&nbsp;
+				            <label for="row[status]-hidden">
+				            	<input id="row[status]-hidden" name="IOS" type="checkbox" value="1" checked="checked"> IOS
+				            </label>        
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label for="name" class="control-label col-xs-12 col-sm-2-2">URL:</label>
+				        <div class="col-xs-12 col-sm-8">
+				            <input type="text" class="form-control" id="url" name="url" value="" aria-required="true" placeholder="请输入URL">
+				        </div>
+				    </div>
+				
+				    <div class="form-group">
+				        <label for="name" class="control-label col-xs-12 col-sm-2-2">ALIAS:</label>
+				        <div class="col-xs-12 col-sm-8">
+				            <input type="text" class="form-control" id="alias" name="alias" value="" aria-required="true" placeholder="个推绑定的账号">
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label for="name" class="control-label col-xs-12 col-sm-2-2">TITLE:</label>
+				        <div class="col-xs-12 col-sm-8">
+				            <input type="text" class="form-control" id="title" name="title" value="" aria-required="true" placeholder="请输入通知标题">
+				        </div>
+				    </div>
+				    
+				    <div class="form-group">
+				        <label for="content" class="control-label col-xs-12 col-sm-2-2">CONTENT:</label>
+				        <div class="col-xs-12 col-sm-8">
+				            <textarea name="content" id="conent" cols="30" rows="5" class="form-control" aria-required="true" placeholder="请输入通知内容，最多300个字" maxlength="300"></textarea>
+				        </div>
+				    </div>
 
-						<!-- /section:settings.box -->
-						<div style="margin:2px auto;width:750px;">
-							<div class="col-xs-12 basic-grey" style="height: 780px">
-								<!-- PAGE CONTENT BEGINS -->
-								<form action="{:U('push')}" method="post" class="STYLE-NAME">
-									<h1 align="center">Push Message</h1>
-							<!----> <label style="margin-bottom: 10px !important">
-										<span>SCENE :</span>
-										<div style="padding-left: 160px !important;">
-											<input name="region" value="BETA" type="radio" class="check0" >
-											 &nbsp;&nbsp;<span style="font-weight: 500 !important">BETA</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input name="region" value="CN" type="radio" class="check0" > 
-											&nbsp;&nbsp;<span style="font-weight: 500 !important">CN</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input name="region" value="TW" type="radio" class="check0" > 
-											&nbsp;&nbsp;<span style="font-weight: 500 !important">TW</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</div>
-								    </label> 
-									<label style="display: {$flag0}">
-										<span>Alias :</span>
-										<input type="text" name="alias" id="Alias" placeholder="个推绑定的账号" maxlength="20"  />
-									</label>
-							
-									<label>
-										<span>TITLE :</span>
-										<input type="text" name="title" id="title" placeholder="请输入通知标题，最多200个字" maxlength="200"/>
-									</label>
-									<label>
-										<span>CONTENT :</span>
-										<textarea name="content" id="content" placeholder="请输入通知内容，最多300个字" maxlength="300"></textarea>
-									</label>
-									
-									<label>
-										<span>Expire Time :</span>
-										<input type="text" name="offlineTime" id="offlineTime" value="" placeholder="0-72 小时内的正整数，该时间段内cid在线过用户均可收到通知" maxlength="2"/>
-									</label>
-									<label>
-										<span>URL :</span>
-										<input type="text" name="url" id="url" placeholder="请输入URL"  />
-									</label>
-									<label>
-										<span>OS :</span>
-										<div style="padding-left: 160px !important;">
-											<input name="ANDROID" value="1" type="checkbox" class="check0" checked="checked">
-											 &nbsp;&nbsp;<span style="font-weight: 500 !important">Android</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<input name="IOS" value="1" type="checkbox" class="check0" checked="checked"> 
-											&nbsp;&nbsp;<span style="font-weight: 500 !important">iOS</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</div>
-									</label>
-									<label></label>
-									<label style="margin-top:15px !important;margin-bottom:45px !important;">
-										<span>IMAGE :</span>
-										<div class="col-sm-9">
-											<div class="">{:UpImage("image",350,200,$member['head'])}</div>
-											<span class="middle" style="font-weight: 500 !important">小于1MB的jpg、gif、png、bmp、jpeg</span>
-										</div>
-									</label>
-									<label style="margin-left: 230px !important;margin-top: 270px !important">
-										<span>&nbsp;</span>
-											<input type="hidden" name="region0" value="{$region}">
-											<input type="hidden" name="flag" value="{$flag}">
-										<input type="submit" class="button" value="Send" style="float: center"/>
-									</label>
-								</form>
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div>
-			</div><!-- /.main-content -->
-			<include file="Public/footer" />
-			
-		</div><!-- /.main-container -->
-
-		<include file="Public/footerjs" />
-		<div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
-		    <form  method="post" >
-		        <table align="center">
-		            <tr>
-			            <td align="center">密 码 ：</td>
-			            <td>
-			            	<input type="text" name="password" id="password" value="" style="height: 30px;">
-			            	<input type="hidden" name="flag0" id="flag0" value="{$flag}">
-			            </td>
-		            </tr>
-		         	<tr>
-			            <td  colspan="4" align="center">
-			            <input type="submit" id="submit-addrow" role="button" style="background-color:#6ab6e8;margin-left:10px;margin-top: 10px;width: 55px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 12px;vertical-align: middle;" value="submit">
-			            </td>
-		            </tr>
-		        </table>
-		    </form>
-		</div>
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-		$( "#dialog" ).dialog({
-		    autoOpen: false,
-		    width: 250,
-		    height:140,
-		    title:'推送确认'
-		});
-		
-		$(".submit").click(function(){
-			$("#form").submit();
-		})
-		$(".button").click(function(){
-			var title = $("input[name='title']").val();
-			var content = $("input[name='content']").val();
-			var Expire = $("input[name='offlineTime']").val();
-			var url = $("input[name='url']").val();
-			if (title == '') {
-				alert('缺少标题');
-			}
-			if (content == '') {
-				alert('缺少内容');
-			} 
-			if (Expire == '') {
-				alert('缺少有效期');
-			}
-			if (url == '') {
-				alert('缺少附加连接，确定不需要？');
-			}
-			if (title == '' || content == '' || Expire == ''){
-				alert('标题，内容，有效期 为必填内容');
-				return false;
-			} else {
-				// $( "#dialog" ).dialog( "open" );
-			 //    event.preventDefault();
-			 //    $("#submit-addrow").click(function(){
-			 //    	var password = $("#password").val();
-			 //    	var flag = $("#flag0").val();
-			 //    	$.post("{:U('PushMessage/confirm')}", {flag:flag, password:password}, function(data){   
-		  //              if (data.status == 'ok') {
-		  //                   alert(data.msg);
-		  //                   $("#form").submit();
-		  //               }else {
-		  //                   alert(data.msg);
-		  //                   return false;
-		  //               }
-		  //           });
-			 //    });
-			}
-		});
-		</script>
-	</body>
+				    <div class="form-group" style="margin-bottom: 20px">
+				        <label for="content" class="control-label col-xs-12 col-sm-2-2">IMAGE:</label>
+				        <div class="col-xs-12 col-sm-8">
+				            <div class="" style="margin-bottom: 20px;">{:UpImage("image",350,200,$member['head'])}</div>
+							<span class="middle" style="font-weight: 500 !important;margin-top: 20px;margin-bottom: 20px ">仅支持小于1MB的jpg、gif、png、bmp、jpeg</span>
+				        </div>
+				    </div><br/>
+				    <div class="form-group">
+				        <label for="maximums" class="control-label col-xs-12 col-sm-2-2">EXPIRE TIME:</label>
+				        <div class="col-xs-12 col-sm-8">
+				            <input type="text" class="form-control" id="offlineTime" name="offlineTime" value="" maxlength="2" aria-required="true" placeholder="0-72小时内的正整数,该时间段内cid在线过用户均可收到通知">
+				        </div>
+				    </div>
+				    <div class="form-group" style="margin-top:20px !important">
+				        <label for="name" class="control-label col-xs-12 col-sm-2-2"></label>
+				        <div class="col-xs-12 col-sm-8">
+				        	<button type="reset" class="btn btn-default btn-embossed" style="border-radius:3px;height:30px;margin-right: 160px;">重置</button>
+				            <button type="submit" class="btn btn-success btn-embossed" style="background: #18bc9c;border-radius:3px;height:30px;">确定</button>
+				        </div>
+				    </div>
+				</form>
+	        </div>
+	    </div>
+	</div>
+</body>
 </html>
+<include file="Public/footerjs"/>
+
+<script type="text/javascript">
+	$( "#dialog" ).dialog({
+	    autoOpen: false,
+	    width: 250,
+	    height:140,
+	    title:'推送确认'
+	});
+	
+	$(".submit").click(function(){
+		$("#form").submit();
+	})
+	$(".button").click(function(){
+		var title = $("input[name='title']").val();
+		var content = $("input[name='content']").val();
+		var Expire = $("input[name='offlineTime']").val();
+		var url = $("input[name='url']").val();
+		if (title == '') {
+			alert('缺少标题');
+		}
+		if (content == '') {
+			alert('缺少内容');
+		} 
+		if (Expire == '') {
+			alert('缺少有效期');
+		}
+		if (url == '') {
+			alert('缺少附加连接，确定不需要？');
+		}
+		if (title == '' || content == '' || Expire == ''){
+			alert('标题，内容，有效期 为必填内容');
+			return false;
+		} else {
+			// $( "#dialog" ).dialog( "open" );
+		 //    event.preventDefault();
+		 //    $("#submit-addrow").click(function(){
+		 //    	var password = $("#password").val();
+		 //    	var flag = $("#flag0").val();
+		 //    	$.post("{:U('PushMessage/confirm')}", {flag:flag, password:password}, function(data){   
+	  //              if (data.status == 'ok') {
+	  //                   alert(data.msg);
+	  //                   $("#form").submit();
+	  //               }else {
+	  //                   alert(data.msg);
+	  //                   return false;
+	  //               }
+	  //           });
+		 //    });
+		}
+	});
+</script>

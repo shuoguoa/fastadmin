@@ -18,8 +18,6 @@ class MenuController extends ComController
 
 
         $p = isset($_GET['p']) ? intval($_GET['p']) : '1';
-
-
         $m = M('auth_rule');
         $pagesize = 10;#每页数量
         $offset = $pagesize * ($p - 1);//计算记录偏移量

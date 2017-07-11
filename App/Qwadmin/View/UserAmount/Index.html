@@ -1,176 +1,178 @@
-
 <include file="Public/head"/>
 <body class="no-skin">
-<include file="Public/header"/>
-<div class="main-container" id="main-container">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('main-container', 'fixed')
-        } catch (e) {
-        }
-    </script>
-
-    <include file="Public/sidebar"/>
-    <div class="main-content">
-        <div class="main-content-inner">
-            <include file="Public/breadcrumbs"/>
-            <div class="page-content">
-                <include file="Public/set"/>
-                <style>
-                    .grouptd {
-                        position: relative;
-                    }
-                    .group {
-                        display: inline-block;
-                        width: 100%;
-                    }
-                    .groupselect {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        border: 0;
-                    }
-                    input{
-                        text-align: left;
-                    }
-                    td{
-                        text-align: left;
-                    }
-                    input {
-                        border: none;
-                    }
-
-                </style>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <!-- PAGE CONTENT BEGINS -->
-                        <div class="row" style="margin-left: 18px;">
-                            <form class="form-inline" action="{:U('UserAmount/Index')}" method="post">
-                                <!-- <label class="inline">用户搜索</label> -->
-                                <label class="inline">&nbsp;&nbsp;uid : </label><input type="text" name="uid" value="{:I(uid)}" class="form-control">
-                                <label class="inline">&nbsp;&nbsp;uuid : </label> <input type="text" name="uuid" value="{:I(uuid)}" class="form-control">
-                                <label class="inline">&nbsp;&nbsp;iphone : </label> <input type="text" name="iphone" value="{:I(iphone)}" class="form-control">
-                                <label class="inline">&nbsp;&nbsp;nickname : </label> <input type="text" name="nickname" value="{:I(nickname)}" class="form-control">
-                                <button type="submit" class="btn btn-purple btn-sm">
-                                    <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
-                                    Search
-                                </button>
-                            </form>
+    <div class="bootstrap-table1">
+        <div class="fixed-table-toolbar">
+            <div class="commonsearch-table" >
+                <form class="form-inline form-commonsearch nice-validator n-default" action="{:U('UserAmount/Index')}" method="post" novalidate="novalidate">
+                    <fieldset>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">uuid:</label>
+                            <input type="text" class="form-control" name="uuid" value="{:I('uuid')}"  id="uid">
                         </div>
-                        <div class="space-4"></div>
-                        <div class="row" style="margin-left: 20px;">
-                           
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th >UID</th>
-                                            <th >UUID</th>
-                                            <th >USERNAME</th>
-                                            <th >NICKNAME</th>
-                                            <th >DIAMOND</th>
-                                            <th >COINS</th>
-                                            <th >OS</th>
-                                            <th >第三方类型</th>
-                                            <th style="text-align: center !important;">第三方账号ID</th>
-                                            <th style="text-align: center !important;">操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>                           
-                                        <volist name="list" id="val">
-                                            <tr>
-                                                <td >{$val['id']}</td>
-                                                <td >{$val['uuid']}</td>
-                                                <td >{$val['username']}</td>
-                                                <td >{$val['nickname']}</td>
-                                                <td >{$val['diamond']}</td>
-                                                <td >{$val['coins']}</td>
-                                                <td >{$val['os']}</td>
-                                                <td >{$val['account_type']}</td>
-                                                <td >{$val['account_id']}</td>
-                                                <td style="text-align: center !important" >
-                                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="rechargeCoins('{$val['id']}', '{$val['os']}', '{$val['username']}')">充德州币</button>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="rechargeDia('{$val['id']}', '{$val['os']}', '{$val['username']}')">充钻</button>
-                                                    &nbsp;&nbsp;&nbsp;
-                                                    <button class="btn btn-info freeze"  onclick="freeze('{$val['id']}', '{$val['is_block']}', '{$val['status']}')">{$val['status']}</button>
-                                                    &nbsp;&nbsp;&nbsp;
-                                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="registration('{$val['id']}', '{$val['os']}', '{$val['username']}')">报名</button>
-                                                </td>
-                                            </tr>
-                                        </volist>
-                                    </tbody>
-                                </table>
-                            
-                           <div style="margin:0 auto">{$page}</div>
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">iphone:</label>
+                            <input type="text" class="form-control" name="iphone" value="{:I('iphone')}"  id="iphone">
                         </div>
-                        <!-- PAGE CONTENT ENDS -->
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.page-content -->
+                        <div class="form-group" style="margin: 5px">
+                            <label for="id" class="control-label" style="padding:0 10px">nickname:</label>
+                             <input type="text" class="form-control" name="nickname" value="{:I('nickname')}"  id="nickname">
+                        </div>
+                        <div class="form-group" style="margin:5px">
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-success" style="background: #18bc9c;border-radius:3px;height:30px;">搜 索</button> 
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
         </div>
-    </div><!-- /.main-content -->
-    <include file="Public/footer"/>
+        <div class="fixed-table-container" style="padding-bottom: 0px;">
+            <div class="fixed-table-body">
+                <table id="table" class="table table-striped table-bordered table-hover" style="width: 100%;margin-top: 0"> 
+                    <thead> 
+                        <tr>
+                            <th data-field="id" class="table-th">
+                                <div class="th-inner ">UID</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th data-field="id" class="table-th">
+                                <div class="th-inner ">UUID</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="table-th-1" data-field="pid">
+                                <div class="th-inner ">USERNAME</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="table-th-1" data-field="name">
+                                <div class="th-inner ">NICKNAME</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="table-th" data-field="status">
+                                <div class="th-inner ">DIAMOND</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="table-th" data-field="operate">
+                                <div class="th-inner ">COINS</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="table-th" data-field="operate">
+                                <div class="th-inner ">OS</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="table-th" data-field="operate">
+                                <div class="th-inner ">第三方类型</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="table-th-2" data-field="operate">
+                                <div class="th-inner ">第三方账号ID</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="table-th-1" data-field="operate">
+                                <div class="th-inner ">操作</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="data-listidx">
+                        <volist name="list" id="val">
+                            <tr data-index="{$val['id']}"> 
+                                <td class="tbody-td">{$val['id']}</td> 
+                                <td class="tbody-td">{$val['uuid']}</td> 
+                                <td class="tbody-td-1" style="width: 250px;">{$val['username']}</td>
+                                <td class="tbody-td-1">{$val['nickname']}</td>
+                                <td class="tbody-td">{$val['diamond']}</td> 
+                                <td class="tbody-td">{$val['coins']}</td> 
+                                <td class="tbody-td">{$val['os']}</td>
+                                <td class="tbody-td">{$val['account_type']}</td>
+                                <td class="tbody-td-1" style="width: 250px;">{$val['account_id']}</td>
+                                <td class="tbody-td-1">
+                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="rechargeCoins('{$val['id']}', '{$val['os']}', '{$val['username']}')">充德州币</button>
+                                        &nbsp;&nbsp;&nbsp; 
+                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="rechargeDia('{$val['id']}', '{$val['os']}', '{$val['username']}')">充钻</button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-info freeze"  onclick="freeze('{$val['id']}', '{$val['is_block']}', '{$val['status']}')">{$val['status']}</button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-info recharge" id="dialog-recharge" onclick="registration('{$val['id']}', '{$val['os']}', '{$val['username']}')">报名</button>
+                                </td> 
+                            </tr>
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div >{$page}</div>
+    </div>
+</div>
+</body>
+</html>
 
-</div><!-- /.main-container -->
 
 <div id="dialog" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
-    <form  method="post" >
-        <table >
-            <tr>
-            <td >用 户 id ：</td>
-            <td><input type="text" name="uid" value="" id="username" readonly="true"></td>
-            </tr>
-            <tr>
-            <td >用 户 名 ：</td>
-            <td><input type="text" name="username" value="" readonly="true"></td>
-            </tr>
-            <tr>
-            <td >操作系统 ：</td>
-            <td><input type="text" name="os" value="" readonly="true"></td>
-            </tr>
-           
-            <tr>
-            <td >钻 石 数 ：</td>
-            <td><input type="text" name="diamond" value=""> </td>
-            </tr>
-
-            <tr>
-            <td  colspan="4" align="center" >
-            <input type="submit" id="submit-recharge" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 50px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px;margin-left: 110px" value="充 值">
-            </td></tr>
-        </table>
-    </form>
+    <div class="form-group">
+        <label for="action" class="control-label col-xs-12 col-sm-2">用户id:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" name="uid" value="" aria-required="true" readonly="true">
+        </div>
+    </div><br/>
+    <div class="form-group">
+        <label for="action" class="control-label col-xs-12 col-sm-2">用户名:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="title" name="username" value="" aria-required="true" readonly="true">
+        </div>
+    </div><br/>
+    <div class="form-group">
+        <label for="action" class="control-label col-xs-12 col-sm-2">操作系统:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="title" name="os" value="" aria-required="true" readonly="true">
+        </div>
+    </div><br/>
+    <div class="form-group">
+        <label for="action" class="control-label col-xs-12 col-sm-2">钻石数:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="title" name="diamond" value="" aria-required="true"
+             placeholder="输入钻石数量">
+        </div>
+    </div><br/><br/>
+    <div class="form-group" >
+        <label for="action" class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-info btn-embossed" id="submit-recharge">充值</button>
+        </div>
+    </div><br/>
 </div>
 
 <div id="dialog1" class="ui-dialog-content1 ui-widget-content" style="width: auto; min-height: 50px; max-height: none; height: auto;">
-    <form  method="post" >
-        <table >
-            <tr>
-            <td >用 户 id ：</td>
-            <td><input type="text" name="uid" value="" id="username" readonly="true"></td>
-            </tr>
-            <tr>
-            <td >用 户 名 ：</td>
-            <td><input type="text" name="username" value="" readonly="true"></td>
-            </tr>
-            <tr>
-            <td >操作系统 ：</td>
-            <td><input type="text" name="os" value="" readonly="true"></td>
-            </tr>
-           
-            <tr>
-            <td >德 州 币 ：</td>
-            <td><input type="text" name="coins" value=""> </td>
-            </tr>
-
-            <tr>
-            <td  colspan="4" >
-            <input type="submit" id="submit-recharge1" role="button" style="background-color:#6ab6e8;margin-top: 10px;width: 50px;height: 30px;border-radius: 10%;color:#fff;text-align: center; font-size: 15px;margin-left: 110px" value="充 值">
-            </td></tr>
-        </table>
-    </form>
+    <div class="form-group">
+        <label for="action" class="control-label col-xs-12 col-sm-2">用户id:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" name="uid" value="" aria-required="true" readonly="true">
+        </div>
+    </div><br/>
+    <div class="form-group">
+        <label for="action" class="control-label col-xs-12 col-sm-2">用户名:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="title" name="username" value="" aria-required="true" readonly="true">
+        </div>
+    </div><br/>
+    <div class="form-group">
+        <label for="action" class="control-label col-xs-12 col-sm-2">操作系统:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="title" name="os" value="" aria-required="true" readonly="true">
+        </div>
+    </div><br/>
+    <div class="form-group">
+        <label for="action" class="control-label col-xs-12 col-sm-2">德州币:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="title" name="coins" value="" aria-required="true"
+             placeholder="输入德州币数量">
+        </div>
+    </div><br/><br/>
+    <div class="form-group" >
+        <label for="action" class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-info btn-embossed" id="submit-recharge1">充值</button>
+        </div>
+    </div><br/>
 </div>
 
 
@@ -180,15 +182,15 @@
 
 $( "#dialog" ).dialog({
     autoOpen: false,
-    width: 300,
-    height:230,
+    width: 450,
+    height:330,
     title:'充 钻 石'
 });
 
 $( "#dialog1" ).dialog({
     autoOpen: false,
-    width: 300,
-    height:230,
+    width: 450,
+    height:330,
     title:'充 德 州 币'
 });
 
@@ -299,80 +301,6 @@ function freeze(uid, isblock, status){
    
 }
 
-
-
-</script>
-
-
-<script type="text/javascript">
-    $(function () {
-        $(".group").click(function () {
-            $(this).addClass('hide');
-            $(this).parent().find(".groupselect").removeClass('hide');
-        })
-        $(".groupselect").on("change", function () {
-            var ob = $(this);
-            var gid = ob.val();
-            var uid = ob.parent().find('.group').attr('val');
-            $.get("{:U('update')}?ajax=yes&uid=" + uid + "&gid=" + gid, function (data) {
-                var text = ob.find("option:selected").text();
-                ob.parent().find(".group").removeClass('hide').html(text);
-                ob.addClass('hide');
-            });
-        })
-
-        $(".check-all").click(function () {
-            $(".uids").prop("checked", this.checked);
-        });
-        $(".uids").click(function () {
-            var option = $(".ids");
-            option.each(function (i) {
-                if (!this.checked) {
-                    $(".check-all").prop("checked", false);
-                    return false;
-                } else {
-                    $(".check-all").prop("checked", true);
-                }
-            });
-        });
-        $("#submit").click(function () {
-            bootbox.confirm({
-                title: "系统提示",
-                message: "是否要删除所选用户？",
-                callback: function (result) {
-                    if (result) {
-                        $("#form").submit();
-                    }
-                },
-                buttons: {
-                    "cancel": {"label": "取消"},
-                    "confirm": {
-                        "label": "确定",
-                        "className": "btn-danger"
-                    }
-                }
-            });
-        });
-        // $(".freeze").click(function () {
-        //     var url = $(this).attr('val');
-        //     bootbox.confirm({
-        //         title: "系统提示",
-        //         message: "是否要冻结该用户?",
-        //         callback: function (result) {
-        //             if (result) {
-        //                 window.location.href = url;
-        //             }
-        //         },
-        //         buttons: {
-        //             "cancel": {"label": "取消"},
-        //             "confirm": {
-        //                 "label": "确定",
-        //                 "className": "btn-danger"
-        //             }
-        //         }
-        //     });
-        // });
-    })
 </script>
 </body>
 </html>

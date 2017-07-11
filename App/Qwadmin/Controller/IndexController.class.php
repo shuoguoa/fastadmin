@@ -15,14 +15,18 @@ class IndexController extends ComController
 {
     public function index()
     {
+        $this->display();
+    }
 
+     public function log()
+    {
         $model = new \Think\Model();
         $mysql = $model->query("select VERSION() as mysql");
         $p = isset($_GET['p']) ? intval($_GET['p']) : '1';
         $t = time() - 3600 * 24 * 60;
         $log = M('log');
         $log->where("t < $t")->delete();//删除60天前的日志
-        $pagesize = 25;#每页数量
+        $pagesize = 20;#每页数量
         $offset = $pagesize * ($p - 1);//计算记录偏移量
         $count = $log->count();
         $list = $log->order('id desc')->limit($offset . ',' . $pagesize)->select();
@@ -34,5 +38,14 @@ class IndexController extends ComController
         $this->assign('mysql', $mysql[0]['mysql']);
         $this->assign('nav', array('', '', ''));//导航
         $this->display();
+    }
+
+    /**
+     * 清空系统缓存
+     */
+    public function wipecache()
+    { 
+        Cache::clear();
+        $this->code = 1;
     }
 }

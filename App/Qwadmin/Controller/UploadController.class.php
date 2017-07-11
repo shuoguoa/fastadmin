@@ -25,8 +25,8 @@ class UploadController extends ComController
         $Img = I('Img');
         $Path = null;
         if ($_FILES['img']) {
-            $Img = $this->saveimg($_FILES);
-        }
+            $Img = $this->saveimg($_FILES);//echo $Img;exit;
+        } 
         $BackCall = I('BackCall');
         $Width = I('Width');
         $Height = I('Height');
