@@ -15,7 +15,7 @@ class IndexController extends ComController
 {
     public function index()
     {
-        echo 4444;
+        echo 4444;echo 9999;
         $this->display();
     }
 
