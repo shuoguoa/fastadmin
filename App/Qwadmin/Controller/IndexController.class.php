@@ -15,6 +15,7 @@ class IndexController extends ComController
 {
     public function index()
     {
+        echo '哈哈哈哈';
         $this->display();
     }
 
